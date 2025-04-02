@@ -1,0 +1,8 @@
+<p-dialog [(visible)]="searchBarActive" [breakpoints]="{ '992px': '75vw', '576px': '90vw' }" modal dismissableMask styleClass="w-1/2">
+    <ng-template #headless>
+        <div class="search-container">
+            <i class="pi pi-search"></i>
+            <input pInputText type="text" [pAutoFocus]="true" class="p-inputtext search-input" placeholder="Search" (keydown.enter)="toggleSearchBar()" />
+        </div>
+    </ng-template>
+</p-dialog>

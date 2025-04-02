@@ -1,0 +1,293 @@
+@if(repoTaskService.allTasks().length == 0) {
+    <div class="card">
+        <span class="text-center text-lg text-orange-500">No tasks found</span>
+    </div>
+}
+@else{
+    @if(repoTaskService.getAllTasksResource.isLoading() == true) {
+        <div class="card">
+            <p-skeleton width="full" height="10rem" />
+        </div>
+    }    
+    @else {
+        <div class="card">
+            <p-toolbar styleClass="mb-12">
+                <ng-template #start>
+                    <p-button label="New" icon="pi pi-plus" severity="secondary" class="mr-2" (onClick)="openNewCreate()" />
+                </ng-template>
+
+                <ng-template #end>
+                    <p-button label="Export" icon="pi pi-upload" severity="secondary" (onClick)="exportCSV()" />
+                </ng-template>
+            </p-toolbar>
+            <p-table
+                #ph
+                [value]="repoTaskService.allTasks()"
+                [rows]="10"
+                [columns]="cols"
+                [paginator]="true"
+                [globalFilterFields]="filterColFields"
+                [tableStyle]="{ 'min-width': '75rem' }"
+                [(selection)]="repoTaskService.selectedTasks"
+                [rowHover]="true"
+                dataKey="id"
+                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} tasks"
+                [showCurrentPageReport]="true"
+                [rowsPerPageOptions]="[10, 20, 30]"
+            >
+                <ng-template #caption>
+                    <div class="flex items-center justify-between">
+                        <h5 class="m-0">Manage Tasks</h5>
+                        <p-iconfield>
+                            <p-inputicon styleClass="pi pi-search" />
+                            <input pInputText type="text" (input)="onGlobalFilter(ph, $event)" placeholder="Search..." />
+                        </p-iconfield>
+                    </div>
+                </ng-template>
+                
+                <ng-template #header>
+                    <tr>
+                        <th style="width: 3rem">
+                            <p-tableHeaderCheckbox />
+                        </th>
+                        <th style="min-width: 3rem" pSortableColumn="id">
+                            <span class="flex items-center gap-2">ID <p-sortIcon field="id" /></span>
+                        </th>
+                        <th pSortableColumn="name" style="min-width:16rem">
+                            <span class="flex items-center gap-2">Name <p-sortIcon field="name" /></span>
+                        </th>
+                        <th pSortableColumn="description" style="min-width: 30rem">
+                            <span class="flex items-center gap-2">Description <p-sortIcon field="description" /></span>
+                        </th>
+                        <th pSortableColumn="phaseOrder" style="min-width:3rem">
+                            <span class="flex items-center gap-2">Phase <p-sortIcon field="phaseOrder" /></span>
+                        </th>
+                        <th pSortableColumn="hasSubTaskRepo" style="min-width:3rem">
+                            <span class="flex items-center gap-2">SubTasks <p-sortIcon field="hasSubTaskRepo" /></span>
+                        </th>
+                        <th pSortableColumn="categoryRepoId" style="min-width:3rem">
+                            <span class="flex items-center gap-2">Category <p-sortIcon field="categoryRepoId" /></span>
+                        </th>
+                        <th pSortableColumn="taskTypeRepoId" style="min-width:3rem">
+                            <span class="flex items-center gap-2">Task Type <p-sortIcon field="taskTypeRepoId" /></span>
+                        </th>
+                        <th pSortableColumn="taskRepoResources" style="min-width:3rem">
+                            <span class="flex items-center gap-2">Resources <p-sortIcon field="taskRepoResources" /></span>
+                        </th>
+                        <th style="min-width: 12rem"></th>
+                    </tr>
+                </ng-template>
+
+                <ng-template #body let-tasks>
+                    <tr>
+                        <td>
+                            <p-tableCheckbox [value]="tasks" />
+                        </td>
+                        <td>{{ tasks.id }}</td>
+                        <td>{{ tasks.name }}</td>
+                        <td>{{ tasks.description }}</td>
+                        <td>{{ tasks.phaseOrder }}</td>
+                        <td>
+                            @if(tasks.hasSubTaskRepo == true) {
+                                <p-drawer [(visible)]="subTaskVisible" position="right" styleClass="!w-full md:!w-80 lg:!w-[50rem]">
+                                    @if(tasks.subTaskRepo.length > 0) {
+                                        <div class="card flex justify-end">
+                                            <p-button label="Create Subtask" [outlined]="true" (click)="subTaskVisible = true"/>
+                                        </div>
+                                        @for(subTask of tasks.subTaskRepo; track $index) { {{ subTask.name }} }
+                                    }
+                                    @else {
+                                        <span>No Subtasks For This Task</span>
+                                    }
+                                </p-drawer>
+                                <p-button icon="pi pi-check" severity="success" [rounded]="true" [outlined]="true" [text]="true" (click)="subTaskVisible = true"/>
+                            }
+                            @else {
+                                <p-drawer [(visible)]="subTaskVisible" position="right">
+                                    @if(tasks.subTaskRepo.length > 0) {
+                                        @for(subTask of tasks.subTaskRepo; track $index) { {{ subTask.name }} }
+                                    }
+                                    @else {
+                                        <span>No Subtasks For This Task</span>
+                                    }
+                                </p-drawer>
+                                <p-button icon="pi pi-times" severity="danger" [rounded]="true" [outlined]="true" [text]="true" />
+                            }
+                        </td>
+                        <td>{{ tasks.categoryRepo?.name }}</td>
+                        <td>{{ tasks.taskTypeRepo?.name }}</td>                    
+                        <td> @for(resource of tasks.taskRepoResources; track $index) { {{ resource.resourceRepo.name }} } </td>
+                        <td>
+                            <p-button icon="pi pi-pencil" class="mr-2" [rounded]="true" [outlined]="true" (click)="editTask(tasks)" />
+                            <p-button icon="pi pi-trash" severity="danger" [rounded]="true" [outlined]="true" (click)="deleteSelectedTasks(tasks.id)" />
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    }
+}
+
+<p-dialog
+    [(visible)]="tasksDialog"
+    header = "Task Details"
+    [modal]="true"
+    [style]="{ width: '450px', height: '900px' }"
+>
+    <ng-template #content>
+        <p-fluid>
+            <div class="grid grid-cols-12 gap-4">
+                <div class="col-span-12">
+                    <label for="name" class="block font-bold mb-4">Name</label>
+                    <input type="text" pInputText id="name" [(ngModel)]="tasks.name" required />
+                    
+                </div>
+                <div class="col-span-12">
+                    <label for="description" class="block font-bold mb-4">Description</label>
+                    <textarea rows="5" cols="30" pTextarea id="description" [(ngModel)]="tasks.description" required ></textarea>
+                </div>
+                <div class="col-span-12">
+                    <label for="order" class="block font-bold mb-4">Order</label>
+                    <p-inputNumber id="order" [(ngModel)]="tasks.phaseOrder" required />
+                </div>
+                <div class="col-span-12">
+                    <label for="hasSubTaskRepo" class="block font-bold mb-4">Has SubTasks</label>
+                    <div class="flex flex-wrap">
+                        <div class="flex flex-row items-center gap-4">
+                            <div class="flex items-center gap-2">
+                                <p-radiobutton inputId="true" id="hasSubTaskRepo" name="hasSubTaskRepo" value="true" 
+                                    [(ngModel)]="tasks.hasSubTaskRepo" required />
+                                <label for="true" class="font-bold">Yes</label>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <p-radiobutton inputId="false" id="hasSubTaskRepo" name="hasSubTaskRepo" value="false" 
+                                    [(ngModel)]="tasks.hasSubTaskRepo" required />
+                                <label for="false" class="font-bold">No</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-span-12">
+                    <label for="categoryRepoId" class="block font-bold mb-4">Category</label>
+                    <p-select id="categoryRepoId" [(ngModel)]="tasks.categoryRepoId" [options]="repoCategoryService.allCategories()" optionLabel="name" optionValue="id" required />
+                </div>
+                <div class="col-span-12">
+                    <label for="taskRepoResources" class="block font-bold mb-4">Resources</label>
+                    <p-multiselect id="taskRepoResources" 
+                    [(ngModel)]="selectedResources" [options]="repoResourceService.allResources()" optionLabel="name" optionValue="id" required />
+                </div>
+                <div class="col-span-12">
+                    <label for="taskTypeRepoId" class="block font-bold mb-4">Task Type</label>
+                    <p-select id="taskTypeRepoId" [(ngModel)]="tasks.taskTypeRepoId" [options]="repoTaskTypeService.allTaskTypes()" optionLabel="name" optionValue="id" required />
+                </div>
+            </div>
+        </p-fluid>
+    </ng-template>
+    <ng-template #footer>
+        <p-button label="Cancel" icon="pi pi-times" text (click)="hideDialog()" />
+        <p-button label="Save" icon="pi pi-check" (click)="saveTask()" />
+    </ng-template>
+</p-dialog>
+
+<p-dialog
+    [(visible)]="tasksCreateDialog"
+    header = "Create New Task"
+    [modal]="true"
+    [style]="{ width: '450px', height: '900px' }"
+>
+    <ng-template #content>
+        <p-fluid>
+            <div class="grid grid-cols-12 gap-4">
+                <div class="col-span-12">
+                    <label for="name" class="block font-bold mb-4">Name</label>
+                    <input type="text" pInputText id="name" [(ngModel)]="tasksCreate.name" required />
+                    
+                </div>
+                <div class="col-span-12">
+                    <label for="description" class="block font-bold mb-4">Description</label>
+                    <textarea rows="5" cols="30" pTextarea id="description" [(ngModel)]="tasksCreate.description" required ></textarea>
+                </div>
+                <div class="col-span-12">
+                    <label for="order" class="block font-bold mb-4">Order</label>
+                    <p-inputNumber id="order" [(ngModel)]="tasksCreate.phaseOrder" required />
+                </div>
+                <div class="col-span-12">                   
+                    <label for="hasSubTaskRepo" class="block font-bold mb-4">Has SubTasks</label>
+                    <div class="flex flex-wrap">
+                        <div class="flex flex-row items-center gap-4">
+                            <div class="flex items-center gap-2">
+                                <p-radiobutton inputId="true" id="hasSubTaskRepo" name="hasSubTaskRepo" value="true" 
+                                    [(ngModel)]="tasksCreate.hasSubTaskRepo" required />
+                                <label for="true" class="font-bold">Yes</label>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <p-radiobutton inputId="false" id="hasSubTaskRepo" name="hasSubTaskRepo" value="false" 
+                                    [(ngModel)]="tasksCreate.hasSubTaskRepo" required />
+                                <label for="false" class="font-bold">No</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-span-12">
+                    
+                    <label for="categoryRepoId" class="block font-bold mb-4">Category</label>
+                    <p-select id="categoryRepoId" [(ngModel)]="tasksCreate.categoryRepoId" [options]="repoCategoryService.allCategories()" optionLabel="name" optionValue="id" required />
+                </div>
+                <div class="col-span-12">
+                    <label for="taskRepoResources" class="block font-bold mb-4">Resources</label>
+                    <p-multiselect id="taskRepoResources" [(ngModel)]="tasksCreate.resourceIds" [options]="repoResourceService.allResources()" optionLabel="name" optionValue="id" required />
+                </div>
+                <div class="col-span-12">
+                    <label for="taskTypeRepoId" class="block font-bold mb-4">Task Type</label>
+                    <p-select id="taskTypeRepoId" [(ngModel)]="tasksCreate.taskTypeRepoId" [options]="repoTaskTypeService.allTaskTypes()" optionLabel="name" optionValue="taskTypeRepoId" required />
+                </div>
+                
+                <!-- Subtasks section - only visible when hasSubTaskRepo is true -->
+                @if(tasksCreate.hasSubTaskRepo) {
+                <div class="col-span-12 mt-4">
+                    <div class="border-t pt-4">
+                        <h3 class="text-lg font-bold mb-4">Subtasks</h3>
+                        
+                        <!-- List of added subtasks -->
+                        @if(subtasks.length > 0) {
+                        <div class="mb-4">
+                            <h4 class="text-md font-semibold mb-2">Added Subtasks:</h4>
+                            <ul class="list-disc pl-5">
+                                @for(subtask of subtasks; track $index) {
+                                <li class="mb-2 flex justify-between items-center">
+                                    <span>{{ subtask.name }}</span>
+                                    <p-button icon="pi pi-trash" severity="danger" [rounded]="true" [text]="true" (click)="removeSubTask($index)" />
+                                </li>
+                                }
+                            </ul>
+                        </div>
+                        }
+                        
+                        <!-- Form to add new subtask -->
+                        <div class="p-4 border rounded-md bg-gray-50">
+                            <h4 class="text-md font-semibold mb-3">Add New Subtask</h4>
+                            <div class="mb-3">
+                                <label for="subtaskName" class="block font-medium mb-2">Name</label>
+                                <input type="text" pInputText id="subtaskName" [(ngModel)]="newSubTask.name" class="w-full" />
+                            </div>
+                            <div class="mb-3">
+                                <label for="subtaskDescription" class="block font-medium mb-2">Description</label>
+                                <textarea rows="3" pTextarea id="subtaskDescription" [(ngModel)]="newSubTask.description" class="w-full"></textarea>
+                            </div>
+                            <div class="flex justify-end">
+                                <p-button label="Add Subtask" icon="pi pi-plus" (click)="addSubTask()" [disabled]="!newSubTask.name.trim()" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                }
+            </div>
+        </p-fluid>
+    </ng-template>
+    <ng-template #footer>
+        <p-button label="Cancel" icon="pi pi-times" text (click)="hideDialog()" />
+        <p-button label="Save" icon="pi pi-check" (click)="saveTask()" />
+    </ng-template>
+</p-dialog>
+
+<p-confirmdialog [style]="{ width: '450px' }" />

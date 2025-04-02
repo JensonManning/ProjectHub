@@ -1,0 +1,23 @@
+<p-drawer [visible]="visible()" (onHide)="onDrawerHide()" position="right" [transitionOptions]="'.3s cubic-bezier(0, 0, 0.2, 1)'" styleClass="layout-config-sidebar w-80" header="Settings">
+    <div class="flex flex-col gap-6">
+        <div>
+            <div class="flex flex-col gap-2">
+                <span class="text-lg text-muted-color font-semibold">Color Scheme</span>
+                <p-selectbutton [ngModel]="darkTheme()" (ngModelChange)="toggleDarkMode()" [options]="themeOptions" optionLabel="name" optionValue="value" [allowEmpty]="false"></p-selectbutton>
+            </div>
+        </div>
+        @if(!simple && location === 'app') {
+            <div class="flex flex-col gap-2">
+                <span class="text-lg text-muted-color font-semibold">Menu Type</span>
+                <div class="flex flex-wrap flex-col gap-3">
+                    <div class="flex">
+                        <div class="flex items-center gap-2 w-6/12">
+                            <p-radio-button name="menuMode" value="static" [(ngModel)]="menuMode" (ngModelChange)="setMenuMode('static')" inputId="static"></p-radio-button>
+                            <label for="static">Static</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</p-drawer>

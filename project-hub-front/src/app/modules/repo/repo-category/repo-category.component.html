@@ -1,0 +1,118 @@
+@if(repoCategoryService.allCategories().length == 0) {
+    <div class="card">
+        <p-toolbar styleClass="mb-12">
+            <ng-template #start>
+                <p-button label="New" icon="pi pi-plus" severity="secondary" class="mr-2" (onClick)="openNew()" />
+            </ng-template>
+
+            <ng-template #end>
+            </ng-template>
+        </p-toolbar>
+        <span class="text-center text-lg text-orange-500">No categories found</span>
+    </div>
+}
+@else{
+    @if(repoCategoryService.getAllCategoriesResource.isLoading() == true) {
+        <div class="card">
+            <p-skeleton width="full" height="10rem" />
+        </div>
+    }    
+    @else {
+        <div class="card">
+            <p-toolbar styleClass="mb-12">
+                <ng-template #start>
+                    <p-button label="New" icon="pi pi-plus" severity="secondary" class="mr-2" (onClick)="openNew()" />
+                </ng-template>
+
+                <ng-template #end>
+                    <p-button label="Export" icon="pi pi-upload" severity="secondary" (onClick)="exportCSV()" />
+                </ng-template>
+            </p-toolbar>
+            <p-table
+                #ph
+                [value]="repoCategoryService.allCategories()"
+                [rows]="10"
+                [columns]="cols"
+                [paginator]="true"
+                [globalFilterFields]="filterColFields"
+                [tableStyle]="{ 'min-width': '75rem' }"
+                [(selection)]="repoCategoryService.selectedCategories"
+                [rowHover]="true"
+                dataKey="id"
+                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} categorys"
+                [showCurrentPageReport]="true"
+                [rowsPerPageOptions]="[10, 20, 30]"
+            >
+                <ng-template #caption>
+                    <div class="flex items-center justify-between">
+                        <h5 class="m-0">Manage Categories</h5>
+                        <p-iconfield>
+                            <p-inputicon styleClass="pi pi-search" />
+                            <input pInputText type="text" (input)="onGlobalFilter(ph, $event)" placeholder="Search..." />
+                        </p-iconfield>
+                    </div>
+                </ng-template>
+                
+                <ng-template #header>
+                    <tr>
+                        <th style="width: 3rem">
+                            <p-tableHeaderCheckbox />
+                        </th>
+                        <th style="min-width: 3rem" pSortableColumn="id">
+                            <span class="flex items-center gap-2">ID <p-sortIcon field="id" /></span>
+                        </th>
+                        <th pSortableColumn="name" style="min-width:16rem">
+                            <span class="flex items-center gap-2">Name <p-sortIcon field="name" /></span>
+                        </th>
+                        <th pSortableColumn="description" style="min-width: 30rem">
+                            <span class="flex items-center gap-2">Description <p-sortIcon field="description" /></span>
+                        </th>
+                        <th style="min-width: 12rem"></th>
+                    </tr>
+                </ng-template>
+
+                <ng-template #body let-category>
+                    <tr>
+                        <td>
+                            <p-tableCheckbox [value]="category" />
+                        </td>
+                        <td>{{ category.id }}</td>
+                        <td>{{ category.name }}</td>
+                        <td>{{ category.description }}</td>
+                        <td>
+                            <p-button icon="pi pi-pencil" class="mr-2" [rounded]="true" [outlined]="true" (click)="editCategory(category)" />
+                            <p-button icon="pi pi-trash" severity="danger" [rounded]="true" [outlined]="true" (click)="deleteSelectedCategories(category.id)" />
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    }
+}
+
+<p-dialog
+    [(visible)]="categoryDialog"
+    header = "Category Details"
+    [modal]="true"
+    [style]="{ width: '450px' }"
+>
+    <ng-template #content>
+        <div class="grid grid-cols-12 gap-4">
+            <div class="col-span-12">
+                <label for="name" class="block font-bold mb-4">Name</label>
+                <input type="text" pInputText id="name" [(ngModel)]="category.name" required />
+                
+            </div>
+            <div class="col-span-12">
+                <label for="description" class="block font-bold mb-4">Description</label>
+                <textarea rows="5" cols="30" pTextarea id="description" [(ngModel)]="category.description" required ></textarea>
+            </div>
+        </div>
+    </ng-template>
+    <ng-template #footer>
+        <p-button label="Cancel" icon="pi pi-times" text (click)="hideDialog()" />
+        <p-button label="Save" icon="pi pi-check" (click)="saveCategory()" />
+    </ng-template>
+</p-dialog>
+
+<p-confirmdialog [style]="{ width: '450px' }" />

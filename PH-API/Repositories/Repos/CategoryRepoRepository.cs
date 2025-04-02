@@ -1,0 +1,66 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using PH_API.Data;
+using PH_API.IRepositories.Repos;
+using PH_API.Models.Repo;
+
+namespace PH_API.Repositories.Repos
+{
+    public class CategoryRepoRepository : ICategoryRepoRepository
+    {
+        private readonly AppDbContext _context;
+        public CategoryRepoRepository(AppDbContext context)
+        {
+            _context = context;
+        }
+
+        public async Task<List<CategoryRepo>> GetCategoryReposAsync()
+        {
+            return await _context.CategoryRepo.ToListAsync();
+        }
+
+        public async Task<CategoryRepo> GetCategoryRepoAsync(int id)
+        {
+            var categoryRepo = await _context.CategoryRepo.FirstOrDefaultAsync(x => x.Id == id);
+            if (categoryRepo == null)
+            {
+                throw new Exception("CategoryRepo not found");
+            }
+            return categoryRepo; 
+        }
+
+        public async Task<CategoryRepo> AddCategoryRepoAsync(CategoryRepo categoryRepo)
+        {
+            await _context.CategoryRepo.AddAsync(categoryRepo);
+            await _context.SaveChangesAsync();
+            return categoryRepo;
+        }
+
+        public async Task<CategoryRepo> UpdateCategoryRepoAsync(int id, CategoryRepo categoryRepo)
+        {
+            var category = await _context.CategoryRepo.FirstOrDefaultAsync(x => x.Id == id);
+            if (category == null)
+            {
+                throw new Exception("CategoryRepo not found");
+            }
+            _context.CategoryRepo.Update(categoryRepo);
+            await _context.SaveChangesAsync();
+            return categoryRepo;
+        }
+
+        public async Task<CategoryRepo> DeleteCategoryRepoAsync(int id)
+        {
+            var categoryRepo = await _context.CategoryRepo.FindAsync(id);
+            if (categoryRepo == null)
+            {
+                throw new Exception("CategoryRepo not found");
+            }
+            _context.CategoryRepo.Remove(categoryRepo);
+            await _context.SaveChangesAsync();
+            return categoryRepo;
+        }
+    }
+}

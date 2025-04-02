@@ -1,0 +1,19 @@
+<div class="layout-wrapper" [ngClass]="containerClass()">
+    <div app-sidebar></div>
+    <div class="layout-content-wrapper">
+        <div class="layout-content-wrapper-inside">
+            <div app-topbar></div>
+            <div class="layout-content">
+                <div app-breadcrumb></div>
+                <router-outlet />
+            </div>
+            <div app-footer></div>
+        </div>
+    </div>
+    <app-user-settings />
+    <div app-search></div>
+    <div app-rightmenu></div>
+    <div class="layout-mask animate-fadein"></div>
+    <div app-search></div>
+    <div app-activity-menu></div>
+</div>
