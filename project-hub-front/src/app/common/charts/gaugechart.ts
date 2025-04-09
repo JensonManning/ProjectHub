@@ -1,7 +1,7 @@
 import { Component, computed, effect, inject, input, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ChartModule } from 'primeng/chart';
-import { LayoutService } from '@/layout/service/layout.service';
+import { PhlayoutService } from '@/core/services/layout/phlayout.service';
 
 @Component({
     selector: 'gauge-chart',
@@ -26,7 +26,7 @@ import { LayoutService } from '@/layout/service/layout.service';
     </div>`
 })
 export class GaugeChart {
-    layoutService = inject(LayoutService);
+    layoutService = inject(PhlayoutService);
 
     class = input<string>('');
 

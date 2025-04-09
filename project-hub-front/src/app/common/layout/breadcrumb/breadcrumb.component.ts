@@ -47,4 +47,8 @@ export class BreadcrumbComponent {
     }
 }
 
+  // Add a tracking function to avoid recreation of the entire collection
+  trackByFn(index: number, item: Breadcrumb): string {
+    return item.label + (item.url || '') + index;
+  }
 }

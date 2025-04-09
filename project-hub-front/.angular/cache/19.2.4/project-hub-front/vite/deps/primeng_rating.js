@@ -1,32 +1,30 @@
 import {
-  StarFillIcon,
-  StarIcon
-} from "./chunk-UUOHCNA2.js";
+  NG_VALUE_ACCESSOR
+} from "./chunk-5BXW67ZI.js";
 import {
   AutoFocus
-} from "./chunk-Z5OXSIJV.js";
+} from "./chunk-HUENEEFH.js";
 import "./chunk-Z7QHAORV.js";
 import {
+  StarFillIcon,
+  StarIcon
+} from "./chunk-JD3EE53S.js";
+import {
   BaseComponent
-} from "./chunk-MNA7QP2B.js";
-import "./chunk-ZUCNCAG5.js";
+} from "./chunk-O4PATEIM.js";
 import {
   BaseStyle
-} from "./chunk-LKIXLNZG.js";
+} from "./chunk-MV4Z7P3T.js";
+import "./chunk-TZIJKBMI.js";
 import {
   PrimeTemplate,
   SharedModule
-} from "./chunk-Y525EMKK.js";
+} from "./chunk-2HRVX5Y5.js";
 import {
   focus,
   getFirstFocusableElement,
   uuid
-} from "./chunk-3DTPQ3QF.js";
-import {
-  NG_VALUE_ACCESSOR
-} from "./chunk-5BXW67ZI.js";
-import "./chunk-CWYBPNCF.js";
-import "./chunk-NJ25EVEJ.js";
+} from "./chunk-5YC7IRCZ.js";
 import {
   CommonModule,
   NgClass,
@@ -82,9 +80,10 @@ import {
   ɵɵtemplate,
   ɵɵtemplateRefExtractor
 } from "./chunk-WZUIYE6W.js";
-import "./chunk-5OPE3T2R.js";
 import "./chunk-4N4GOYJH.js";
+import "./chunk-5OPE3T2R.js";
 import "./chunk-FHTVLBLO.js";
+import "./chunk-YAPJLE7E.js";
 import "./chunk-4MWRP73S.js";
 
 // node_modules/primeng/fesm2022/primeng-rating.mjs

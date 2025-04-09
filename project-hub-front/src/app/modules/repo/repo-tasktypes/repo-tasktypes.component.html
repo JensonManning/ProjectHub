@@ -76,7 +76,7 @@
                         <td>{{ taskType.id }}</td>
                         <td>{{ taskType.name }}</td>
                         <td>
-                            <p-button icon="pi pi-pencil" class="mr-2" [rounded]="true" [outlined]="true" (click)="editTaskType(taskType)" />
+                            <p-button icon="pi pi-pencil" class="mr-2" [rounded]="true" [outlined]="true" (click)="taskType(taskType)" />
                             <p-button icon="pi pi-trash" severity="danger" [rounded]="true" [outlined]="true" (click)="deleteSelectedTaskTypes(taskType.id)" />
                         </td>
                     </tr>

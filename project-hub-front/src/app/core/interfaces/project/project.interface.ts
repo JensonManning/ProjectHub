@@ -6,6 +6,7 @@ export interface Project {
     id: number;
     name: string;
     description: string;
+    shortcode: string;
     startDate: Date;
     endDate: Date;
     status: number;
@@ -18,6 +19,7 @@ export interface Project {
 export interface ProjectCreate {
     name: string;
     description: string;
+    shortcode: string;
     startDate: Date;
     endDate: Date;
     status: number;
@@ -27,9 +29,21 @@ export interface ProjectCreate {
     projectNotebooks?: ProjectNotebookCreate[];
 }
 
+export interface ProjectV2Create {
+    id ?: number | null;
+    name: string;
+    description: string;
+    shortcode: string;
+    startDate: Date;
+    endDate: Date;
+    status: number;
+    type: number;
+}
+
 export interface ProjectUpdate {
     name: string;
     description: string;
+    shortcode: string;
     startDate: Date;
     endDate: Date;
     status: number;
@@ -40,6 +54,7 @@ export interface ProjectSimple {
     id: number;
     name: string;
     description: string;
+    shortcode: string;
     startDate: Date;
     endDate: Date;
     status: number;

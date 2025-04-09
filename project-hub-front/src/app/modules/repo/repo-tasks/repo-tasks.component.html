@@ -1,5 +1,14 @@
 @if(repoTaskService.allTasks().length == 0) {
     <div class="card">
+        <p-toolbar styleClass="mb-12">
+            <ng-template #start>
+                <p-button label="New" icon="pi pi-plus" severity="secondary" class="mr-2" (onClick)="openNewCreate()" />
+            </ng-template>
+
+            <ng-template #end>
+                <p-button label="Export" icon="pi pi-upload" severity="secondary" (onClick)="exportCSV()" />
+            </ng-template>
+        </p-toolbar>
         <span class="text-center text-lg text-orange-500">No tasks found</span>
     </div>
 }
@@ -239,7 +248,7 @@
                 </div>
                 <div class="col-span-12">
                     <label for="taskTypeRepoId" class="block font-bold mb-4">Task Type</label>
-                    <p-select id="taskTypeRepoId" [(ngModel)]="tasksCreate.taskTypeRepoId" [options]="repoTaskTypeService.allTaskTypes()" optionLabel="name" optionValue="taskTypeRepoId" required />
+                    <p-select id="taskTypeRepoId" [(ngModel)]="tasksCreate.taskTypeRepoId" [options]="repoTaskTypeService.allTaskTypes()" optionLabel="name" optionValue="id" required />
                 </div>
                 
                 <!-- Subtasks section - only visible when hasSubTaskRepo is true -->

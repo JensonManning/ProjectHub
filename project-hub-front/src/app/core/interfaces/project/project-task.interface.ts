@@ -1,3 +1,4 @@
+import { ProjectSubtaskCreate } from "./project-subtask.interface";
 import { ProjectTaskCategory } from "./project-task-category.interface";
 import { ProjectTaskComment } from "./project-task-comment.interface";
 import { ProjectTaskResources } from "./project-task-resources.interface";
@@ -12,7 +13,7 @@ export interface ProjectTask {
     hasSubTasks: boolean;
     projectPhaseId: number;
     projectTaskTypeId: number;
-    projectResources: ProjectTaskResources[];
+    projectTaskResources: ProjectTaskResources[];
     projectTaskCategories: ProjectTaskCategory[];
     projectTaskComments: ProjectTaskComment[];
 }
@@ -25,7 +26,9 @@ export interface ProjectTaskCreate {
     endDate: Date;
     hasSubTasks: boolean;
     projectPhaseId: number;
-    projectTaskTypeId: number;
+    projectSubTask : ProjectSubtaskCreate[] | null;
+    projectTaskCategoryId: number;
+    resourceIds: number[];
 }
 
 export interface ProjectTaskUpdate {

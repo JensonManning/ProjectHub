@@ -7,7 +7,7 @@ export interface ProjectResource {
     description: string;
     projectId: number;
     project: Project;
-    userId: number;
+    userId: string;
     user: User;
 }
 
@@ -15,13 +15,13 @@ export interface ProjectResourceCreate {
     name: string;
     description: string;
     projectId: number;
-    userId: number;
+    userId: string;
 }
 
 export interface ProjectResourceUpdate {
     name: string;
     description: string;
-    userId: number;
+    userId: string;
 }
 
 export interface ProjectResourceSimple {

@@ -1,0 +1,8 @@
+@for(resource of projectService.projectDetails().projectResources; track resource.id) {
+    <div class="card mb-4">
+        <div class=" card flex justify-between items-center">
+            <h3 class="text-lg font-semibold">{{ resource.name }}</h3>
+            <h3 class="text-lg font-semibold">{{ resource.user.name }}</h3>
+        </div>
+    </div>
+}

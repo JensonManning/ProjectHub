@@ -22,6 +22,7 @@ import { TagModule } from 'primeng/tag';
 import { TextareaModule } from 'primeng/textarea';
 import { ToastModule } from 'primeng/toast';
 import { ToolbarModule } from 'primeng/toolbar';
+import { TaskRepo } from '@/core/interfaces/repo/repo-task.interface';
 
 interface Column {
     field: string;
@@ -67,7 +68,11 @@ export class RepoTasktypesComponent {
 
     filterColFields: string[] = ['id', 'name', 'description'];
 	taskTypeDialog: boolean = false;
-	taskType!: TaskTypeRepoSimple;
+	taskType: TaskTypeRepo = {
+		id: 0,
+		name: '',
+		taskRepo: []
+	};
 
 	taskTypeSubmitted: boolean = false;
 
@@ -77,10 +82,14 @@ export class RepoTasktypesComponent {
 
     cols!: Column[];
 
+    isEditing = false;
+
     constructor(
         private messageService: MessageService,
         private confirmationService: ConfirmationService
-    ) {}
+    ) {
+        this.repoTaskTypeService.getAllTaskTypesResource.reload();
+    }
 
     exportCSV() {
         this.ph.exportCSV();
@@ -91,15 +100,23 @@ export class RepoTasktypesComponent {
     }
 
     openNew() {
-		this.taskType = {id: 0, name: ''};
+		this.taskType = {id: 0, name: '', taskRepo: []};
 		this.taskTypeSubmitted = false;
 		this.taskTypeDialog = true;
     }
 
-	editTaskType(taskType: TaskTypeRepo) {
+	startEdit(taskType: TaskTypeRepo) {
 		this.taskType = { ...taskType };
-		this.repoTaskTypeService.selectedTaskType.set(taskType);
-		this.taskTypeDialog = true;
+		this.isEditing = true;
+	}
+
+	cancelEdit() {
+		this.taskType = {
+			id: 0,
+			name: '',
+			taskRepo: []
+		};
+		this.isEditing = false;
 	}
 
     deleteSelectedTaskTypes(id: number) {
@@ -176,7 +193,12 @@ export class RepoTasktypesComponent {
 			this.taskType = {
 				id: 0,
 				name: '',
+				taskRepo: []
 			};
         }
+	}
+
+	deleteTaskType(id: number) {
+		this.repoTaskTypeService.deleteTaskType(id);
 	}
 }

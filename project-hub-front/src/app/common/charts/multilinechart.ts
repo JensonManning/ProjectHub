@@ -1,5 +1,5 @@
 import { Component, computed, effect, HostBinding, inject, input, untracked } from '@angular/core';
-import { LayoutService } from '@/layout/service/layout.service';
+import { PhlayoutService } from '@/core/services/layout/phlayout.service';
 import { sampleDataReductionByArray } from '@/lib/utils';
 import { CommonModule } from '@angular/common';
 import { ChartModule } from 'primeng/chart';
@@ -29,7 +29,7 @@ export class MultiLineChart {
         return this.class();
     }
 
-    layoutService = inject(LayoutService);
+    layoutService = inject(PhlayoutService);
 
     isDarkTheme = computed(() => this.layoutService.isDarkTheme());
 

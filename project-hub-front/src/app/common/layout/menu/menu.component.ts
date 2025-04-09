@@ -51,6 +51,23 @@ export class MenuComponent {
 		},
 		{ separator: true },
 		{
+			label: 'Users',
+			icon: 'pi pi-users',
+			items: [
+				{
+					label: 'Manage Users',
+					icon: 'pi pi-user-edit',
+					routerLink: ['/users/manage']
+				},
+				{
+					label: 'Manage Roles',
+					icon: 'pi pi-sliders-h',
+					routerLink: ['/users/roles/manage']
+				}
+			]
+		},
+		{ separator: true },
+		{
 		label: 'Repo',
 		icon: 'pi pi-database',
 		items: [

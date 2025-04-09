@@ -1,0 +1,1791 @@
+[
+  {
+    "ContainingType": "project_hub_api.Controllers.Repos.CategoryRepoController",
+    "Method": "GetCategoryRepos",
+    "RelativePath": "api/CategoryRepo",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "project_hub_api.Controllers.Repos.CategoryRepoController",
+    "Method": "PostCategoryRepo",
+    "RelativePath": "api/CategoryRepo",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "categoryRepoCreateDto",
+        "Type": "project_hub_api.Dtos.Repo.CategoryRepoCreateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "project_hub_api.Controllers.Repos.CategoryRepoController",
+    "Method": "GetCategoryRepo",
+    "RelativePath": "api/CategoryRepo/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "project_hub_api.Controllers.Repos.CategoryRepoController",
+    "Method": "PutCategoryRepo",
+    "RelativePath": "api/CategoryRepo/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "categoryRepoUpdateDto",
+        "Type": "project_hub_api.Dtos.Repo.CategoryRepoUpdateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "project_hub_api.Controllers.Repos.CategoryRepoController",
+    "Method": "DeleteCategoryRepo",
+    "RelativePath": "api/CategoryRepo/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "project_hub_api.Controllers.Repos.NotebookRepoController",
+    "Method": "GetNotebooks",
+    "RelativePath": "api/NotebookRepo",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "project_hub_api.Controllers.Repos.NotebookRepoController",
+    "Method": "PostNotebookAsync",
+    "RelativePath": "api/NotebookRepo",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "notebookRepoCreateDto",
+        "Type": "project_hub_api.Dtos.Repo.NotebookRepoCreateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "project_hub_api.Controllers.Repos.NotebookRepoController",
+    "Method": "GetNotebook",
+    "RelativePath": "api/NotebookRepo/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "project_hub_api.Controllers.Repos.NotebookRepoController",
+    "Method": "PutNotebookAsync",
+    "RelativePath": "api/NotebookRepo/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "notebookRepoUpdateDto",
+        "Type": "project_hub_api.Dtos.Repo.NotebookRepoUpdateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "project_hub_api.Controllers.Repos.NotebookRepoController",
+    "Method": "DeleteNotebookAsync",
+    "RelativePath": "api/NotebookRepo/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "project_hub_api.Controllers.Repos.PhaseRepoController",
+    "Method": "GetPhaseRepos",
+    "RelativePath": "api/PhaseRepo",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[project_hub_api.Models.Repo.PhaseRepo, project-hub-api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "project_hub_api.Controllers.Repos.PhaseRepoController",
+    "Method": "PostPhaseRepo",
+    "RelativePath": "api/PhaseRepo",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "phaseRepo",
+        "Type": "project_hub_api.Models.Repo.PhaseRepo",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "project_hub_api.Models.Repo.PhaseRepo",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "project_hub_api.Controllers.Repos.PhaseRepoController",
+    "Method": "GetPhaseRepo",
+    "RelativePath": "api/PhaseRepo/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "project_hub_api.Models.Repo.PhaseRepo",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "project_hub_api.Controllers.Repos.PhaseRepoController",
+    "Method": "PutPhaseRepo",
+    "RelativePath": "api/PhaseRepo/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "phaseRepo",
+        "Type": "project_hub_api.Models.Repo.PhaseRepo",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "project_hub_api.Models.Repo.PhaseRepo",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "project_hub_api.Controllers.Repos.PhaseRepoController",
+    "Method": "DeletePhaseRepo",
+    "RelativePath": "api/PhaseRepo/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "project_hub_api.Controllers.Projects.ProjectController",
+    "Method": "GetProjects",
+    "RelativePath": "api/Project",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[project_hub_api.Dtos.Projects.ProjectDto, project-hub-api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "project_hub_api.Controllers.Projects.ProjectController",
+    "Method": "CreateProject",
+    "RelativePath": "api/Project",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "projectCreateDto",
+        "Type": "project_hub_api.Dtos.Projects.ProjectCreateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "project_hub_api.Dtos.Projects.ProjectDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "project_hub_api.Controllers.Projects.ProjectController",
+    "Method": "GetProject",
+    "RelativePath": "api/Project/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "project_hub_api.Dtos.Projects.ProjectDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "project_hub_api.Controllers.Projects.ProjectController",
+    "Method": "UpdateProject",
+    "RelativePath": "api/Project/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "projectUpdateDto",
+        "Type": "project_hub_api.Dtos.Projects.ProjectUpdateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "project_hub_api.Controllers.Projects.ProjectController",
+    "Method": "DeleteProject",
+    "RelativePath": "api/Project/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "project_hub_api.Controllers.Projects.ProjectController",
+    "Method": "CreateCompleteProject",
+    "RelativePath": "api/Project/complete",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "completeProjectDto",
+        "Type": "project_hub_api.Dtos.Projects.CompleteProjectDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "project_hub_api.Dtos.Projects.ProjectDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "project_hub_api.Controllers.Projects.ProjectNotebookController",
+    "Method": "GetNotebooks",
+    "RelativePath": "api/ProjectNotebook",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[project_hub_api.Dtos.Projects.Notebooks.ProjectNotebookDto, project-hub-api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "project_hub_api.Controllers.Projects.ProjectNotebookController",
+    "Method": "CreateNotebook",
+    "RelativePath": "api/ProjectNotebook",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "notebookCreateDto",
+        "Type": "project_hub_api.Dtos.Projects.Notebooks.ProjectNotebookCreateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "project_hub_api.Dtos.Projects.Notebooks.ProjectNotebookDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "project_hub_api.Controllers.Projects.ProjectNotebookController",
+    "Method": "GetNotebook",
+    "RelativePath": "api/ProjectNotebook/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "project_hub_api.Dtos.Projects.Notebooks.ProjectNotebookDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "project_hub_api.Controllers.Projects.ProjectNotebookController",
+    "Method": "UpdateNotebook",
+    "RelativePath": "api/ProjectNotebook/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "notebookUpdateDto",
+        "Type": "project_hub_api.Dtos.Projects.Notebooks.ProjectNotebookUpdateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "project_hub_api.Controllers.Projects.ProjectNotebookController",
+    "Method": "DeleteNotebook",
+    "RelativePath": "api/ProjectNotebook/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "project_hub_api.Controllers.Projects.ProjectPhaseController",
+    "Method": "GetPhases",
+    "RelativePath": "api/ProjectPhase",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[project_hub_api.Dtos.Projects.Phases.ProjectPhaseDto, project-hub-api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "project_hub_api.Controllers.Projects.ProjectPhaseController",
+    "Method": "CreatePhase",
+    "RelativePath": "api/ProjectPhase",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "phaseCreateDto",
+        "Type": "project_hub_api.Dtos.Projects.Phases.ProjectPhaseCreateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "project_hub_api.Dtos.Projects.Phases.ProjectPhaseDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "project_hub_api.Controllers.Projects.ProjectPhaseController",
+    "Method": "GetPhase",
+    "RelativePath": "api/ProjectPhase/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "project_hub_api.Dtos.Projects.Phases.ProjectPhaseDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "project_hub_api.Controllers.Projects.ProjectPhaseController",
+    "Method": "UpdatePhase",
+    "RelativePath": "api/ProjectPhase/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "phaseUpdateDto",
+        "Type": "project_hub_api.Dtos.Projects.Phases.ProjectPhaseUpdateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "project_hub_api.Controllers.Projects.ProjectPhaseController",
+    "Method": "DeletePhase",
+    "RelativePath": "api/ProjectPhase/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "project_hub_api.Controllers.Projects.ProjectResourceController",
+    "Method": "GetResources",
+    "RelativePath": "api/ProjectResource",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[project_hub_api.Dtos.Projects.Resources.ProjectResourceDto, project-hub-api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "project_hub_api.Controllers.Projects.ProjectResourceController",
+    "Method": "CreateResource",
+    "RelativePath": "api/ProjectResource",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "resourceCreateDto",
+        "Type": "project_hub_api.Dtos.Projects.Resources.ProjectResourceCreateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "project_hub_api.Dtos.Projects.Resources.ProjectResourceDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "project_hub_api.Controllers.Projects.ProjectResourceController",
+    "Method": "GetResource",
+    "RelativePath": "api/ProjectResource/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "project_hub_api.Dtos.Projects.Resources.ProjectResourceDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "project_hub_api.Controllers.Projects.ProjectResourceController",
+    "Method": "UpdateResource",
+    "RelativePath": "api/ProjectResource/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "resourceUpdateDto",
+        "Type": "project_hub_api.Dtos.Projects.Resources.ProjectResourceUpdateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "project_hub_api.Controllers.Projects.ProjectResourceController",
+    "Method": "DeleteResource",
+    "RelativePath": "api/ProjectResource/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "project_hub_api.Controllers.Users.ProjectRoleController",
+    "Method": "GetProjectRoles",
+    "RelativePath": "api/ProjectRole",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[project_hub_api.Dtos.Users.ProjectRoleDto, project-hub-api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "project_hub_api.Controllers.Users.ProjectRoleController",
+    "Method": "CreateProjectRole",
+    "RelativePath": "api/ProjectRole",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "projectRoleCreateDto",
+        "Type": "project_hub_api.Dtos.Users.ProjectRoleCreateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "project_hub_api.Dtos.Users.ProjectRoleDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "project_hub_api.Controllers.Users.ProjectRoleController",
+    "Method": "GetProjectRole",
+    "RelativePath": "api/ProjectRole/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "project_hub_api.Dtos.Users.ProjectRoleDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "project_hub_api.Controllers.Users.ProjectRoleController",
+    "Method": "UpdateProjectRole",
+    "RelativePath": "api/ProjectRole/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "projectRoleUpdateDto",
+        "Type": "project_hub_api.Dtos.Users.ProjectRoleUpdateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "project_hub_api.Controllers.Users.ProjectRoleController",
+    "Method": "DeleteProjectRole",
+    "RelativePath": "api/ProjectRole/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "project_hub_api.Controllers.Projects.ProjectSubTaskController",
+    "Method": "GetSubTasks",
+    "RelativePath": "api/ProjectSubTask",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[project_hub_api.Dtos.Projects.Tasks.ProjectSubTaskDto, project-hub-api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "project_hub_api.Controllers.Projects.ProjectSubTaskController",
+    "Method": "CreateSubTask",
+    "RelativePath": "api/ProjectSubTask",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "subTaskCreateDto",
+        "Type": "project_hub_api.Dtos.Projects.Tasks.ProjectSubTaskCreateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "project_hub_api.Dtos.Projects.Tasks.ProjectSubTaskDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "project_hub_api.Controllers.Projects.ProjectSubTaskController",
+    "Method": "GetSubTask",
+    "RelativePath": "api/ProjectSubTask/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "project_hub_api.Dtos.Projects.Tasks.ProjectSubTaskDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "project_hub_api.Controllers.Projects.ProjectSubTaskController",
+    "Method": "UpdateSubTask",
+    "RelativePath": "api/ProjectSubTask/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "subTaskUpdateDto",
+        "Type": "project_hub_api.Dtos.Projects.Tasks.ProjectSubTaskUpdateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "project_hub_api.Controllers.Projects.ProjectSubTaskController",
+    "Method": "DeleteSubTask",
+    "RelativePath": "api/ProjectSubTask/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "project_hub_api.Controllers.Projects.ProjectTaskController",
+    "Method": "GetProjectTasks",
+    "RelativePath": "api/ProjectTask",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[project_hub_api.Models.Projects.Tasks.ProjectTask, project-hub-api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "project_hub_api.Controllers.Projects.ProjectTaskController",
+    "Method": "CreateProjectTask",
+    "RelativePath": "api/ProjectTask",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "taskDto",
+        "Type": "project_hub_api.Dtos.Projects.Tasks.ProjectTaskCreateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "project_hub_api.Models.Projects.Tasks.ProjectTask",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "project_hub_api.Controllers.Projects.ProjectTaskController",
+    "Method": "GetProjectTask",
+    "RelativePath": "api/ProjectTask/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "project_hub_api.Models.Projects.Tasks.ProjectTask",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "project_hub_api.Controllers.Projects.ProjectTaskController",
+    "Method": "UpdateProjectTask",
+    "RelativePath": "api/ProjectTask/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "taskDto",
+        "Type": "project_hub_api.Dtos.Projects.Tasks.ProjectTaskUpdateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "project_hub_api.Controllers.Projects.ProjectTaskController",
+    "Method": "DeleteProjectTask",
+    "RelativePath": "api/ProjectTask/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "project_hub_api.Controllers.Projects.ProjectTaskCategoryController",
+    "Method": "GetCategories",
+    "RelativePath": "api/ProjectTaskCategory",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[project_hub_api.Dtos.Projects.Tasks.ProjectTaskCategoryDto, project-hub-api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "project_hub_api.Controllers.Projects.ProjectTaskCategoryController",
+    "Method": "CreateCategory",
+    "RelativePath": "api/ProjectTaskCategory",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "categoryCreateDto",
+        "Type": "project_hub_api.Dtos.Projects.Tasks.ProjectTaskCategoryCreateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "project_hub_api.Dtos.Projects.Tasks.ProjectTaskCategoryDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "project_hub_api.Controllers.Projects.ProjectTaskCategoryController",
+    "Method": "GetCategory",
+    "RelativePath": "api/ProjectTaskCategory/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "project_hub_api.Dtos.Projects.Tasks.ProjectTaskCategoryDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "project_hub_api.Controllers.Projects.ProjectTaskCategoryController",
+    "Method": "UpdateCategory",
+    "RelativePath": "api/ProjectTaskCategory/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "categoryUpdateDto",
+        "Type": "project_hub_api.Dtos.Projects.Tasks.ProjectTaskCategoryUpdateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "project_hub_api.Controllers.Projects.ProjectTaskCategoryController",
+    "Method": "DeleteCategory",
+    "RelativePath": "api/ProjectTaskCategory/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "project_hub_api.Controllers.Projects.ProjectTaskCommentController",
+    "Method": "GetComments",
+    "RelativePath": "api/ProjectTaskComment",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[project_hub_api.Dtos.Projects.Tasks.ProjectTaskCommentDto, project-hub-api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "project_hub_api.Controllers.Projects.ProjectTaskCommentController",
+    "Method": "CreateComment",
+    "RelativePath": "api/ProjectTaskComment",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "commentCreateDto",
+        "Type": "project_hub_api.Dtos.Projects.Tasks.ProjectTaskCommentCreateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "project_hub_api.Dtos.Projects.Tasks.ProjectTaskCommentDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "project_hub_api.Controllers.Projects.ProjectTaskCommentController",
+    "Method": "GetComment",
+    "RelativePath": "api/ProjectTaskComment/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "project_hub_api.Dtos.Projects.Tasks.ProjectTaskCommentDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "project_hub_api.Controllers.Projects.ProjectTaskCommentController",
+    "Method": "UpdateComment",
+    "RelativePath": "api/ProjectTaskComment/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "commentUpdateDto",
+        "Type": "project_hub_api.Dtos.Projects.Tasks.ProjectTaskCommentUpdateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "project_hub_api.Controllers.Projects.ProjectTaskCommentController",
+    "Method": "DeleteComment",
+    "RelativePath": "api/ProjectTaskComment/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "project_hub_api.Controllers.Projects.ProjectTaskResourcesController",
+    "Method": "GetTaskResources",
+    "RelativePath": "api/ProjectTaskResources",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[project_hub_api.Dtos.Projects.Tasks.ProjectTaskResourcesDto, project-hub-api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "project_hub_api.Controllers.Projects.ProjectTaskResourcesController",
+    "Method": "CreateTaskResource",
+    "RelativePath": "api/ProjectTaskResources",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "resourceCreateDto",
+        "Type": "project_hub_api.Dtos.Projects.Tasks.ProjectTaskResourcesCreateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "project_hub_api.Dtos.Projects.Tasks.ProjectTaskResourcesDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "project_hub_api.Controllers.Projects.ProjectTaskResourcesController",
+    "Method": "GetTaskResource",
+    "RelativePath": "api/ProjectTaskResources/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "project_hub_api.Dtos.Projects.Tasks.ProjectTaskResourcesDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "project_hub_api.Controllers.Projects.ProjectTaskResourcesController",
+    "Method": "UpdateTaskResource",
+    "RelativePath": "api/ProjectTaskResources/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "resourceUpdateDto",
+        "Type": "project_hub_api.Dtos.Projects.Tasks.ProjectTaskResourcesUpdateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "project_hub_api.Controllers.Projects.ProjectTaskResourcesController",
+    "Method": "DeleteTaskResource",
+    "RelativePath": "api/ProjectTaskResources/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "project_hub_api.Controllers.Users.ProjectUserController",
+    "Method": "GetProjectUsers",
+    "RelativePath": "api/ProjectUser",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[project_hub_api.Dtos.Users.ProjectUserDto, project-hub-api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "project_hub_api.Controllers.Users.ProjectUserController",
+    "Method": "CreateProjectUser",
+    "RelativePath": "api/ProjectUser",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "projectUserCreateDto",
+        "Type": "project_hub_api.Dtos.Users.ProjectUserCreateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "project_hub_api.Dtos.Users.ProjectUserDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "project_hub_api.Controllers.Users.ProjectUserController",
+    "Method": "GetProjectUser",
+    "RelativePath": "api/ProjectUser/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "project_hub_api.Dtos.Users.ProjectUserDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "project_hub_api.Controllers.Users.ProjectUserController",
+    "Method": "UpdateProjectUser",
+    "RelativePath": "api/ProjectUser/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "projectUserUpdateDto",
+        "Type": "project_hub_api.Dtos.Users.ProjectUserUpdateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "project_hub_api.Controllers.Users.ProjectUserController",
+    "Method": "DeleteProjectUser",
+    "RelativePath": "api/ProjectUser/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "project_hub_api.Controllers.Users.ProjectUserController",
+    "Method": "GetCurrentUser",
+    "RelativePath": "api/ProjectUser/currentUser",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "project_hub_api.Controllers.Repos.ResourceRepoController",
+    "Method": "GetResourceRepos",
+    "RelativePath": "api/ResourceRepo",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[project_hub_api.Models.Repo.ResourceRepo, project-hub-api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "project_hub_api.Controllers.Repos.ResourceRepoController",
+    "Method": "PostResourceRepo",
+    "RelativePath": "api/ResourceRepo",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "resourceRepo",
+        "Type": "project_hub_api.Dtos.Repo.ResourceRepoUpdateCreateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "project_hub_api.Models.Repo.ResourceRepo",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "project_hub_api.Controllers.Repos.ResourceRepoController",
+    "Method": "GetResourceRepo",
+    "RelativePath": "api/ResourceRepo/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "project_hub_api.Models.Repo.ResourceRepo",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "project_hub_api.Controllers.Repos.ResourceRepoController",
+    "Method": "PutResourceRepo",
+    "RelativePath": "api/ResourceRepo/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "resourceRepo",
+        "Type": "project_hub_api.Models.Repo.ResourceRepo",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "project_hub_api.Models.Repo.ResourceRepo",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "project_hub_api.Controllers.Repos.ResourceRepoController",
+    "Method": "DeleteResourceRepo",
+    "RelativePath": "api/ResourceRepo/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "project_hub_api.Controllers.Repos.TaskRepoController",
+    "Method": "GetTaskRepos",
+    "RelativePath": "api/TaskRepo",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "project_hub_api.Controllers.Repos.TaskRepoController",
+    "Method": "PostTaskRepo",
+    "RelativePath": "api/TaskRepo",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "taskRepoDto",
+        "Type": "project_hub_api.Dtos.Repo.TaskRepoCreateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "project_hub_api.Controllers.Repos.TaskRepoController",
+    "Method": "GetTaskRepo",
+    "RelativePath": "api/TaskRepo/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "project_hub_api.Controllers.Repos.TaskRepoController",
+    "Method": "PutTaskRepo",
+    "RelativePath": "api/TaskRepo/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "taskRepoDto",
+        "Type": "project_hub_api.Dtos.Repo.TaskRepoUpdateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "project_hub_api.Controllers.Repos.TaskRepoController",
+    "Method": "DeleteTaskRepo",
+    "RelativePath": "api/TaskRepo/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "project_hub_api.Controllers.Repos.TaskTypeRepoController",
+    "Method": "GetTaskTypeRepos",
+    "RelativePath": "api/TaskTypeRepo",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "project_hub_api.Controllers.Repos.TaskTypeRepoController",
+    "Method": "CreateTaskTypeRepoAsync",
+    "RelativePath": "api/TaskTypeRepo",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "taskTypeRepo",
+        "Type": "project_hub_api.Dtos.Repo.TaskTypeRepoCreateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "project_hub_api.Controllers.Repos.TaskTypeRepoController",
+    "Method": "GetTaskTypeRepo",
+    "RelativePath": "api/TaskTypeRepo/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "project_hub_api.Controllers.Repos.TaskTypeRepoController",
+    "Method": "UpdateTaskTypeRepoAsync",
+    "RelativePath": "api/TaskTypeRepo/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "taskTypeRepo",
+        "Type": "project_hub_api.Dtos.Repo.TaskTypeRepoUpdateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "project_hub_api.Controllers.Repos.TaskTypeRepoController",
+    "Method": "DeleteTaskTypeRepoAsync",
+    "RelativePath": "api/TaskTypeRepo/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]

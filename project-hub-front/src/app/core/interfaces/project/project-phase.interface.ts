@@ -9,6 +9,7 @@ export interface ProjectPhase {
     order: number;
     startDate: Date;
     endDate: Date;
+    status: number;
     projectId: number;
     project: Project;
     projectTasks: ProjectTask[];
@@ -21,6 +22,7 @@ export interface ProjectPhaseCreate {
     order: number;
     startDate: Date;
     endDate: Date;
+    status: number;
     projectId?: number;
     projectTasks: ProjectTaskCreate[];
     projectTaskCategories: ProjectTaskCategoryCreate[];

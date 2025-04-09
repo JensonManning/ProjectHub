@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, effect, ElementRef, HostBinding, inject, input, output, untracked, viewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LayoutService } from '@/layout/service/layout.service';
+import { PhlayoutService } from '@/core/services/layout/phlayout.service';
 import { sampleDataByFixedLength, trackByFn } from '@/lib/utils';
 
 @Component({
@@ -62,7 +62,7 @@ export class MeterChart {
 
     protected readonly trackByFn = trackByFn;
 
-    layoutService = inject(LayoutService);
+    layoutService = inject(PhlayoutService);
 
     class = input<string>('');
 

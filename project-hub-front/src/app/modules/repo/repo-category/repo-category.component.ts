@@ -139,19 +139,6 @@ export class RepoCategoryComponent {
 		this.repoCategoryService.createCategory(category);
 	}
 
-    getSeverity(status: string) {
-        switch (status) {
-            case 'INSTOCK':
-                return 'success';
-            case 'LOWSTOCK':
-                return 'warn';
-            case 'OUTOFSTOCK':
-                return 'danger';
-            default:
-                return 'info';
-        }
-    }
-
 	saveCategory() {
 		this.categorySubmitted = true;
 		let _categorys = this.repoCategoryService.allCategories();

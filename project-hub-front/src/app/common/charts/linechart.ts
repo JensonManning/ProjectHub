@@ -1,6 +1,6 @@
 import { Component, computed, effect, HostBinding, inject, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LayoutService } from '@/layout/service/layout.service';
+import { PhlayoutService } from '@/core/services/layout/phlayout.service';
 import { ChartModule } from 'primeng/chart';
 import { sampleDataReduction } from '@/lib/utils';
 import 'chartjs-adapter-date-fns';
@@ -19,7 +19,7 @@ export class LineChart {
         return this.class();
     }
 
-    layoutService = inject(LayoutService);
+    layoutService = inject(PhlayoutService);
 
     class = input<string>('');
 

@@ -24,6 +24,11 @@ export const appRoutes: Routes = [
                 loadChildren: () => import('@/modules/projects/projects.routes')
             },
             {
+                path: 'users',
+                data: { breadcrumb: 'Users' },
+                loadChildren: () => import('@/modules/users/user.routes')
+            },
+            {
                 path: 'apps',
                 loadChildren: () => import('@/apps/apps.routes'),
                 data: { breadcrumb: 'Apps' }

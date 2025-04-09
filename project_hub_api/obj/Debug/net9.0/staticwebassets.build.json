@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "PBU0evpCjI33C1CjxggRYNCz3BlW7BHVv/ulOL6F1Gw=",
+  "Source": "project-hub-api",
+  "BasePath": "_content/project-hub-api",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}

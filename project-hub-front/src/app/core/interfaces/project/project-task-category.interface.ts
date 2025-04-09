@@ -8,6 +8,7 @@ export interface ProjectTaskCategory {
 }
 
 export interface ProjectTaskCategoryCreate {
+    id?: number;
     name: string;
     description: string;
     projectId: number;

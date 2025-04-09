@@ -8,3 +8,12 @@
 
     <app-dash-tasks-create />
 </div>
+
+<div class="card">
+    <ul>
+    @for(tasks of pTaskService.allTasks(); track $index) {
+        
+            <li>{{ tasks.name }}</li>
+    }
+    </ul>
+</div>

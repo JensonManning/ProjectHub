@@ -11,6 +11,7 @@ import { BadgeModule } from 'primeng/badge';
 import { OverlayBadgeModule } from 'primeng/overlaybadge';
 import { AvatarModule } from 'primeng/avatar';
 import { StyleClassModule } from 'primeng/styleclass';
+import { ProjectService } from '@/core/services/project/project.service';
 @Component({
   selector: '[app-topbar]',
   imports: [CommonModule, InputTextModule, ButtonModule, IconFieldModule, InputIconModule, RippleModule, BadgeModule, OverlayBadgeModule, AvatarModule, StyleClassModule],
@@ -18,7 +19,8 @@ import { StyleClassModule } from 'primeng/styleclass';
   styleUrl: './topbar.component.scss'
 })
 export class TopbarComponent {
-  layoutService = inject(PhlayoutService);
+    projectService = inject(ProjectService);
+    layoutService = inject(PhlayoutService);
 
     isDarkTheme = computed(() => this.layoutService.isDarkTheme());
 

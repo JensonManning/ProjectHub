@@ -1,0 +1,130 @@
+@if(projectUserService.allUsers().length == 0) {
+    <div class="card">
+        <p-toolbar styleClass="mb-12">
+            <ng-template #start>
+                <p-button label="New" icon="pi pi-plus" severity="secondary" class="mr-2" (onClick)="openNew()" />
+            </ng-template>
+
+            <ng-template #end>
+                
+            </ng-template>
+        </p-toolbar>
+        <span class="text-center text-lg text-orange-500">No users found</span>
+    </div>
+}
+@else{
+    @if(projectUserService.getAllUsersResource.isLoading() == true) {
+        <div class="card">
+            <p-skeleton width="full" height="10rem" />
+        </div>
+    }    
+    @else {
+        <div class="card">
+            <p-toolbar styleClass="mb-12">
+                <ng-template #start>
+                    <p-button label="New" icon="pi pi-plus" severity="secondary" class="mr-2" (onClick)="openNew()" />
+                </ng-template>
+
+                <ng-template #end>
+                    <p-button label="Export" icon="pi pi-upload" severity="secondary" (onClick)="exportCSV()" />
+                </ng-template>
+            </p-toolbar>
+            <p-table
+                #ph
+                [value]="projectUserService.allUsers()"
+                [rows]="10"
+                [columns]="cols"
+                [paginator]="true"
+                [globalFilterFields]="filterColFields"
+                [tableStyle]="{ 'min-width': '75rem' }"
+                [(selection)]="projectUserService.selectedUsers"
+                [rowHover]="true"
+                dataKey="id"
+                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} users"
+                [showCurrentPageReport]="true"
+                [rowsPerPageOptions]="[10, 20, 30]"
+            >
+                <ng-template #caption>
+                    <div class="flex items-center justify-between">
+                        <h5 class="m-0">Manage Users</h5>
+                        <p-iconfield>
+                            <p-inputicon styleClass="pi pi-search" />
+                            <input pInputText type="text" (input)="onGlobalFilter(ph, $event)" placeholder="Search..." />
+                        </p-iconfield>
+                    </div>
+                </ng-template>
+                
+                <ng-template #header>
+                    <tr>
+                        <th style="min-width: 3rem" pSortableColumn="id">
+                            <span class="flex items-center gap-2">ID <p-sortIcon field="id" /></span>
+                        </th>
+                        <th pSortableColumn="name" style="min-width:16rem">
+                            <span class="flex items-center gap-2">Name <p-sortIcon field="name" /></span>
+                        </th>
+                        <th pSortableColumn="email" style="min-width:16rem">
+                            <span class="flex items-center gap-2">Email <p-sortIcon field="email" /></span>
+                        </th>
+                        <th pSortableColumn="phone" style="min-width:16rem">
+                            <span class="flex items-center gap-2">Phone <p-sortIcon field="phone" /></span>
+                        </th>
+                        <th pSortableColumn="role" style="min-width:16rem">
+                            <span class="flex items-center gap-2">Role <p-sortIcon field="role" /></span>
+                        </th>
+
+                        <th style="min-width: 12rem"></th>
+                    </tr>
+                </ng-template>
+
+                <ng-template #body let-user>
+                    <tr>
+                        <td>{{ user.id }}</td>
+                        <td>{{ user.name }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.phone }}</td>
+                        <td>{{ user.role?.name }}</td>
+                        <td>
+                            <p-button icon="pi pi-pencil" class="mr-2" [rounded]="true" [outlined]="true" (click)="editUser(user)" />
+                            <p-button icon="pi pi-trash" severity="danger" [rounded]="true" [outlined]="true" (click)="deleteSelectedUsers(user.id)" />
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    }
+}
+
+<p-dialog
+    [(visible)]="projectUserDialog"
+    header = "Resource Details"
+    [modal]="true"
+    [style]="{ width: '450px', height: '600px' }"
+>
+    <ng-template #content>
+        <div class="grid grid-cols-12 gap-4">
+            <div class="col-span-12">
+                <label for="name" class="block font-bold mb-4">Name</label>
+                <input type="text" pInputText id="name" [(ngModel)]="projectUser.name" required />               
+            </div>
+            <div class="col-span-12">
+                <label for="email" class="block font-bold mb-4">Email</label>
+                <input type="text" pInputText id="email" [(ngModel)]="projectUser.email" required />
+            </div>
+            <div class="col-span-12">
+                <label for="phone" class="block font-bold mb-4">Phone</label>
+                <input type="text" pInputText id="phone" [(ngModel)]="projectUser.phone" required />
+            </div>
+            <div class="col-span-12">
+                <label for="role" class="block font-bold mb-4">Role</label>
+                <p-select [options]="roleService.allRoles()" [(ngModel)]="projectUser.roleId" optionLabel="name" optionValue="id" required />
+            </div>
+
+        </div>
+    </ng-template>
+    <ng-template #footer>
+        <p-button label="Cancel" icon="pi pi-times" text (click)="hideDialog()" />
+        <p-button label="Save" icon="pi pi-check" (click)="saveUser()" />
+    </ng-template>
+</p-dialog>
+
+<p-confirmdialog [style]="{ width: '450px' }" />

@@ -17,3 +17,9 @@ export interface ProjectTaskResourcesUpdate {
     projectTaskId: number;
     projectResourceId: number;
 }
+
+export interface ProjectTaskResourcesSimple {
+    projectTaskId: number;
+    projectResourceId: number;
+    projectResource: ProjectResource;
+}
