@@ -8,8 +8,9 @@
         <img class="mobile-logo" src="/layout/images/logo-{{ isDarkTheme() ? 'white' : 'dark' }}.svg" alt="diamond-layout" />
         <div>
             @for(project of projectService.allProjects(); track project.id) {
-                @if(project.status == 1) {
-                    <p-button label="{{project.name}}"></p-button>
+                <!-- currentUser()?.role != "Project Manager Supervisor"-->
+                @if(project.status == 3) {
+                    <p-button label="{{project.name}}" (onClick)="viewProject(project.id)" ></p-button>
                 }
             }
         </div>

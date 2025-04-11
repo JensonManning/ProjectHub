@@ -12,6 +12,7 @@ import { OverlayBadgeModule } from 'primeng/overlaybadge';
 import { AvatarModule } from 'primeng/avatar';
 import { StyleClassModule } from 'primeng/styleclass';
 import { ProjectService } from '@/core/services/project/project.service';
+import { Router } from '@angular/router';
 @Component({
   selector: '[app-topbar]',
   imports: [CommonModule, InputTextModule, ButtonModule, IconFieldModule, InputIconModule, RippleModule, BadgeModule, OverlayBadgeModule, AvatarModule, StyleClassModule],
@@ -21,6 +22,7 @@ import { ProjectService } from '@/core/services/project/project.service';
 export class TopbarComponent {
     projectService = inject(ProjectService);
     layoutService = inject(PhlayoutService);
+    router = inject(Router);
 
     isDarkTheme = computed(() => this.layoutService.isDarkTheme());
 
@@ -128,4 +130,9 @@ export class TopbarComponent {
     toggleSearchBar() {
         this.layoutService.layoutState.update((value) => ({ ...value, searchBarActive: !value.searchBarActive }));
     }
+
+    viewProject(projectId: number) {
+        this.projectService.selectedProjectId.set(projectId);
+        this.router.navigate(['/projects', projectId, 'details']);
+      }
 }

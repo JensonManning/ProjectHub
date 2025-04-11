@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using project_hub_api.Dtos.Projects.Tasks;
 using project_hub_api.Models.Projects.Tasks;
 
@@ -18,6 +14,7 @@ namespace project_hub_api.Mappers.Projects
                 Description = projectTask.Description,
                 StartDate = projectTask.StartDate,
                 EndDate = projectTask.EndDate,
+                Status = projectTask.Status,
                 ProjectTaskCategoryId = projectTask.ProjectTaskCategoryId,
                 ProjectTaskCategory = projectTask.ProjectTaskCategory?.ToProjectTaskCategorySimpleDto(),
                 ProjectTaskComments = projectTask.ProjectTaskComments.Select(p => p.ToProjectTaskCommentSimpleDto()).ToList(),
@@ -33,6 +30,7 @@ namespace project_hub_api.Mappers.Projects
                 Description = projectTask.Description,
                 StartDate = projectTask.StartDate,
                 EndDate = projectTask.EndDate,
+                Status = projectTask.Status,
                 ProjectTaskCategoryId = projectTask.ProjectTaskCategoryId
             };
         }
@@ -45,6 +43,7 @@ namespace project_hub_api.Mappers.Projects
                 Description = projectTask.Description,
                 StartDate = projectTask.StartDate,
                 EndDate = projectTask.EndDate,
+                Status = projectTask.Status,
                 ProjectTaskCategoryId = projectTask.ProjectTaskCategoryId
             };
         }
@@ -58,6 +57,7 @@ namespace project_hub_api.Mappers.Projects
                 Description = projectTask.Description,
                 StartDate = projectTask.StartDate,
                 EndDate = projectTask.EndDate,
+                Status = projectTask.Status,
                 ProjectTaskCategoryId = projectTask.ProjectTaskCategoryId,
                 ProjectTaskCategory = projectTask.ProjectTaskCategory?.ToProjectTaskCategorySimpleDto(),
                 ProjectTaskComments = projectTask.ProjectTaskComments.Select(p => p.ToProjectTaskCommentSimpleDto()).ToList()

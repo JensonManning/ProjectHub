@@ -7,7 +7,9 @@ using project_hub_api.Dtos.Projects.Resources;
 using project_hub_api.Dtos.Projects.Tasks;
 using project_hub_api.Models.Projects.Phases;
 using project_hub_api.Models.Projects.Tasks;
+using static project_hub_api.Models.Projects.Phases.ProjectPhase;
 using static project_hub_api.Models.Projects.Project;
+using static project_hub_api.Models.Projects.Tasks.ProjectTask;
 
 namespace project_hub_api.Dtos.Projects
 {
@@ -41,7 +43,7 @@ namespace project_hub_api.Dtos.Projects
         public int Order { get; set; }
         public DateOnly StartDate { get; set; }
         public DateOnly EndDate { get; set; }
-        public ProjectPhase.PhaseStatus Status { get; set; }
+        public PhaseStatus Status { get; set; }
         
         [JsonPropertyName("projectTaskCategories")]
         public List<ProjectTaskCategoryCreateDto> TaskCategories { get; set; } = new List<ProjectTaskCategoryCreateDto>();
@@ -59,7 +61,7 @@ namespace project_hub_api.Dtos.Projects
         public DateOnly EndDate { get; set; }
         public int ProjectTaskCategoryId { get; set; }
         public bool HasSubTasks { get; set; }
-        public ProjectTask.TaskStatus Status { get; set; }
+        public ProjectTaskStatus Status { get; set; }
         
         [JsonPropertyName("projectSubTask")]
         public List<ProjectSubTaskCreateDto> SubTasks { get; set; } = new List<ProjectSubTaskCreateDto>();

@@ -127,5 +127,27 @@ namespace project_hub_api.Controllers.Projects
                 return StatusCode(500, "Internal server error");
             }
         }
+
+        [HttpPut]
+        [Route("complete/{id}")]
+        public async Task<IActionResult> CompleteProjectTask([FromRoute]int id)
+        {
+            try
+            {
+                var task = await _projectTaskRepository.GetProjectTaskAsync(id);
+                if (task == null)
+                {
+                    return NotFound();
+                }
+                
+                await _projectTaskRepository.CompleteProjectTaskAsync(id);
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Error completing task with id {id}");
+                return StatusCode(500, "Internal server error");
+            }
+        }
     }
 }

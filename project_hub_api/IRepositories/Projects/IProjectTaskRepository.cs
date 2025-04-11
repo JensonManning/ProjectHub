@@ -13,5 +13,6 @@ namespace project_hub_api.IRepositories.Projects
         public Task<ProjectTask> AddProjectTaskAsync(ProjectTask projectTask, List<int> resourceIds);
         public Task<ProjectTask> UpdateProjectTaskAsync(int id, ProjectTask projectTask);
         public Task<ProjectTask> DeleteProjectTaskAsync(int id);
+        public Task<ProjectTask> CompleteProjectTaskAsync(int id);
     }
 }

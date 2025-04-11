@@ -1,1 +1,79 @@
-<p>details-project-notebooks works!</p>
+<div class="flex flex-column gap-4 p-4">
+    <div class="flex justify-content-end">
+        <p-iconField>
+            <p-inputIcon>
+                <i class="pi pi-search"></i>
+            </p-inputIcon>
+            <input pInputText type="text" placeholder="Search notebooks..." 
+                [(ngModel)]="filterText" class="w-full md:w-20rem" />
+        </p-iconField>
+    </div>
+</div>
+<div class="flex justify-center flex-column gap-4 p-4 w-full">
+    <div class="grid gap-4">
+        @for(notebook of filteredNotebooks(); track notebook.id) {
+            <div class="col-12 md:col-6 lg:col-4">
+                <div class="card h-full w-full">
+                    <div class="flex align-items-center justify-content-between p-3">
+                        <span class="text-xl font-bold">{{notebook.name}}</span>
+                        <div class="text-right pl-10">
+                            <p-button icon="pi pi-eye" text="true" (click)="showNotebook(notebook)"></p-button>
+                        </div>
+                        
+                    </div>
+                    
+                    <p class="m-0 p-3">{{notebook.description || 'No description available'}}</p>
+                </div>
+            </div>
+        }
+        @if(filteredNotebooks().length === 0) {
+            <div class="col-12">
+                <div class="flex justify-content-center p-4">
+                    <span class="text-500">No notebooks found matching your search</span>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<p-dialog [(visible)]="dialogVisible" [style]="{width: '80vw'}" [modal]="true" 
+    [draggable]="false" [resizable]="false" [styleClass]="'notebook-dialog'">
+    <ng-template pTemplate="header">
+        <div class="flex align-items-center justify-content-between">
+            <span class="text-xl font-bold">{{selectedNotebook()?.name}}</span>
+            <div class="flex gap-2">
+                @if(!isEditing()) {
+                    <p-button icon="pi pi-pencil" (click)="editNotebook()" 
+                        class="p-button-rounded p-button-text"></p-button>
+                }
+            </div>
+        </div>
+    </ng-template>
+    
+    <div class="flex flex-column gap-3">
+        @if(isEditing()) {
+            <div class="field">
+                <label for="name" class="block mb-2">Name</label>
+                <input pInputText id="name" [(ngModel)]="selectedNotebook()!.name" class="w-full" />
+            </div>
+            <div class="field">
+                <label for="description" class="block mb-2">Description</label>
+                <input pInputText id="description" [(ngModel)]="selectedNotebook()!.description" class="w-full" />
+            </div>
+            <div class="field">
+                <label for="content" class="block mb-2">Content</label>
+                <p-editor id="content" [(ngModel)]="selectedNotebook()!.content" 
+                    [style]="{'height':'320px'}"></p-editor>
+            </div>
+            <div class="flex justify-content-end gap-2">
+                <p-button label="Cancel" (click)="cancelEdit()" 
+                    class="p-button-text"></p-button>
+                <p-button label="Save" (click)="saveNotebook()" 
+                    class="p-button-primary"></p-button>
+            </div>
+        } @else {
+            <div class="text-500 mb-2">{{selectedNotebook()?.description || 'No description available'}}</div>
+            <div class="editor-content" [innerHTML]="selectedNotebook()?.content"></div>
+        }
+    </div>
+</p-dialog>

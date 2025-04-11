@@ -1,8 +1,12 @@
-@for(resource of projectService.projectDetails().projectResources; track resource.id) {
-    <div class="card mb-4">
-        <div class=" card flex justify-between items-center">
-            <h3 class="text-lg font-semibold">{{ resource.name }}</h3>
-            <h3 class="text-lg font-semibold">{{ resource.user.name }}</h3>
+<div class="grid grid-cols-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4">
+    @for(resource of projectService.projectDetails().projectResources; track resource.id) {
+        <div class="card flex flex-col col-span-1 justify-between items-start p-6 bg-white shadow-md border border-gray-200 rounded-lg">
+            <div class="mb-4">
+                <h3 class="text-xl font-bold text-gray-800">{{ resource.name }}</h3>
+                <h3 class="text-md font-medium text-gray-600">{{ resource.user.name }}</h3>
+            </div>
+            <p-button label="Edit" icon="pi pi-pencil" class="p-button-sm" (click)="editResource(resource.id, resource)"></p-button>
         </div>
-    </div>
-}
+        
+    }
+</div>

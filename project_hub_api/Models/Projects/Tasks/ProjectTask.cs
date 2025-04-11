@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using project_hub_api.Models.Projects.Phases;
 
 namespace project_hub_api.Models.Projects.Tasks
@@ -11,7 +7,7 @@ namespace project_hub_api.Models.Projects.Tasks
         public int Id { get; set;}
         public string Name { get; set;} = string.Empty;
         public string Description { get; set;} = string.Empty;
-        public TaskStatus Status { get; set;}
+        public ProjectTaskStatus Status { get; set;}
         public DateOnly StartDate { get; set;}
         public DateOnly EndDate { get; set;}
         public bool HasSubTasks { get; set; }
@@ -25,7 +21,7 @@ namespace project_hub_api.Models.Projects.Tasks
         public List<ProjectTaskComment>? ProjectTaskComments { get; set; } = new List<ProjectTaskComment>(); // 1 to Many
         public List<ProjectTask_Resource>? ProjectTaskResources { get; set; } // Many to Many
 
-        public enum TaskStatus {
+        public enum ProjectTaskStatus {
             Upcoming,
             Active,
             Completed,

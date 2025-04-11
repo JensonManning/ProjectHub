@@ -7,7 +7,7 @@ import { rxResource } from '@angular/core/rxjs-interop';
 import { ProjectResource } from '@/core/interfaces/project/project-resource.interface';
 import { ProjectTaskResources } from '@/core/interfaces/project/project-task-resources.interface';
 import { UserService } from '@/core/services/user/user.service';
-
+import { ProjectService } from './project.service';
 @Injectable({
   providedIn: 'root'
 })
@@ -15,6 +15,7 @@ export class ProjectTaskService {
 
   http = inject(HttpClient)
   userService = inject(UserService)
+  projectService = inject(ProjectService)
   private apiUrl = environment.apiUrl;
 
   allTasks = computed(() => this.getAllTasksResource.value() || [] as ProjectTask[]);
@@ -39,6 +40,8 @@ export class ProjectTaskService {
     return filteredTasks;
   });
 
+
+
   getAllTasksResource = rxResource({
     loader: () => this.http.get<ProjectTask[]>(`${this.apiUrl}projecttask`).pipe(
       catchError(() => of([]))
@@ -47,6 +50,10 @@ export class ProjectTaskService {
 
   createProjectTask(projectTask: ProjectTaskCreate) {
     return this.http.post<ProjectTaskCreate>(`${this.apiUrl}projecttask`, projectTask);
+  }
+
+  completeProjectTask(taskId: number) {
+    return this.http.put<ProjectTask>(`${this.apiUrl}projecttask/complete/${taskId}`, {});
   }
 
   eff = effect(() => {

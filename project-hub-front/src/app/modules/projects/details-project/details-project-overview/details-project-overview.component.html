@@ -1,1 +1,158 @@
-<p>details-project-overview works!</p>
+<div class="grid gap-4 p-2">
+    <!-- Project Header Card -->
+    <div class="col-12">
+        <p-card styleClass="shadow-2 border-round-xl">
+            <div class="flex align-items-center p-2">
+                <div class="flex flex-column">
+                    <h2 class="text-xl font-bold mb-1">{{projectService.projectDetails().name}}</h2>
+                    <span class="text-sm text-500">{{projectService.projectDetails().shortcode}}</span>
+                </div>
+                <div class="ml-auto">
+                    <p-tag [severity]="getProjectPhaseSeverity()" [value]="getProjectStatusLabel()"></p-tag>
+                </div>
+            </div>
+        </p-card>
+    </div>
+
+    <!-- Project Details Card -->
+    <div class="col-12">
+        <p-card styleClass="shadow-2 border-round-xl" header="Project Details">
+            <div class="p-3">
+                <div class="flex mb-3">
+                    <div class="w-10rem">
+                        <span class="font-semibold text-600">Description:</span>
+                    </div>
+                    <div>
+                        <span class="text-700">{{projectService.projectDetails().description || 'asdf'}}</span>
+                    </div>
+                </div>
+                
+                <div class="flex mb-3 align-items-center">
+                    <div class="w-10rem">
+                        <span class="font-semibold text-600">Start Date:</span>
+                    </div>
+                    <div class="flex-grow-1 text-right">
+                        <span class="text-700">{{projectService.projectDetails().startDate | date:'MMM d, yyyy'}}</span>
+                    </div>
+                </div>
+                
+                <div class="flex mb-3 align-items-center">
+                    <div class="w-10rem">
+                        <span class="font-semibold text-600">End Date:</span>
+                    </div>
+                    <div class="flex-grow-1 text-right">
+                        <span class="text-700">{{projectService.projectDetails().endDate | date:'MMM d, yyyy'}}</span>
+                    </div>
+                </div>
+                
+                <div class="flex mb-3 align-items-center">
+                    <div class="w-10rem">
+                        <span class="font-semibold text-600">Type:</span>
+                    </div>
+                    <div>
+                        <span class="text-700">{{getProjectTypeLabel()}}</span>
+                    </div>
+                </div>
+                
+                <div class="flex align-items-center">
+                    <div class="w-10rem">
+                        <span class="font-semibold text-600">Status:</span>
+                    </div>
+                    <div>
+                        <span class="text-700">{{getProjectStatusLabel()}}</span>
+                    </div>
+                </div>
+            </div>
+        </p-card>
+    </div>
+
+    <!-- Current Phase Card -->
+    <div class="col-12">
+        <p-card styleClass="shadow-2 border-round-xl" header="Current Phase">
+            <div *ngIf="currentPhase(); else noPhase" class="p-3">
+                <div class="flex align-items-center mb-3">
+                    <h4 class="m-0 text-primary font-bold text-xl">{{currentPhase()!.name}}</h4>
+                    <p-tag class="ml-auto" [severity]="getPhaseStatusSeverity(currentPhase()!)" [value]="getPhaseStatusLabel(currentPhase()!)"></p-tag>
+                </div>
+                
+                <div class="flex mb-3">
+                    <div class="w-10rem">
+                        <span class="font-semibold text-600">Description:</span>
+                    </div>
+                    <div>
+                        <span class="text-700">{{currentPhase()?.description || 'asdf'}}</span>
+                    </div>
+                </div>
+                
+                <div class="flex mb-3 align-items-center">
+                    <div class="w-10rem">
+                        <span class="font-semibold text-600">Start Date:</span>
+                    </div>
+                    <div class="flex-grow-1 text-right">
+                        <span class="text-700">{{currentPhase()?.startDate | date:'MMM d, yyyy'}}</span>
+                    </div>
+                </div>
+                
+                <div class="flex mb-3 align-items-center">
+                    <div class="w-10rem">
+                        <span class="font-semibold text-600">End Date:</span>
+                    </div>
+                    <div class="flex-grow-1 text-right">
+                        <span class="text-700">{{currentPhase()?.endDate | date:'MMM d, yyyy'}}</span>
+                    </div>
+                </div>
+                
+                <div class="flex flex-column">
+                    <div class="mb-2">
+                        <span class="font-semibold text-600">Phase Progress:</span>
+                    </div>
+                    <p-progressBar [value]="getPhaseProgress(currentPhase())"></p-progressBar>
+                </div>
+            </div>
+            <ng-template #noPhase>
+                <div class="flex flex-column align-items-center justify-content-center p-5">
+                    <i class="pi pi-info-circle text-4xl text-blue-300 mb-3"></i>
+                    <span class="text-center">No active phases available</span>
+                </div>
+            </ng-template>
+        </p-card>
+    </div>
+
+    <!-- Tasks Overview Card -->
+    <div class="col-12">
+        <p-card styleClass="shadow-2 border-round-xl" header="Tasks Overview">
+            <div class="p-3">
+                <div class="flex justify-content-center mb-4">
+                    <div class="text-center px-5">
+                        <div class="text-3xl font-bold text-green-500 mb-1">{{completedTasks()}}</div>
+                        <div class="text-sm text-600">Completed</div>
+                    </div>
+                    <div class="text-center px-5">
+                        <div class="text-3xl font-bold text-orange-500 mb-1">{{openTasks()}}</div>
+                        <div class="text-sm text-600">Open</div>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <div class="mb-2">
+                        <span class="font-semibold text-600">Task Completion:</span>
+                    </div>
+                    <p-progressBar [value]="getTasksProgress()"></p-progressBar>
+                </div>
+
+                <div>
+                    <div class="mb-2">
+                        <span class="font-semibold text-600">Task Status Breakdown:</span>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <p-tag severity="info" [value]="'Upcoming: ' + getTasksByStatus(0)"></p-tag>
+                        <p-tag severity="warn" [value]="'Active: ' + getTasksByStatus(1)"></p-tag>
+                        <p-tag severity="success" [value]="'Completed: ' + getTasksByStatus(2)"></p-tag>
+                        <p-tag severity="danger" [value]="'Delayed: ' + getTasksByStatus(4)"></p-tag>
+                    </div>
+                </div>
+            </div>
+        </p-card>
+    </div>
+</div>
+

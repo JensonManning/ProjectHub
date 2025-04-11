@@ -1,8 +1,41 @@
-<p-dialog [(visible)]="searchBarActive" [breakpoints]="{ '992px': '75vw', '576px': '90vw' }" modal dismissableMask styleClass="w-1/2">
+<p-dialog [(visible)]="searchBarActive" [breakpoints]="{ '992px': '90vw', '576px': '95vw' }" [style]="{width: '40vw'}" modal dismissableMask>
     <ng-template #headless>
         <div class="search-container">
             <i class="pi pi-search"></i>
-            <input pInputText type="text" [pAutoFocus]="true" class="p-inputtext search-input" placeholder="Search" (keydown.enter)="toggleSearchBar()" />
+            <div class="flex w-full">
+                <p-autoComplete 
+                    [(ngModel)]="selectedProject" 
+                    [suggestions]="filteredProjects" 
+                    (completeMethod)="filterProjects($event)"
+                    (onSelect)="onProjectSelect($event)"
+                    [field]="'name'"
+                    [placeholder]="'Search projects...'" 
+                    [pAutoFocus]="true"
+                    styleClass="flex w-full search-input"
+                    [showClear]="true"
+                    [autofocus]="true"
+                    [forceSelection]="true">
+                    <ng-template let-project pTemplate="item">
+                        <div class="flex align-items-center">
+                            <span class="font-bold">{{project.name}}</span>
+                            @if(project.shortcode != null) {
+                                <span class="ml-2 text-sm text-gray-500">({{project.shortcode}})</span>
+                            }
+                        </div>
+                    </ng-template>
+                    <ng-template let-project pTemplate="selectedItem">
+                        <div class="flex align-items-center">
+                            <span>{{project.selectedProject}}</span>
+                            @if(project.shortcode != null) {
+                                <span class="ml-2 text-sm text-gray-500">({{project.shortcode}})</span>
+                            }
+                        </div>
+                    </ng-template>
+                </p-autoComplete>
+                @if(selectedProject != null) {
+                    <p-button label="Go to Project" (click)="goToSelectedProject()"></p-button>
+                }
+            </div>
         </div>
     </ng-template>
 </p-dialog>

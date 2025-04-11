@@ -1,0 +1,21 @@
+:host ::ng-deep {
+    .notebook-dialog {
+        .p-dialog-content {
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+    }
+
+    .editor-content {
+        max-height: 60vh;
+        overflow-y: auto;
+        padding: 1rem;
+        background-color: var(--surface-ground);
+        border-radius: 6px;
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+    }
+}

@@ -45,6 +45,7 @@ namespace project_hub_api.Services
                     Name = completeProject.Name,
                     Description = completeProject.Description,
                     StartDate = completeProject.StartDate,
+                    Shortcode = completeProject.Shortcode,
                     EndDate = completeProject.EndDate,
                     Status = completeProject.Status,
                     Type = completeProject.Type,
@@ -190,7 +191,7 @@ namespace project_hub_api.Services
                                     EndDate = taskDto.EndDate,
                                     ProjectTaskCategoryId = newCategoryId, // Use the NEW mapped ID
                                     HasSubTasks = taskDto.HasSubTasks,
-                                    Status = taskDto.Status,
+                                    Status = ProjectTask.ProjectTaskStatus.Upcoming,
                                     ProjectPhaseId = phase.Id // Link to the phase
                                 };
 

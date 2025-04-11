@@ -36,12 +36,12 @@ namespace project_hub_api.Repositories.Projects
                     throw new Exception("One or more resource IDs are invalid.");
                 }
 
-                var taskResources = validResourceIds.Select(resourceId => new ProjectTask_Resource 
+                var taskResources = validResourceIds.Select(resourceId => new ProjectTask_Resource
                 {
                     ProjectTaskId = projectTask.Id,
                     ProjectResourceId = resourceId
                 }).ToList();
-                
+
                 await _context.ProjectTaskResources.AddRangeAsync(taskResources);
                 await _context.SaveChangesAsync();
             }
@@ -49,7 +49,7 @@ namespace project_hub_api.Repositories.Projects
             return await _context.ProjectTasks
                 .Include(t => t.ProjectTaskCategory!)
                 .Include(t => t.ProjectTaskResources!)
-                .ThenInclude(tr => tr.ProjectResource!) 
+                .ThenInclude(tr => tr.ProjectResource!)
                 .FirstOrDefaultAsync(t => t.Id == projectTask.Id);
         }
 
@@ -84,17 +84,17 @@ namespace project_hub_api.Repositories.Projects
             var tasks = await _context.ProjectTasks
                 .Include(p => p.ProjectTaskCategory)
                 .ToListAsync();
-    
+
             // Get all task resources
             var resources = await _context.ProjectTaskResources
                 .Include(r => r.ProjectResource)
                 .ToListAsync();
-    
+
             // Create a dictionary to look up resources by task ID
             var resourcesByTaskId = resources
                 .GroupBy(r => r.ProjectTaskId)
                 .ToDictionary(g => g.Key, g => g.ToList());
-    
+
             // Create new ProjectTask objects with resources manually assigned
             var result = tasks.Select(t => new ProjectTask
             {
@@ -107,13 +107,13 @@ namespace project_hub_api.Repositories.Projects
                 HasSubTasks = t.HasSubTasks,
                 ProjectTaskCategoryId = t.ProjectTaskCategoryId,
                 ProjectTaskCategory = t.ProjectTaskCategory,
-        
+
                 // Manually assign resources if they exist
-                ProjectTaskResources = resourcesByTaskId.ContainsKey(t.Id) 
-                    ? resourcesByTaskId[t.Id] 
+                ProjectTaskResources = resourcesByTaskId.ContainsKey(t.Id)
+                    ? resourcesByTaskId[t.Id]
                     : new List<ProjectTask_Resource>()
             }).ToList();
-    
+
             return result;
         }
 
@@ -137,6 +137,19 @@ namespace project_hub_api.Repositories.Projects
             _context.ProjectTasks.Update(existingTask);
             await _context.SaveChangesAsync();
             return existingTask;
+        }
+
+        public async Task<ProjectTask> CompleteProjectTaskAsync(int id)
+        {
+            var projectTask = await _context.ProjectTasks.FirstOrDefaultAsync(t => t.Id == id);
+            if (projectTask == null)
+            {
+                return null!;
+            }
+            projectTask.Status = ProjectTask.ProjectTaskStatus.Completed;
+            _context.ProjectTasks.Update(projectTask);
+            await _context.SaveChangesAsync();
+            return projectTask;
         }
     }
 }

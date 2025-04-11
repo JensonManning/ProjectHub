@@ -1,9 +1,16 @@
-import { Injectable } from '@angular/core';
+import { ProjectResource } from '@/core/interfaces/project/project-resource.interface';
+import { HttpClient } from '@angular/common/http';
+import { inject, Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment.development';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProjectResourceService {
-
-  constructor() { }
+  http = inject(HttpClient)
+  private apiUrl = environment.apiUrl;
+  
+  editResource(id: number, Resource: ProjectResource) {
+    return this.http.put<ProjectResource>(`${this.apiUrl}projectresource/${id}`, Resource);
+  }
 }

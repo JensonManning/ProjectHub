@@ -1,1 +1,355 @@
-<p>details-project-tasks works!</p>
+<div class="grid gap-4 p-3">
+    <!-- Header Card -->
+    <div class="col-12 card">
+        <div class="flex align-items-center justify-between justify-content-between mb-4">
+            <h2 class="text-xl font-bold m-0">Project Tasks</h2>
+            <p-button icon="pi pi-plus" label="Add Task" text="true" (onClick)="showTaskDialog()"></p-button>
+        </div>
+        
+        <!-- Task Statistics -->
+        <div class="grid mb-3">
+            <div class="col-12 md:col-6 lg:col-3">
+                <div class="p-3 border-round bg-green-50">
+                    <div class="flex justify-content-between">
+                        <div>
+                            <span class="text-green-500 font-medium text-xl">{{allCompletedTasks().length}}</span>
+                            <div class="text-500">Completed Tasks</div>
+                        </div>
+                        <div class="flex align-items-center justify-content-center bg-green-100 border-round" style="width: 2.5rem; height: 2.5rem">
+                            <i class="pi pi-check-circle text-green-500 text-xl"></i>
+                        </div>
+                    </div>
+                    <p-button *ngIf="statusFilter() !== TaskStatus.Completed" 
+                            label="View Completed" 
+                            styleClass="p-button-outlined p-button-success p-button-sm w-full mt-3"
+                            (onClick)="filterByStatus(TaskStatus.Completed)"></p-button>
+                </div>
+            </div>
+            <div class="col-12 md:col-6 lg:col-3">
+                <div class="p-3 border-round bg-blue-50">
+                    <div class="flex justify-content-between">
+                        <div>
+                            <span class="text-blue-500 font-medium text-xl">{{allUnfilteredTasks().length}}</span>
+                            <div class="text-500">Total Tasks</div>
+                        </div>
+                        <div class="flex align-items-center justify-content-center bg-blue-100 border-round" style="width: 2.5rem; height: 2.5rem">
+                            <i class="pi pi-list text-blue-500 text-xl"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 md:col-6 lg:col-3">
+                <div class="p-3 border-round bg-yellow-50">
+                    <div class="flex justify-content-between">
+                        <div>
+                            <span class="text-yellow-500 font-medium text-xl">{{activeTasks().length}}</span>
+                            <div class="text-500">Active Tasks</div>
+                        </div>
+                        <div class="flex align-items-center justify-content-center bg-yellow-100 border-round" style="width: 2.5rem; height: 2.5rem">
+                            <i class="pi pi-bolt text-yellow-500 text-xl"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 md:col-6 lg:col-3">
+                <div class="p-3 border-round bg-red-50">
+                    <div class="flex justify-content-between">
+                        <div>
+                            <span class="text-red-500 font-medium text-xl">{{lateTasks().length}}</span>
+                            <div class="text-500">Late Tasks</div>
+                        </div>
+                        <div class="flex align-items-center justify-content-center bg-red-100 border-round" style="width: 2.5rem; height: 2.5rem">
+                            <i class="pi pi-exclamation-circle text-red-500 text-xl"></i>
+                        </div>
+                    </div>
+                    <p-button *ngIf="statusFilter() !== TaskStatus.Late && lateTasks().length > 0" 
+                            label="View Late" 
+                            styleClass="p-button-outlined p-button-danger p-button-sm w-full mt-3"
+                            (onClick)="filterByStatus(TaskStatus.Late)"></p-button>
+                </div>
+            </div>
+            <div class="col-12 md:col-6 lg:col-3">
+                <div class="p-3 border-round bg-purple-50">
+                    <div class="flex justify-content-between">
+                        <div>
+                            <span class="text-purple-500 font-medium text-xl">
+                                {{Math.round((allCompletedTasks().length / allUnfilteredTasks().length) * 100) || 0}}%
+                            </span>
+                            <div class="text-500">Completion Rate</div>
+                        </div>
+                        <div class="flex align-items-center justify-content-center bg-purple-100 border-round" style="width: 2.5rem; height: 2.5rem">
+                            <i class="pi pi-chart-pie text-purple-500 text-xl"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <p-divider />
+        <div class="flex gap-3 ml-auto p-3">
+            <div class="flex flex-column md:flex-row gap-3 mb-3">
+                <span class="p-input-icon-left p-input-icon-right w-full md:w-15rem">
+                    <input type="text" pInputText class="w-full" placeholder="Search tasks..." #searchInput (input)="applyFilter(searchInput.value)" />
+                    <i *ngIf="filterText().length > 0" class="pi pi-times cursor-pointer" (click)="clearSearchFilter(searchInput)"></i>
+                </span>            
+            </div>
+            <!-- Completed filter with count of completed tasks -->
+            <div class="flex align-items-center">
+                <p-button 
+                    [styleClass]="statusFilter() === TaskStatus.Completed ? 'p-button-success' : 'p-button-outlined'" 
+                    label="Completed" 
+                    icon="pi pi-check-circle"
+                    [badge]="allCompletedTasks().length.toString()" 
+                    badgeClass="bg-success" 
+                    (click)="filterByStatus(TaskStatus.Completed)">
+                </p-button>
+            </div>
+            
+            <!-- Other filters -->
+            <p-button 
+                [styleClass]="statusFilter() === 'all' ? 'p-button-primary' : 'p-button-outlined'" 
+                label="All" 
+                [badge]="allTasks().length.toString()" 
+                badgeClass="bg-primary" 
+                (click)="filterByStatus('all')"></p-button>
+            <p-button 
+                [styleClass]="statusFilter() === TaskStatus.Active ? 'p-button-warning' : 'p-button-outlined'" 
+                label="Active" 
+                [badge]="activeTasks().length.toString()" 
+                badgeClass="bg-warning" 
+                (click)="filterByStatus(TaskStatus.Active)"></p-button>
+            <p-button 
+                [styleClass]="statusFilter() === TaskStatus.Late ? 'p-button-danger' : 'p-button-outlined'" 
+                label="Late" 
+                [badge]="lateTasks().length.toString()" 
+                badgeClass="bg-danger" 
+                (click)="filterByStatus(TaskStatus.Late)"></p-button>
+            <p-divider layout="vertical" />  
+            <p-button 
+                [styleClass]="categoryFilter() !== 'all' ? 'p-button-info' : 'p-button-text'" 
+                icon="pi pi-tag" 
+                label="Categories" 
+                [badge]="categoryFilter() !== 'all' ? '1' : undefined"
+                badgeClass="bg-primary"
+                (onClick)="toggleCategoryDrawer()"></p-button>
+            
+            <!-- Clear category filter button -->
+            @if(categoryFilter() !== 'all' ) {
+                <p-button icon="pi pi-times" pTooltip="Clear category filter" tooltipPosition="top" severity="warn" text="true"
+                (onClick)="clearCategoryFilter()"></p-button>
+            }
+            
+            <p-drawer header="Filter by Category" [(visible)]="categoryDrawer" position="right" [style]="{width: '300px'}">
+                <p-fluid>
+                    <div class="category-list p-3">
+                        <!-- All Categories Option -->
+                        <div class="category-item mb-2">                      
+                            <div class="flex justify-center w-full">
+                                <p-button label="All Categories" badge="{{ allTasks().length }}" 
+                                styleClass="w-full" (onClick)="selectCategoryAndClose('all')"
+                                [class]="categoryFilter() === 'all' ? 'p-button-primary' : 'p-button-outlined'" ></p-button>
+                            </div>                  
+                        </div>
+                        
+                        <!-- Individual Category Options -->
+                        <ng-container *ngFor="let option of categoryOptions()">
+                            <div *ngIf="option.value !== null" class="category-item mb-2">
+                                <div class="w-full">
+                                    <p-button [label]="option.label" class="w-full" badge="{{ getCategoryTaskCount(option.value) }}"
+                                    [class]="categoryFilter() === option.value ? 'p-button-primary' : 'p-button-outlined'" 
+                                    (onClick)="selectCategoryAndClose(option.value)"></p-button>
+                                </div>
+                            </div>
+                        </ng-container>
+                    </div>
+                </p-fluid>
+            </p-drawer>
+        </div>           
+    </div>
+    <p-divider />
+    <div class="col-12 md:col-9">
+        @if(projectPhases().length > 0) {
+            @for(phase of projectPhases(); track phase.id) {
+                <div class="card mb-4">
+                    <div class="flex align-items-center gap-3 pb-4 border-round-top-xl">
+                        <span class="font-bold text-lg">{{ phase.name }}</span>
+                        <p-tag [severity]="getPhaseStatusSeverity(phase.status)" [value]="getPhaseStatusLabel(phase.status)"></p-tag>
+                        <div class="flex-grow-1 text-right">
+                            <span class="text-500 mr-3">{{ phase.startDate | date:'mediumDate' }} - {{ phase.endDate | date:'mediumDate' }}</span>
+                            <p-badge [value]="phase.projectTasks.length.toString()" severity="info" class="ml-2"></p-badge>
+                        </div>
+                    </div> 
+                    <p-table [value]="getTasksByPhase(phase)" [rowHover]="true" styleClass="p-datatable-sm"
+                        [paginator]="phase.projectTasks.length > 10" [rows]="10" 
+                        [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} tasks">
+                        
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th pSortableColumn="name" style="width: 30%">Task <p-sortIcon field="name"></p-sortIcon></th>
+                                <th pSortableColumn="status" style="width: 15%">Status <p-sortIcon field="status"></p-sortIcon></th>
+                                <th pSortableColumn="startDate" style="width: 15%">Start Date <p-sortIcon field="startDate"></p-sortIcon></th>
+                                <th pSortableColumn="endDate" style="width: 15%">End Date <p-sortIcon field="endDate"></p-sortIcon></th>
+                                <th style="width: 25%">Actions</th>
+                            </tr>
+                        </ng-template>
+                        
+                        <ng-template pTemplate="body" let-task>
+                            <tr (click)="handleTaskClick(task)" 
+                                class="cursor-pointer"
+                                [class.line-through]="task.status === TaskStatus.Completed"
+                                [class.text-muted]="task.status === TaskStatus.Completed">
+                                <td>
+                                    <div class="flex align-items-center">
+                                        <span class="font-semibold">{{ task.name }}</span>
+                                    </div>
+                                    <div class="text-xs text-500 mt-1 truncate" style="max-width: 300px;">{{ task.description }}</div>
+                                </td>
+                                <td>
+                                    <p-tag [severity]="getStatusSeverity(task.status)" [value]="getStatusLabel(task.status)"></p-tag>
+                                </td>
+                                <td>{{ task.startDate | date:'mediumDate' }}</td>
+                                <td>{{ task.endDate | date:'mediumDate' }}</td>
+                                <td>
+                                    <div class="flex gap-2">
+                                        <button *ngIf="task.status !== TaskStatus.Completed" 
+                                                pButton pRipple icon="pi pi-check" 
+                                                class="p-button-rounded p-button-text p-button-success p-button-sm"
+                                                pTooltip="Mark Complete" tooltipPosition="top" 
+                                                (click)="$event.stopPropagation(); completeTask(task)"></button>
+                                        <button *ngIf="task.status === TaskStatus.Completed" 
+                                                pButton pRipple icon="pi pi-check-circle" 
+                                                class="p-button-rounded p-button-text p-button-success p-button-sm"
+                                                pTooltip="Completed" tooltipPosition="top" 
+                                                disabled></button>
+                                        <p-button icon="pi pi-comments" styleClass="p-button-rounded p-button-text p-button-sm"
+                                                [badge]="task.projectTaskComments?.length || '0'" badgeClass="p-badge-info"
+                                                pTooltip="Comments" tooltipPosition="top"></p-button>
+                                        <p-button icon="pi pi-users" styleClass="p-button-rounded p-button-text p-button-sm"
+                                                [badge]="task.projectTaskResources?.length || '0'" badgeClass="p-badge-success"
+                                                pTooltip="Resources" tooltipPosition="top"></p-button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </ng-template>
+                        
+                        <ng-template pTemplate="emptymessage">
+                            <tr>
+                                <td colspan="5" class="text-center p-4">
+                                    <div class="flex flex-column align-items-center">
+                                        <span class="text-lg text-500">No tasks in this phase</span>
+                                    </div>
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>            
+                </div>
+            }
+        }
+    </div>
+
+    <!-- Task Dialog -->
+    <p-dialog [(visible)]="taskDialogVisible" [style]="{width: '550px'}" [modal]="true" [draggable]="false" [resizable]="false" header="Task Details" (onHide)="hideTaskDialog()">
+        <div class="p-fluid">
+            <div *ngIf="selectedTask()">
+                <!-- View/Edit Task Details -->
+                <div class="grid formgrid">
+                    <div class="col-12 mb-3">
+                        <h2 class="text-xl m-0">{{ selectedTask()?.name }}</h2>
+                        <p-tag [severity]="getStatusSeverity(selectedTask()!.status)" [value]="getStatusLabel(selectedTask()!.status)" class="mt-2"></p-tag>
+                    </div>
+                    
+                    <div class="col-12 mb-3">
+                        <span class="block text-500 mb-1">Description</span>
+                        <p class="m-0">{{ selectedTask()?.description || 'No description provided' }}</p>
+                    </div>
+                    
+                    <div class="col-6 mb-3">
+                        <span class="block text-500 mb-1">Start Date</span>
+                        <span>{{ selectedTask()?.startDate | date:'mediumDate' }}</span>
+                    </div>
+                    
+                    <div class="col-6 mb-3">
+                        <span class="block text-500 mb-1">End Date</span>
+                        <span>{{ selectedTask()?.endDate | date:'mediumDate' }}</span>
+                    </div>
+                    
+                    <div class="col-6 mb-3">
+                        <span class="block text-500 mb-1">Phase</span>
+                        <span>{{ selectedTask()?.phaseName }}</span>
+                    </div>
+                    
+                    <div class="col-6 mb-3">
+                        <span class="block text-500 mb-1">Has Subtasks</span>
+                        <span>{{ selectedTask()?.hasSubTasks ? 'Yes' : 'No' }}</span>
+                    </div>
+                    
+                    <!-- Subtasks section (if available in the API) -->
+                    <ng-container *ngIf="selectedTask()?.hasSubTasks">
+                        <div class="col-12 mb-3">
+                            <h3 class="text-lg mb-2">Subtasks</h3>
+                            <div *ngIf="!selectedTask()?.projectSubTasks?.length" class="p-3 text-center text-500">
+                                No subtasks available
+                            </div>
+                            <ul *ngIf="selectedTask()?.projectSubTasks?.length" class="list-none p-0 m-0">
+                                <li *ngFor="let subtask of selectedTask()?.projectSubTasks" class="flex align-items-center mb-2 p-2 border-round surface-hover">
+                                    <i class="pi pi-check-circle mr-2" [ngClass]="subtask.status === 2 ? 'text-green-500' : 'text-gray-500'"></i>
+                                    <span>{{ subtask.name }}</span>
+                                    <p-tag [severity]="getStatusSeverity(subtask.status)" [value]="getStatusLabel(subtask.status)" class="ml-auto"></p-tag>
+                                </li>
+                            </ul>
+                        </div>
+                    </ng-container>
+                    
+                    <!-- Resources section -->
+                    <div class="col-12 mb-3" *ngIf="selectedTask()?.projectTaskResources?.length">
+                        <h3 class="text-lg mb-2">Resources</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <div *ngFor="let resource of selectedTask()?.projectTaskResources" class="p-2 border-round surface-hover">
+                                <div class="flex align-items-center">
+                                    <div class="avatar mr-2">
+                                        <div class="h-2rem w-2rem border-circle bg-primary-100 flex align-items-center justify-content-center">
+                                            <span class="text-primary text-sm font-bold">U</span>
+                                        </div>
+                                    </div>
+                                    <span>Resource Name</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Comments section -->
+                    <div class="col-12" *ngIf="selectedTask()?.projectTaskComments?.length">
+                        <h3 class="text-lg mb-2">Comments</h3>
+                        <div class="border-1 border-round p-3 surface-ground">
+                            <div *ngFor="let comment of selectedTask()?.projectTaskComments" class="mb-3 pb-3 border-bottom-1 border-300">
+                                <div class="flex align-items-center mb-2">
+                                    <div class="avatar mr-2">
+                                        <div class="h-2rem w-2rem border-circle bg-primary-100 flex align-items-center justify-content-center">
+                                            <span class="text-primary text-sm font-bold">U</span>
+                                        </div>
+                                    </div>
+                                    <span class="font-semibold">User</span>
+                                    <span class="text-500 text-xs ml-auto">{{ comment.createdAt | date:'medium' }}</span>
+                                </div>
+                                <p class="m-0 line-height-3">{{ comment.commentBy }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div *ngIf="!selectedTask()">
+                <!-- New Task Form would go here -->
+                <p class="text-center">Task creation form will be implemented here.</p>
+            </div>
+        </div>
+        
+        <ng-template pTemplate="footer">
+            <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-outlined" (click)="hideTaskDialog()"></button>
+            <button *ngIf="selectedTask()" pButton pRipple label="Edit" icon="pi pi-pencil" class="p-button-primary ml-2"></button>
+            <button *ngIf="!selectedTask()" pButton pRipple label="Create" icon="pi pi-save" class="p-button-primary ml-2"></button>
+        </ng-template>
+    </p-dialog>
+</div>
+
+<p-confirmDialog></p-confirmDialog>

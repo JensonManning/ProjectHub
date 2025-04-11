@@ -1,0 +1,37 @@
+.category-list {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  
+  .category-item {
+    display: block;
+    width: 100%;
+    margin-bottom: 0.5rem;
+    
+    div {
+      display: flex;
+      align-items: center;
+      
+      button {
+        flex: 1;
+        text-align: left;
+        margin-right: 0.5rem;
+      }
+      
+      .badge {
+        padding: 0.25rem 0.5rem;
+        border-radius: 50%;
+        font-size: 0.85rem;
+      }
+    }
+  }
+}
+
+/* Styling for completed tasks */
+.line-through {
+  text-decoration: line-through;
+}
+
+.text-muted {
+  opacity: 0.7;
+}

@@ -42,8 +42,21 @@ namespace project_hub_api.Repositories.Projects
         {
             return await _context.Projects
                 .Include(p => p.ProjectPhases)
+                    .ThenInclude(phase => phase.ProjectTaskCategories)
+                .Include(p => p.ProjectPhases)
+                    .ThenInclude(phase => phase.ProjectTasks)
+                        .ThenInclude(task => task.ProjectTaskCategory)
+                .Include(p => p.ProjectPhases)
+                    .ThenInclude(phase => phase.ProjectTasks)
+                        .ThenInclude(task => task.ProjectTaskComments)
+                .Include(p => p.ProjectPhases)
+                    .ThenInclude(phase => phase.ProjectTasks)
+                        .ThenInclude(task => task.ProjectTaskResources)
+                .Include(p => p.ProjectPhases)
+                    .ThenInclude(phase => phase.ProjectTasks)
+                        .ThenInclude(task => task.ProjectTaskResources)
                 .Include(p => p.ProjectResources)
-                .ThenInclude(p => p.User)
+                    .ThenInclude(resource => resource.User)
                 .Include(p => p.ProjectNotebooks)
                 .FirstOrDefaultAsync(p => p.Id == id) ?? null!; 
         }

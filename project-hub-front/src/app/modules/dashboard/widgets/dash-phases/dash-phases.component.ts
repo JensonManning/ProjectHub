@@ -19,8 +19,6 @@ export class DashPhasesComponent implements OnInit {
   userService = inject(UserService);
   router = inject(Router);
 
-
-
   ngOnInit() {
     // Make sure services are initialized
     this.projectService.getAllProjectsResource.reload();
@@ -32,6 +30,20 @@ export class DashPhasesComponent implements OnInit {
 
     console.log('Phase status values:');
     console.log('0 = Upcoming, 1 = Active, 2 = Completed, 3 = Cancelled, 4 = Delayed, 5 = Postponed, 6 = Late');
+  }
+
+  /**
+   * Get projects that have an active phase with the specified order
+   * @param phaseOrder The order number of the phase to filter by
+   * @returns Array of projects that have an active phase with the specified order
+   */
+  getProjectsWithActivePhase(phaseOrder: number) {
+    const allProjects = this.projectService.allProjectsByUser();
+    return allProjects.filter(project => 
+      project.projectPhases.some(phase => 
+        phase.status === 1 && phase.order === phaseOrder
+      )
+    );
   }
 
   /**
