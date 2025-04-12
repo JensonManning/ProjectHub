@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("project-hub-api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f67d86f693b71f195333cdd73047bb4524a42d39")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8c82dbca4b7a3fe2c5f7d437e0775e25fc62338c")]
 [assembly: System.Reflection.AssemblyProductAttribute("project-hub-api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("project-hub-api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

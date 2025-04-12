@@ -40,17 +40,12 @@
     [draggable]="false" [resizable]="false" [styleClass]="'notebook-dialog'">
     <ng-template pTemplate="header">
         <div class="flex align-items-center justify-content-between">
-            <span class="text-xl font-bold">{{selectedNotebook()?.name}}</span>
-            <div class="flex gap-2">
-                @if(!isEditing()) {
-                    <p-button icon="pi pi-pencil" (click)="editNotebook()" 
-                        class="p-button-rounded p-button-text"></p-button>
-                }
-            </div>
-        </div>
+            <span class="text-xl font-bold">{{selectedNotebook()?.name}}</span>           
+        </div>       
     </ng-template>
     
-    <div class="flex flex-column gap-3">
+    <div class="grid grid-cols-12 gap-4">
+        <div class="col-span-12">
         @if(isEditing()) {
             <div class="field">
                 <label for="name" class="block mb-2">Name</label>
@@ -71,9 +66,20 @@
                 <p-button label="Save" (click)="saveNotebook()" 
                     class="p-button-primary"></p-button>
             </div>
-        } @else {
+        } 
+        @else {
             <div class="text-500 mb-2">{{selectedNotebook()?.description || 'No description available'}}</div>
-            <div class="editor-content" [innerHTML]="selectedNotebook()?.content"></div>
+            <p-divider />
+            <div class="editor-content card" [innerHTML]="selectedNotebook()?.content"></div>
+            
+        }
+        </div>
+        
+    </div>
+    <div class="flex gap-10">
+        @if(!isEditing()) {
+            <p-button label="Edit" icon="pi pi-pencil" (click)="editNotebook()" 
+                class="mt-4" text="true"></p-button>
         }
     </div>
 </p-dialog>

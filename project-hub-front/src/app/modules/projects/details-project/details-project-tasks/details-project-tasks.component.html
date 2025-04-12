@@ -1,4 +1,5 @@
 <div class="grid gap-4 p-3">
+    <p-toast position="bottom-center" [style]="{'width': '100%'}" [styleClass]="'flex flex-row gap-2 justify-content-center'"></p-toast>
     <!-- Header Card -->
     <div class="col-12 card">
         <div class="flex align-items-center justify-between justify-content-between mb-4">
@@ -7,80 +8,39 @@
         </div>
         
         <!-- Task Statistics -->
-        <div class="grid mb-3">
-            <div class="col-12 md:col-6 lg:col-3">
-                <div class="p-3 border-round bg-green-50">
-                    <div class="flex justify-content-between">
-                        <div>
-                            <span class="text-green-500 font-medium text-xl">{{allCompletedTasks().length}}</span>
-                            <div class="text-500">Completed Tasks</div>
-                        </div>
-                        <div class="flex align-items-center justify-content-center bg-green-100 border-round" style="width: 2.5rem; height: 2.5rem">
-                            <i class="pi pi-check-circle text-green-500 text-xl"></i>
-                        </div>
-                    </div>
-                    <p-button *ngIf="statusFilter() !== TaskStatus.Completed" 
-                            label="View Completed" 
-                            styleClass="p-button-outlined p-button-success p-button-sm w-full mt-3"
-                            (onClick)="filterByStatus(TaskStatus.Completed)"></p-button>
-                </div>
-            </div>
-            <div class="col-12 md:col-6 lg:col-3">
-                <div class="p-3 border-round bg-blue-50">
+        <div class="flex justify-content-between mb-3">
+            <div class="flex-1 mx-2">
+                <div class=" border-round bg-blue-50">
                     <div class="flex justify-content-between">
                         <div>
                             <span class="text-blue-500 font-medium text-xl">{{allUnfilteredTasks().length}}</span>
-                            <div class="text-500">Total Tasks</div>
-                        </div>
-                        <div class="flex align-items-center justify-content-center bg-blue-100 border-round" style="width: 2.5rem; height: 2.5rem">
-                            <i class="pi pi-list text-blue-500 text-xl"></i>
+                            <div class="font-bold text-500">Total Tasks</div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-12 md:col-6 lg:col-3">
+            <div class="flex-1 mx-2 ">
                 <div class="p-3 border-round bg-yellow-50">
                     <div class="flex justify-content-between">
                         <div>
                             <span class="text-yellow-500 font-medium text-xl">{{activeTasks().length}}</span>
-                            <div class="text-500">Active Tasks</div>
-                        </div>
-                        <div class="flex align-items-center justify-content-center bg-yellow-100 border-round" style="width: 2.5rem; height: 2.5rem">
-                            <i class="pi pi-bolt text-yellow-500 text-xl"></i>
+                            <div class="font-bold text-500">Active Tasks</div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-12 md:col-6 lg:col-3">
+            <div class="flex-1 mx-2">
                 <div class="p-3 border-round bg-red-50">
                     <div class="flex justify-content-between">
                         <div>
                             <span class="text-red-500 font-medium text-xl">{{lateTasks().length}}</span>
-                            <div class="text-500">Late Tasks</div>
-                        </div>
-                        <div class="flex align-items-center justify-content-center bg-red-100 border-round" style="width: 2.5rem; height: 2.5rem">
-                            <i class="pi pi-exclamation-circle text-red-500 text-xl"></i>
+                            <div class="font-bold text-500">Late Tasks</div>
                         </div>
                     </div>
-                    <p-button *ngIf="statusFilter() !== TaskStatus.Late && lateTasks().length > 0" 
+                    <!-- <p-button *ngIf="statusFilter() !== TaskStatus.Late && lateTasks().length > 0" 
                             label="View Late" 
                             styleClass="p-button-outlined p-button-danger p-button-sm w-full mt-3"
-                            (onClick)="filterByStatus(TaskStatus.Late)"></p-button>
-                </div>
-            </div>
-            <div class="col-12 md:col-6 lg:col-3">
-                <div class="p-3 border-round bg-purple-50">
-                    <div class="flex justify-content-between">
-                        <div>
-                            <span class="text-purple-500 font-medium text-xl">
-                                {{Math.round((allCompletedTasks().length / allUnfilteredTasks().length) * 100) || 0}}%
-                            </span>
-                            <div class="text-500">Completion Rate</div>
-                        </div>
-                        <div class="flex align-items-center justify-content-center bg-purple-100 border-round" style="width: 2.5rem; height: 2.5rem">
-                            <i class="pi pi-chart-pie text-purple-500 text-xl"></i>
-                        </div>
-                    </div>
+                            (onClick)="filterByStatus(TaskStatus.Late)"></p-button> -->
                 </div>
             </div>
         </div>

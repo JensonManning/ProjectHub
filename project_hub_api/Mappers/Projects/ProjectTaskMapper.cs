@@ -60,7 +60,8 @@ namespace project_hub_api.Mappers.Projects
                 Status = projectTask.Status,
                 ProjectTaskCategoryId = projectTask.ProjectTaskCategoryId,
                 ProjectTaskCategory = projectTask.ProjectTaskCategory?.ToProjectTaskCategorySimpleDto(),
-                ProjectTaskComments = projectTask.ProjectTaskComments.Select(p => p.ToProjectTaskCommentSimpleDto()).ToList()
+                ProjectTaskComments = projectTask.ProjectTaskComments.Select(p => p.ToProjectTaskCommentSimpleDto()).ToList(),
+                ProjectTaskResources = projectTask.ProjectTaskResources.Select(p => p.ToProjectTaskResourcesSimpleDto()).ToList()
             };
         }
     }

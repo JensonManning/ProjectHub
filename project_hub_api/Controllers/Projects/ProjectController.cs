@@ -30,7 +30,7 @@ namespace project_hub_api.Controllers.Projects
 
         // GET: api/Project
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ProjectDto>>> GetProjects()
+        public async Task<ActionResult<IEnumerable<Project>>> GetProjects()
         {
             try
             {
@@ -147,6 +147,23 @@ namespace project_hub_api.Controllers.Projects
             {
                 _logger.LogError(ex, "Error creating complete project");
                 return StatusCode(500, new { error = ex.Message, detail = ex.InnerException?.Message });
+            }
+        }
+
+        // GET : api/Project/user
+        [HttpGet("user")]
+        public async Task<ActionResult<IEnumerable<ProjectDto>>> GetProjectsByUserId(int userId)
+        {
+            try
+            {
+                var projects = await _projectRepository.GetAllUserProjectsAsync();
+                var projectDtos = projects.Select(p => p.ToProjectDto()).ToList();
+                return Ok(projectDtos);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Error retrieving projects for user with id {userId}");
+                return StatusCode(500, "Internal server error");
             }
         }
     }

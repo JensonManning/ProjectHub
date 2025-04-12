@@ -23,6 +23,8 @@ import { ChipModule } from 'primeng/chip';
 import { DrawerModule } from 'primeng/drawer';
 import { CheckboxModule } from 'primeng/checkbox';
 import { FluidModule } from 'primeng/fluid';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
 
 // Category interface for strong typing
 interface ProjectTaskCategory {
@@ -70,9 +72,10 @@ interface TaskComment {
     ChipModule,
     DrawerModule,
     CheckboxModule,
-    FluidModule 
+    FluidModule,
+    ToastModule
   ],
-  providers: [ConfirmationService],
+  providers: [ConfirmationService, MessageService],
   templateUrl: './details-project-tasks.component.html',
   styleUrl: './details-project-tasks.component.scss'
 })
@@ -80,6 +83,7 @@ export class DetailsProjectTasksComponent {
   projectService = inject(ProjectService);
   projectTaskService = inject(ProjectTaskService);
   confirmationService = inject(ConfirmationService);
+  messageService = inject(MessageService);
   
   // For template calculations
   Math = Math;
@@ -538,13 +542,13 @@ export class DetailsProjectTasksComponent {
    * @param task The task to complete
    */
   completeTask(task: ExtendedProjectTask): void {
-    console.log('Before completing, task status:', task.status);
-    
     // Only proceed if the task is not already completed
     if (task.status !== TaskStatus.Completed) {
+      // Show loading state
+      this.messageService.add({ severity: 'info', summary: 'Completing Task', detail: 'Please wait...', sticky: true });
+      
       // First update UI immediately for better user experience
       task.status = TaskStatus.Completed;
-      console.log('After setting status, task status:', task.status);
       
       // If we're looking at the 'Completed' filter, make the task stay visible
       if (this.statusFilter() === TaskStatus.Completed) {
@@ -556,10 +560,19 @@ export class DetailsProjectTasksComponent {
       // Then call the API to persist the change
       this.projectTaskService.completeProjectTask(task.id).subscribe({
         next: (response) => {
-          console.log('API response:', response);
+          // Clear loading message
+          this.messageService.clear();
+          
+          // Show success toast
+          this.messageService.add({ 
+            severity: 'success', 
+            summary: 'Success', 
+            detail: `Task "${task.name}" completed successfully`,
+            life: 3000
+          });
+          
           // Force reload of the project details
           this.projectService.getProjectResource.reload();
-          console.log(`Task ${task.name} completed successfully`);
           
           // If Completed filter is active, make sure the UI shows the update
           if (this.statusFilter() === TaskStatus.Completed) {
@@ -571,6 +584,17 @@ export class DetailsProjectTasksComponent {
           }
         },
         error: (err: unknown) => {
+          // Clear loading message
+          this.messageService.clear();
+          
+          // Show error toast
+          this.messageService.add({ 
+            severity: 'error', 
+            summary: 'Error', 
+            detail: 'Failed to complete task. Please try again.',
+            life: 3000
+          });
+          
           // Revert the UI update on error
           task.status = TaskStatus.Active;
           console.error('Error completing task:', err);

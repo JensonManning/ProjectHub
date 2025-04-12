@@ -11,6 +11,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ProjectNotebook } from '@/core/interfaces/project/project-notebook.interface';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
+import { DividerModule } from 'primeng/divider';
 
 @Component({
   selector: 'app-details-project-notebooks',
@@ -24,7 +25,8 @@ import { InputIconModule } from 'primeng/inputicon';
     FormsModule,
     InputTextModule,
     IconFieldModule,
-    InputIconModule
+    InputIconModule,
+    DividerModule
   ],
   templateUrl: './details-project-notebooks.component.html',
   styleUrl: './details-project-notebooks.component.scss'

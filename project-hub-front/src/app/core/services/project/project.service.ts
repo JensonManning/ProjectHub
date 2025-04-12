@@ -2,7 +2,7 @@ import { Project, ProjectCreate, ProjectV2Create } from '@/core/interfaces/proje
 import { HttpClient } from '@angular/common/http';
 import { computed, effect, inject, Injectable, signal } from '@angular/core';
 import { rxResource } from '@angular/core/rxjs-interop';
-import { catchError, of } from 'rxjs';
+import { catchError, lastValueFrom, of } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
 import { UserService } from '../user/user.service';
 import { CompleteProjectDto } from '../../interfaces/project/complete-project.interface';
@@ -58,6 +58,10 @@ export class ProjectService {
     return this.http.get<Project>(this.apiUrl + 'Project/' + id)
   }
 
+  getAllUserProjects() : Promise<Project[]> {
+    return lastValueFrom(this.http.get<Project[]>(this.apiUrl + 'Project'))
+  }
+
   editProject(id: number, Project: Project) {
     return this.http.put<Project>(this.apiUrl + 'Project/' + id, Project)
   }
@@ -86,8 +90,8 @@ export class ProjectService {
   
   constructor() { }
   eff = effect(() => {
-    console.log(this.allProjects());
-    console.log(this.selectedProject());
+    console.log("get all projects : ", this.allProjects());
+    console.log("selected project: ", this.selectedProject());
     console.log("allActiveProjectsByUser", this.allActiveProjectsByUser());
     console.log("allProjectsByUser", this.allProjectsByUser());
     console.log("project details : ", this.projectDetails());

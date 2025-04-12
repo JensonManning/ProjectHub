@@ -6,6 +6,10 @@ import Aura from '@primeng/themes/aura';
 import {providePrimeNG} from 'primeng/config';
 import {appRoutes} from './app.routes';
 import {definePreset} from '@primeng/themes';
+import {
+    provideTanStackQuery,
+    QueryClient,
+} from '@tanstack/angular-query-experimental'
 
 const MyPreset = definePreset(Aura, {
     semantic: {
@@ -30,6 +34,7 @@ export const appConfig: ApplicationConfig = {
         provideRouter(appRoutes, withInMemoryScrolling({ anchorScrolling: 'enabled', scrollPositionRestoration: 'enabled' }), withEnabledBlockingInitialNavigation()),
         provideHttpClient(withFetch()),
         provideAnimationsAsync(),
-        providePrimeNG({ theme: { preset: MyPreset, options: { darkModeSelector: '.app-dark' } } })
+        providePrimeNG({ theme: { preset: MyPreset, options: { darkModeSelector: '.app-dark' } } }),
+        provideTanStackQuery(new QueryClient())
     ]
 };

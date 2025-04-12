@@ -1,7 +1,7 @@
 import {
   __spreadProps,
   __spreadValues
-} from "./chunk-4MWRP73S.js";
+} from "./chunk-JMGX424T.js";
 
 // node_modules/@primeng/themes/aura/accordion/index.mjs
 var accordion_default = {

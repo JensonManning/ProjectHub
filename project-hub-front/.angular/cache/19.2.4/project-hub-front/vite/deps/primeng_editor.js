@@ -1,20 +1,20 @@
 import {
+  NG_VALUE_ACCESSOR
+} from "./chunk-YVCFLD34.js";
+import {
   BaseComponent
-} from "./chunk-EGTTFUDQ.js";
+} from "./chunk-MCAGOVVM.js";
 import {
   BaseStyle
-} from "./chunk-JGRKXMNC.js";
+} from "./chunk-2BPJ52SI.js";
 import {
   Header,
   PrimeTemplate,
   SharedModule
-} from "./chunk-ZHV3EER6.js";
+} from "./chunk-NNBV5CI3.js";
 import {
   findSingle
 } from "./chunk-5YC7IRCZ.js";
-import {
-  NG_VALUE_ACCESSOR
-} from "./chunk-5BXW67ZI.js";
 import {
   CommonModule,
   NgClass,
@@ -22,7 +22,7 @@ import {
   NgStyle,
   NgTemplateOutlet,
   isPlatformServer
-} from "./chunk-2OUMHLJJ.js";
+} from "./chunk-TVWKGRMV.js";
 import {
   ChangeDetectionStrategy,
   Component,
@@ -60,15 +60,15 @@ import {
   ɵɵqueryRefresh,
   ɵɵtemplate,
   ɵɵtext
-} from "./chunk-WZUIYE6W.js";
+} from "./chunk-4ONORM3Q.js";
 import "./chunk-4N4GOYJH.js";
 import "./chunk-5OPE3T2R.js";
 import "./chunk-FHTVLBLO.js";
-import "./chunk-CWYBPNCF.js";
-import "./chunk-NJ25EVEJ.js";
+import "./chunk-TZIJKBMI.js";
+import "./chunk-YAPJLE7E.js";
 import {
   __spreadValues
-} from "./chunk-4MWRP73S.js";
+} from "./chunk-JMGX424T.js";
 
 // node_modules/primeng/fesm2022/primeng-editor.mjs
 var _c0 = ["header"];
@@ -1293,7 +1293,7 @@ var Editor = class _Editor extends BaseComponent {
       return;
     }
     if (!this.dynamicQuill) {
-      import("./quill-QZ7IKJZ6.js").then((quillModule) => {
+      import("./quill-KEVXGS2U.js").then((quillModule) => {
         this.dynamicQuill = quillModule.default;
         this.createQuillEditor();
       }).catch((e) => console.error(e.message));
