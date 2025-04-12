@@ -21,6 +21,7 @@ import { TagModule } from 'primeng/tag';
 import { TooltipModule } from 'primeng/tooltip';
 import { TaskStatus, TaskStatusLabels, TaskStatusColors } from '@/core/interfaces/project/project-task-status.enum';
 import { ProjectPhase } from '@/core/interfaces/project/project-phase.interface';
+import { PopoverModule } from 'primeng/popover';
 
 @Component({
   selector: 'app-dash-tasks',
@@ -37,7 +38,8 @@ import { ProjectPhase } from '@/core/interfaces/project/project-phase.interface'
     FluidModule,
     TableModule,
     TagModule,
-    TooltipModule
+    TooltipModule,
+    PopoverModule
   ],
   templateUrl: './dash-tasks.component.html',
   styleUrl: './dash-tasks.component.scss'

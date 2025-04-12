@@ -183,10 +183,24 @@
                                                 disabled></button>
                                         <p-button icon="pi pi-comments" styleClass="p-button-rounded p-button-text p-button-sm"
                                                 [badge]="task.projectTaskComments?.length || '0'" badgeClass="p-badge-info"
-                                                pTooltip="Comments" tooltipPosition="top"></p-button>
+                                                pTooltip="Comments" tooltipPosition="top">
+                                        </p-button>
                                         <p-button icon="pi pi-users" styleClass="p-button-rounded p-button-text p-button-sm"
                                                 [badge]="task.projectTaskResources?.length || '0'" badgeClass="p-badge-success"
-                                                pTooltip="Resources" tooltipPosition="top"></p-button>
+                                                pTooltip="Resources" tooltipPosition="top" (onClick)="res.toggle($event)">
+                                        </p-button>
+                                        <p-popover #res>
+                                            <ul>
+                                                @for(resource of task.projectTaskResources; track $index) {
+                                                    @if(resource.projectResource.description !== null) {
+                                                        <li>{{ resource.projectResource.description }}</li>
+                                                    }
+                                                    @else {
+                                                        <li>No Users Assigned</li>
+                                                    }
+                                                }
+                                            </ul>
+                                        </p-popover>
                                     </div>
                                 </td>
                             </tr>

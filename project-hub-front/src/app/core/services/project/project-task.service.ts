@@ -22,21 +22,16 @@ export class ProjectTaskService {
 
   allUserTasks = computed(() => {
     const currentUserId = this.userService.currentUser().id;
-    console.log("Current User ID: ", currentUserId);
   
     const filteredTasks = this.allTasks().filter(task => {
-      console.log("Inspecting Task: ", task);
   
       const match = task.projectTaskResources?.some(taskResource => {
-        console.log("Inspecting Task Resource: ", taskResource);
         return taskResource.projectResource?.userId === currentUserId;
       });
-  
-      console.log("Task Match: ", match);
+
       return match;
     });
-  
-    console.log("Filtered Tasks: ", filteredTasks);
+
     return filteredTasks;
   });
 

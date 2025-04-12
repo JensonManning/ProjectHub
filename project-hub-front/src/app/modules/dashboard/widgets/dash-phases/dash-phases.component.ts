@@ -24,12 +24,6 @@ export class DashPhasesComponent implements OnInit {
     this.projectService.getAllProjectsResource.reload();
     this.userService.getCurrentUserResource.reload();
 
-    // Log status values for reference
-    console.log('Project status values:');
-    console.log('3 = Active project');
-
-    console.log('Phase status values:');
-    console.log('0 = Upcoming, 1 = Active, 2 = Completed, 3 = Cancelled, 4 = Delayed, 5 = Postponed, 6 = Late');
   }
 
   /**
@@ -39,32 +33,25 @@ export class DashPhasesComponent implements OnInit {
    */
   getProjectsWithActivePhase(phaseOrder: number) {
     const allProjects = this.projectService.allProjectsByUser();
-    console.log(`Debug - Phase ${phaseOrder}:`);
-    console.log('All projects:', allProjects);
+
     
     // Track all unique phase statuses we find
     const foundStatuses = new Set<number>();
     
     const filteredProjects = allProjects.filter(project => {
-      console.log(`\nChecking project ${project.id} (${project.name}):`);
-      console.log('Project phases:', project.projectPhases);
       
       // Record all statuses we find
       project.projectPhases.forEach(phase => foundStatuses.add(phase.status));
       
       const matchingPhases = project.projectPhases.filter(phase => {
         const matches = phase.status === 1 && phase.order === phaseOrder;
-        console.log(`Phase ${phase.id}: order=${phase.order}, status=${phase.status} (${this.getStatusName(phase.status)}), matches=${matches}`);
         return matches;
       });
       
       const hasActivePhase = matchingPhases.length > 0;
-      console.log(`Has active phase ${phaseOrder}:`, hasActivePhase);
       return hasActivePhase;
     });
-    
-    console.log(`\nFound these phase statuses:`, Array.from(foundStatuses).map(status => `${status} = ${this.getStatusName(status)}`));
-    console.log(`\nFinal filtered projects for phase ${phaseOrder}:`, filteredProjects);
+  
     return filteredProjects;
   }
 

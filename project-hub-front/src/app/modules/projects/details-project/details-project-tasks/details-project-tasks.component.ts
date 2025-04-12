@@ -25,6 +25,7 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { FluidModule } from 'primeng/fluid';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
+import { PopoverModule } from 'primeng/popover';
 
 // Category interface for strong typing
 interface ProjectTaskCategory {
@@ -73,7 +74,8 @@ interface TaskComment {
     DrawerModule,
     CheckboxModule,
     FluidModule,
-    ToastModule
+    ToastModule,
+    PopoverModule
   ],
   providers: [ConfirmationService, MessageService],
   templateUrl: './details-project-tasks.component.html',
@@ -363,7 +365,6 @@ export class DetailsProjectTasksComponent {
     // Get all categories from all phases
     this.projectPhases().forEach(phase => {
       if (phase.projectTaskCategories && phase.projectTaskCategories.length > 0) {
-        console.log(`Phase ${phase.id} has ${phase.projectTaskCategories.length} categories:`, phase.projectTaskCategories);
         phase.projectTaskCategories.forEach(category => {
           if (category && category.id && category.name) {
             // Store by ID
@@ -378,8 +379,7 @@ export class DetailsProjectTasksComponent {
         });
       }
     });
-    
-    console.log('All category names map:', categoryNameMap);
+  
     
     // Get unique category names and sort them
     const uniqueCategoryNames = Array.from(categoryNameMap.keys()).sort();
@@ -396,8 +396,7 @@ export class DetailsProjectTasksComponent {
         });
       }
     });
-    
-    console.log('Final category options (deduplicated by name):', options);
+  
     
     // Update category options
     this.categoryOptions.set(options);
@@ -527,7 +526,6 @@ export class DetailsProjectTasksComponent {
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
         // TODO: Implement actual delete logic
-        console.log('Delete task', task);
       }
     });
   }
@@ -597,7 +595,7 @@ export class DetailsProjectTasksComponent {
           
           // Revert the UI update on error
           task.status = TaskStatus.Active;
-          console.error('Error completing task:', err);
+  
           
           // Force UI refresh again
           this.filterText.update(val => val + '');
