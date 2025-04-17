@@ -2,6 +2,7 @@ using System.Text.Json.Serialization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using project_hub_api.Data;
+using project_hub_api.Hubs;
 using project_hub_api.IRepositories.Projects;
 using project_hub_api.IRepositories.Repos;
 using project_hub_api.IRepositories.Users;
@@ -11,6 +12,8 @@ using project_hub_api.Repositories.Repos;
 using project_hub_api.Repositories.Users;
 using project_hub_api.Services;
 using Scalar.AspNetCore;
+
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -54,10 +57,20 @@ builder.Services.AddScoped<IResourceRepoRepository, ResourceRepoRepository>();
 builder.Services.AddScoped<INotebookRepoRepository, NotebookRepoRepository>();
 builder.Services.AddScoped<ITaskTypeRepoRepository, TaskTypeRepoRepository>();
 
+// Hubs
+builder.Services.AddSignalR();
+
+
+
 // Register project creation service
 builder.Services.AddScoped<ProjectCreationService>();
+
+// Register notification service
+builder.Services.AddScoped<NotificationService>();
+
 var app = builder.Build();
 app.UseSwagger().UseSwaggerUI();
+app.MapHub<NotificationHub>("/hubs/notification");
 // Configure the HTTP request pipeline
 if (app.Environment.IsDevelopment())
 {

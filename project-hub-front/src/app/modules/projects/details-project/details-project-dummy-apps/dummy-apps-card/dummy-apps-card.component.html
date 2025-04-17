@@ -1,0 +1,32 @@
+<!-- <div [id]="card.id" class="flex bg-surface-0 dark:bg-surface-900 flex-col w-full border border-surface p-4 gap-8 hover:bg-surface-50 dark:hover:bg-surface-950 cursor-pointer rounded-border" cdkDragHandle>
+    <div class="flex justify-between items-center">
+        <span class="text-surface-900 dark:text-surface-0 font-semibold">{{ card.title ? card.title : 'Untitled' }}</span>
+        <div>
+            <button pButton pRipple type="button" icon="pi pi-ellipsis-v" rounded text severity="secondary" class="p-trigger" (click)="menu.toggle($event)"></button>
+            <p-tiered-menu #menu [model]="menuItems" appendTo="body" [popup]="true"></p-tiered-menu>
+        </div>
+    </div>
+
+    <div class="flex items-center justify-between flex-col md:flex-row gap-6 md:gap-0">
+        <div class="flex items-center gap-4">
+            <span class="text-surface-900 dark:text-surface-0 font-semibold flex-shrink-0" *ngIf="card.taskList?.tasks?.length">
+                <i class="pi pi-check-square text-surface-700 dark:text-surface-100 mr-2"></i>
+                {{ generateTaskInfo() }}
+            </span>
+        </div>
+    </div>
+</div> -->
+<div [id]="card.id" class="flex bg-surface-0 dark:bg-surface-900 flex-col w-full border border-surface p-4 gap-8 hover:bg-surface-50 dark:hover:bg-surface-950 cursor-pointer rounded-border" cdkDragHandle>
+    <div class="flex justify-between items-center">
+        <span class="text-surface-900 dark:text-surface-0 font-semibold">{{ card.title ? card.title : 'Untitled' }}</span>
+        <div>
+            <button pButton pRipple type="button" icon="pi pi-ellipsis-v" rounded text severity="secondary" class="p-trigger" (click)="menu.toggle($event)"></button>
+            <p-tiered-menu #menu [model]="menuItems" appendTo="body" [popup]="true"></p-tiered-menu>
+        </div>
+    </div>
+    <div class="flex items-center justify-between flex-col md:flex-row gap-6 md:gap-0">
+        <div class="flex items-center gap-4">
+            <img src="{{card.icon}}" alt="icon" class="w-10 h-10" />
+        </div>
+    </div>
+</div>

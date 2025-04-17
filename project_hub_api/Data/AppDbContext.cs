@@ -10,6 +10,7 @@ using project_hub_api.Models.Repo;
 using project_hub_api.Models.Projects.Resources;
 using project_hub_api.Models.Projects.Tasks;
 using project_hub_api.Models.Users;
+using project_hub_api.Models.Notifications;
 
 namespace project_hub_api.Data
 {
@@ -40,6 +41,9 @@ namespace project_hub_api.Data
         public DbSet<CategoryRepo> CategoryRepo { get; set; }
         public DbSet<TaskRepo_ResourceRepo> TaskRepoResources { get; set; }
         public DbSet<NotebookRepo> NotebookRepo { get; set; }
+
+        // Hub
+        public DbSet<Notification> Notifications { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

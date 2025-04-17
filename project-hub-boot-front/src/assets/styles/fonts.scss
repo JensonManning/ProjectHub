@@ -1,0 +1,43 @@
+/* Inter Font Configuration */
+@use 'sass:meta';
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+/* Define font variables */
+:root {
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
+  
+  /* Font weight variables to make it easier to use */
+  --font-weight-extra-light: 200;
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extra-bold: 800;
+  
+  /* Letter spacing for different purposes */
+  --letter-spacing-tight: -0.025em;
+  --letter-spacing-normal: 0;
+  --letter-spacing-wide: 0.025em;
+  
+  /* Line heights */
+  --line-height-none: 1;
+  --line-height-tight: 1.25;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.75;
+  --line-height-loose: 2;
+}
+
+/* Apply Inter's OpenType features for better readability */
+* {
+  -webkit-font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  
+  /* Use "optimizeLegibility" for better text rendering on high-DPI displays */
+  text-rendering: optimizeLegibility;
+  
+  /* Font smoothing for better rendering */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+} 

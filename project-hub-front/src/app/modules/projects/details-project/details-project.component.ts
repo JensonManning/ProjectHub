@@ -5,10 +5,11 @@ import { DetailsProjectResourcesComponent } from "./details-project-resources/de
 import { DetailsProjectOverviewComponent } from "./details-project-overview/details-project-overview.component";
 import { DetailsProjectTasksComponent } from "./details-project-tasks/details-project-tasks.component";
 import { DetailsProjectNotebooksComponent } from "./details-project-notebooks/details-project-notebooks.component";
+import { DetailsProjectDummyAppsComponent } from "./details-project-dummy-apps/details-project-dummy-apps.component";
 
 @Component({
   selector: 'app-details-project',
-  imports: [TabsModule, DetailsProjectResourcesComponent, DetailsProjectOverviewComponent, DetailsProjectTasksComponent, DetailsProjectNotebooksComponent],
+  imports: [DetailsProjectDummyAppsComponent, TabsModule, DetailsProjectResourcesComponent, DetailsProjectOverviewComponent, DetailsProjectTasksComponent, DetailsProjectNotebooksComponent],
   templateUrl: './details-project.component.html',
   styleUrl: './details-project.component.scss'
 })

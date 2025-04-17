@@ -180,3 +180,4 @@ D:\Coding Data\ProjectHub\project_hub_api\obj\Debug\net9.0\refint\project-hub-ap
 D:\Coding Data\ProjectHub\project_hub_api\obj\Debug\net9.0\project-hub-api.pdb
 D:\Coding Data\ProjectHub\project_hub_api\obj\Debug\net9.0\project-hub-api.genruntimeconfig.cache
 D:\Coding Data\ProjectHub\project_hub_api\obj\Debug\net9.0\ref\project-hub-api.dll
+D:\Coding Data\ProjectHub\project_hub_api\bin\Debug\net9.0\System.Net.WebSockets.WebSocketProtocol.dll

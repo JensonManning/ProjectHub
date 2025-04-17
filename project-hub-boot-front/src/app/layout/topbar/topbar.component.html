@@ -1,0 +1,115 @@
+<div class="layout-topbar">
+    <div class="topbar-left gap-3">
+        <img class="logo-image" src="styles/images/logos/RW_Logo_Symbol_light@0.png" alt="Project hub" />
+        <span class="app-name title-h7">ProjectHub</span>
+        <div class="vr"></div>
+        @for(project of projectService.allProjectsByUser(); track project.id) {
+            <button type="button" class="btn btn-secondary project-btn" 
+                    data-bs-toggle="tooltip" 
+                    data-bs-placement="bottom" 
+                    title="{{ project.name }}">
+                {{ project.shortcode }}
+            </button>
+        }
+    </div>
+    <div class="topbar-right">
+        <ul class="topbar-menu">
+            <li class="right-sidebar-item">
+                <a class="right-sidebar-button" (click)="toggleSearch()">
+                    <lucide-angular [name]="Search"></lucide-angular>                 
+                </a>
+            </li>
+            <li class="right-sidebar-item">
+                <a class="right-sidebar-button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasUserInfo" aria-controls="offcanvasUserInfo">
+                    <lucide-angular [name]="User"></lucide-angular>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<!-- Search Overlay -->
+<div class="search-overlay" [class.active]="showSearch">
+    <div class="search-container">
+        <div class="search-box">
+            <lucide-angular [name]="Search" class="search-icon"></lucide-angular>
+            <input 
+                #searchInput
+                type="text" 
+                class="form-control search-input" 
+                placeholder="Search projects..."
+                [(ngModel)]="searchTerm"
+                (input)="onSearchInput()"
+            >
+            <a class="close-search" (click)="toggleSearch()">
+                <lucide-angular [name]="X"></lucide-angular>
+            </a>
+        </div>
+        
+        <div class="search-results" *ngIf="filteredProjects.length > 0">
+            <ul class="list-group">
+                @for(project of filteredProjects; track project.id) {
+                    <li class="list-group-item" (click)="selectProject(project)">
+                        <div class="project-item">
+                            <span class="project-shortcode">{{ project.shortcode }}</span>
+                            <span class="project-name">{{ project.name }}</span>
+                        </div>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- User Info Offcanvas -->
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasUserInfo" aria-labelledby="offcanvasUserInfoLabel">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasUserInfoLabel">User Information</h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <div>
+            <ul>
+                <li>
+                    <span>ID : </span>
+                    @if(userService.currentUser().id) {
+                        <span>{{ userService.currentUser().id }}</span>
+                    } @else {
+                        <span>No ID assigned</span>
+                    }
+                </li>
+                <li>
+                    <span>Name : </span>
+                    @if(userService.currentUser().name) {
+                        <span>{{ userService.currentUser().name }}</span>
+                    } @else {
+                        <span>No name entered</span>
+                    }
+                </li>
+                <li>
+                    <span>Email : </span>
+                    @if(userService.currentUser().email) {
+                        <span>{{ userService.currentUser().email }}</span>
+                    } @else {
+                        <span>No email entered</span>
+                    }
+                </li>
+                <li>
+                    <span>Phone : </span>
+                    @if(userService.currentUser().phone) {
+                        <span>{{ userService.currentUser().phone }}</span>
+                    } @else {
+                        <span>No phone number entered</span>
+                    }
+                </li>
+                <li>
+                    <span>Role : </span>
+                    @if(userService.currentUser().role) {
+                        <span>{{ userService.currentUser().role?.name }}</span>
+                    } @else {
+                        <span>No role assigned</span>
+                    }
+            </ul>
+        </div>
+    </div>
+</div>

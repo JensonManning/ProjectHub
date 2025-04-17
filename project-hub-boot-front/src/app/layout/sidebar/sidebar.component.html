@@ -1,0 +1,79 @@
+<div class="layout-sidebar">
+    <div class="sidebar-content">
+        <!-- Dashboards Section -->
+        <div class="sidebar-section">
+            <h5 class="sidebar-header">DASHBOARDS</h5>
+            <ul class="sidebar-menu">
+                @for(item of dashboardMenu; track item.name) {
+                    <li class="sidebar-menu-item">
+                        <a [routerLink]="item.path" class="sidebar-menu-link">
+                            <div class="sidebar-icon">
+                                <lucide-angular [name]="item.icon"></lucide-angular>
+                            </div>
+                            <span>{{ item.name }}</span>
+                        </a>
+                    </li>
+                }
+            </ul>       
+        </div>
+
+        <!-- Projects Section -->
+        <div class="sidebar-section">
+            <h5 class="sidebar-header">PROJECTS</h5>
+            <ul class="sidebar-menu">
+                @for(item of manageMenu; track item.name) {
+                    <li class="sidebar-menu-item" [class.has-submenu]="item.submenu && item.submenu.length > 0" [class.expanded]="item.expanded">
+                        <a 
+                            [routerLink]="item.submenu && item.submenu.length ? null : item.path" 
+                            class="sidebar-menu-link"
+                            (click)="item.submenu && item.submenu.length ? toggleSubmenu(item) : null"
+                        >
+                            <div class="sidebar-icon">
+                                <lucide-angular [name]="item.icon"></lucide-angular>
+                            </div>
+                            <span>{{ item.name }}</span>
+                            @if(item.submenu && item.submenu.length > 0) {
+                                <div class="submenu-toggle-icon" [class.expanded]="item.expanded">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                                </div>
+                            }
+                        </a>
+                        @if(item.submenu && item.submenu.length > 0) {
+                            <ul class="sidebar-submenu" [class.show]="item.expanded">
+                                @for(subitem of item.submenu; track subitem.name) {
+                                    <li class="sidebar-submenu-item">
+                                        <a [routerLink]="subitem.path" class="sidebar-submenu-link">
+                                            <div class="sidebar-icon">
+                                                <lucide-angular [name]="subitem.icon"></lucide-angular>
+                                            </div>
+                                            <span>{{ subitem.name }}</span>
+                                        </a>
+                                    </li>
+                                }
+                            </ul>
+                        }
+                    </li>
+                }
+            </ul>
+        </div>
+
+        <!-- Repository Section -->
+        <div class="sidebar-section">
+            <h5 class="sidebar-header">REPOSITORY</h5>
+            <ul class="sidebar-menu">
+                @for(item of repoMenu; track item.name) {
+                    <li class="sidebar-menu-item">
+                        <a [routerLink]="item.path" class="sidebar-menu-link">
+                            <div class="sidebar-icon">
+                                <lucide-angular [name]="item.icon"></lucide-angular>
+                            </div>
+                            <span>{{ item.name }}</span>
+                        </a>
+                    </li>
+                }
+            </ul>
+        </div>  
+        
+        
+    </div>
+</div>

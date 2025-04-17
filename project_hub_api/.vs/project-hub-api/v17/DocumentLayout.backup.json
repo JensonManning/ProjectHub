@@ -1,48 +1,7 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "D:\\Coding Data\\ProjectHub\\project_hub_api\\",
-  "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{62794279-DDCF-435C-A204-301ED1614220}|project-hub-api.csproj|d:\\coding data\\projecthub\\project_hub_api\\services\\projectcreationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{62794279-DDCF-435C-A204-301ED1614220}|project-hub-api.csproj|solutionrelative:services\\projectcreationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{62794279-DDCF-435C-A204-301ED1614220}|project-hub-api.csproj|d:\\coding data\\projecthub\\project_hub_api\\repositories\\projects\\projectrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{62794279-DDCF-435C-A204-301ED1614220}|project-hub-api.csproj|solutionrelative:repositories\\projects\\projectrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{62794279-DDCF-435C-A204-301ED1614220}|project-hub-api.csproj|d:\\coding data\\projecthub\\project_hub_api\\mappers\\projects\\projecttaskmapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{62794279-DDCF-435C-A204-301ED1614220}|project-hub-api.csproj|solutionrelative:mappers\\projects\\projecttaskmapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{62794279-DDCF-435C-A204-301ED1614220}|project-hub-api.csproj|d:\\coding data\\projecthub\\project_hub_api\\models\\projects\\project.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{62794279-DDCF-435C-A204-301ED1614220}|project-hub-api.csproj|solutionrelative:models\\projects\\project.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{62794279-DDCF-435C-A204-301ED1614220}|project-hub-api.csproj|d:\\coding data\\projecthub\\project_hub_api\\dtos\\projects\\completeprojectdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{62794279-DDCF-435C-A204-301ED1614220}|project-hub-api.csproj|solutionrelative:dtos\\projects\\completeprojectdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{62794279-DDCF-435C-A204-301ED1614220}|project-hub-api.csproj|d:\\coding data\\projecthub\\project_hub_api\\dtos\\projects\\tasks\\projecttaskdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{62794279-DDCF-435C-A204-301ED1614220}|project-hub-api.csproj|solutionrelative:dtos\\projects\\tasks\\projecttaskdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{62794279-DDCF-435C-A204-301ED1614220}|project-hub-api.csproj|d:\\coding data\\projecthub\\project_hub_api\\repositories\\projects\\projecttaskrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{62794279-DDCF-435C-A204-301ED1614220}|project-hub-api.csproj|solutionrelative:repositories\\projects\\projecttaskrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{62794279-DDCF-435C-A204-301ED1614220}|project-hub-api.csproj|d:\\coding data\\projecthub\\project_hub_api\\controllers\\projects\\projecttaskcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{62794279-DDCF-435C-A204-301ED1614220}|project-hub-api.csproj|solutionrelative:controllers\\projects\\projecttaskcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{62794279-DDCF-435C-A204-301ED1614220}|project-hub-api.csproj|d:\\coding data\\projecthub\\project_hub_api\\models\\projects\\tasks\\projecttask.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{62794279-DDCF-435C-A204-301ED1614220}|project-hub-api.csproj|solutionrelative:models\\projects\\tasks\\projecttask.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{62794279-DDCF-435C-A204-301ED1614220}|project-hub-api.csproj|d:\\coding data\\projecthub\\project_hub_api\\irepositories\\projects\\iprojecttaskrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{62794279-DDCF-435C-A204-301ED1614220}|project-hub-api.csproj|solutionrelative:irepositories\\projects\\iprojecttaskrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    }
-  ],
+  "Documents": [],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -50,140 +9,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": -1,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Project.cs",
-              "DocumentMoniker": "D:\\Coding Data\\ProjectHub\\project_hub_api\\Models\\Projects\\Project.cs",
-              "RelativeDocumentMoniker": "Models\\Projects\\Project.cs",
-              "ToolTip": "D:\\Coding Data\\ProjectHub\\project_hub_api\\Models\\Projects\\Project.cs",
-              "RelativeToolTip": "Models\\Projects\\Project.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-11T05:25:57.917Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "ProjectCreationService.cs",
-              "DocumentMoniker": "D:\\Coding Data\\ProjectHub\\project_hub_api\\Services\\ProjectCreationService.cs",
-              "RelativeDocumentMoniker": "Services\\ProjectCreationService.cs",
-              "ToolTip": "D:\\Coding Data\\ProjectHub\\project_hub_api\\Services\\ProjectCreationService.cs",
-              "RelativeToolTip": "Services\\ProjectCreationService.cs",
-              "ViewState": "AgIAACEAAAAAAAAAAAAowC8AAAA6AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-11T05:16:36.998Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "CompleteProjectDto.cs",
-              "DocumentMoniker": "D:\\Coding Data\\ProjectHub\\project_hub_api\\Dtos\\Projects\\CompleteProjectDto.cs",
-              "RelativeDocumentMoniker": "Dtos\\Projects\\CompleteProjectDto.cs",
-              "ToolTip": "D:\\Coding Data\\ProjectHub\\project_hub_api\\Dtos\\Projects\\CompleteProjectDto.cs",
-              "RelativeToolTip": "Dtos\\Projects\\CompleteProjectDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEcAAAACAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-11T05:13:09.338Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "ProjectTask.cs",
-              "DocumentMoniker": "D:\\Coding Data\\ProjectHub\\project_hub_api\\Models\\Projects\\Tasks\\ProjectTask.cs",
-              "RelativeDocumentMoniker": "Models\\Projects\\Tasks\\ProjectTask.cs",
-              "ToolTip": "D:\\Coding Data\\ProjectHub\\project_hub_api\\Models\\Projects\\Tasks\\ProjectTask.cs",
-              "RelativeToolTip": "Models\\Projects\\Tasks\\ProjectTask.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAWAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-11T05:06:47.434Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "ProjectTaskDto.cs",
-              "DocumentMoniker": "D:\\Coding Data\\ProjectHub\\project_hub_api\\Dtos\\Projects\\Tasks\\ProjectTaskDto.cs",
-              "RelativeDocumentMoniker": "Dtos\\Projects\\Tasks\\ProjectTaskDto.cs",
-              "ToolTip": "D:\\Coding Data\\ProjectHub\\project_hub_api\\Dtos\\Projects\\Tasks\\ProjectTaskDto.cs",
-              "RelativeToolTip": "Dtos\\Projects\\Tasks\\ProjectTaskDto.cs",
-              "ViewState": "AgIAADAAAAAAAAAAAAAkwDQAAAAPAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-11T05:01:07.238Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "ProjectTaskMapper.cs",
-              "DocumentMoniker": "D:\\Coding Data\\ProjectHub\\project_hub_api\\Mappers\\Projects\\ProjectTaskMapper.cs",
-              "RelativeDocumentMoniker": "Mappers\\Projects\\ProjectTaskMapper.cs",
-              "ToolTip": "D:\\Coding Data\\ProjectHub\\project_hub_api\\Mappers\\Projects\\ProjectTaskMapper.cs",
-              "RelativeToolTip": "Mappers\\Projects\\ProjectTaskMapper.cs",
-              "ViewState": "AgIAACkAAAAAAAAAAAAwwBAAAAAZAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-11T04:59:21.615Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "ProjectTaskController.cs",
-              "DocumentMoniker": "D:\\Coding Data\\ProjectHub\\project_hub_api\\Controllers\\Projects\\ProjectTaskController.cs",
-              "RelativeDocumentMoniker": "Controllers\\Projects\\ProjectTaskController.cs",
-              "ToolTip": "D:\\Coding Data\\ProjectHub\\project_hub_api\\Controllers\\Projects\\ProjectTaskController.cs",
-              "RelativeToolTip": "Controllers\\Projects\\ProjectTaskController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-10T22:58:26.187Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "ProjectTaskRepository.cs",
-              "DocumentMoniker": "D:\\Coding Data\\ProjectHub\\project_hub_api\\Repositories\\Projects\\ProjectTaskRepository.cs",
-              "RelativeDocumentMoniker": "Repositories\\Projects\\ProjectTaskRepository.cs",
-              "ToolTip": "D:\\Coding Data\\ProjectHub\\project_hub_api\\Repositories\\Projects\\ProjectTaskRepository.cs",
-              "RelativeToolTip": "Repositories\\Projects\\ProjectTaskRepository.cs",
-              "ViewState": "AgIAAH0AAAAAAAAAAAAqwJQAAABJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-10T22:56:57.586Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "IProjectTaskRepository.cs",
-              "DocumentMoniker": "D:\\Coding Data\\ProjectHub\\project_hub_api\\IRepositories\\Projects\\IProjectTaskRepository.cs",
-              "RelativeDocumentMoniker": "IRepositories\\Projects\\IProjectTaskRepository.cs",
-              "ToolTip": "D:\\Coding Data\\ProjectHub\\project_hub_api\\IRepositories\\Projects\\IProjectTaskRepository.cs",
-              "RelativeToolTip": "IRepositories\\Projects\\IProjectTaskRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAABCAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-10T22:52:46.771Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "ProjectRepository.cs",
-              "DocumentMoniker": "D:\\Coding Data\\ProjectHub\\project_hub_api\\Repositories\\Projects\\ProjectRepository.cs",
-              "RelativeDocumentMoniker": "Repositories\\Projects\\ProjectRepository.cs",
-              "ToolTip": "D:\\Coding Data\\ProjectHub\\project_hub_api\\Repositories\\Projects\\ProjectRepository.cs",
-              "RelativeToolTip": "Repositories\\Projects\\ProjectRepository.cs",
-              "ViewState": "AgIAAB4AAAAAAAAAAAAowDgAAABHAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-09T18:22:41.445Z",
-              "EditorCaption": ""
             }
           ]
         }

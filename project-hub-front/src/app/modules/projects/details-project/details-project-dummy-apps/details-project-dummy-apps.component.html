@@ -1,0 +1,10 @@
+<!-- Fixed height container with horizontal scroll -->
+<div class="w-full h-[calc(100vh-120px)] overflow-x-auto px-4">
+  <div id="kanban-wrapper" cdkDropList cdkDropListOrientation="horizontal" (cdkDropListDropped)="dropList($event)" [cdkDropListData]="lists" class="flex gap-4 min-w-full">
+    <app-dummy-apps-list *ngFor="let list of lists; let i = index" [list]="list" [listIds]="listIds" cdkDrag cdkDragHandle [cdkDragDisabled]="isMobileDevice" class="p-kanban-list w-[250px] flex-shrink-0"></app-dummy-apps-list>
+    <div class="w-[250px] flex-shrink-0 px-4 py-1 mb-4">
+      <button pButton pRipple label="New List" icon="pi pi-plus font-semibold" class="py-4 justify-center font-semibold w-full rounded" (click)="addList()"></button>
+    </div>
+    <app-dummy-apps-sidebar></app-dummy-apps-sidebar>
+  </div>
+</div>

@@ -1,0 +1,84 @@
+/* You can add global styles to this file, and also import other style files */
+@use 'sass:color';
+@use 'assets/styles/fonts.scss' as fonts;
+@use 'assets/styles/shadcn-theme.scss' as theme;
+
+// Quill CSS is loaded via angular.json configuration
+
+html {
+    height: 100%;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+body {
+    font-family: var(--font-sans);
+    font-weight: var(--font-weight-normal);
+    color: var(--foreground);
+    background-color: var(--background);
+    padding: 0;
+    margin: 0;
+    min-height: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+}
+
+// Apply Inter font to common elements
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-sans);
+    font-weight: var(--font-weight-semibold);
+    line-height: var(--line-height-tight);
+    letter-spacing: var(--letter-spacing-tight);
+}
+
+// Shadcn-like focus styles
+:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+// Remove text decoration from links
+a {
+    text-decoration: none;
+    color: var(--primary);
+    transition: color 0.15s ease;
+    font-family: var(--font-sans);
+    
+    &:hover {
+      color: color.adjust(#191970, $lightness: -10%);
+    }
+}
+
+// Apply Inter to all text elements
+p, span, div, li, input, button, textarea, select, label {
+    font-family: var(--font-sans);
+}
+
+// Additional styling for specific text elements
+p {
+    line-height: var(--line-height-relaxed);
+    margin-bottom: 1rem;
+}
+
+strong, b {
+    font-weight: var(--font-weight-semibold);
+}
+
+small {
+    font-size: 0.875rem;
+}
+
+img {
+    max-width: none !important;
+}
+
+// Add subtle transitions to interactive elements
+button, 
+.btn, 
+input, 
+select, 
+textarea {
+  transition: all 0.2s ease;
+  font-family: var(--font-sans);
+}
