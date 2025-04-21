@@ -60,7 +60,9 @@ builder.Services.AddScoped<ITaskTypeRepoRepository, TaskTypeRepoRepository>();
 // Hubs
 builder.Services.AddSignalR();
 
-
+// Register project status services
+builder.Services.AddScoped<ProjectStatusService>();
+builder.Services.AddHostedService<ProjectStatusBackgroundService>();
 
 // Register project creation service
 builder.Services.AddScoped<ProjectCreationService>();

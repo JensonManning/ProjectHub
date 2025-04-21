@@ -1,0 +1,106 @@
+// Custom styling for buttons with ghost appearance
+.btn-ghost-primary,
+.btn-ghost-danger {
+  background-color: transparent;
+  border-color: transparent;
+  
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+}
+
+.btn-ghost-primary {
+  color: var(--bs-primary);
+  
+  &:hover {
+    color: var(--bs-primary);
+  }
+}
+
+.btn-ghost-danger {
+  color: var(--bs-danger);
+  
+  &:hover {
+    color: var(--bs-danger);
+  }
+}
+
+// Make sure table rows have consistent height
+.table {
+  th, td {
+    vertical-align: middle;
+  }
+}
+
+// Make sure the table is properly responsive
+.table-responsive {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+// Improved checkbox appearance
+.form-check-input {
+  cursor: pointer;
+}
+
+// Tooltip styling
+.tooltip {
+  .tooltip-inner {
+    max-width: 300px;
+    padding: 0.5rem;
+    background-color: var(--bs-dark);
+    font-size: 0.875rem;
+  }
+}
+
+// Badge styling
+.badge {
+  padding: 0.35em 0.65em;
+  font-size: 0.75em;
+}
+
+// Improve modal appearance
+.modal-content {
+  border: none;
+  border-radius: 0.5rem;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+.modal-header {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.modal-footer {
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+// Make the description column not take up too much space
+td:nth-child(4) {
+  max-width: 250px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+// Improve the search field
+.input-group {
+  .input-group-text {
+    background-color: #f8f9fa;
+    border-right: none;
+  }
+  
+  .form-control {
+    border-left: none;
+    
+    &:focus {
+      box-shadow: none;
+      border-color: #ced4da;
+    }
+  }
+}
+
+// Empty state styling
+.text-muted {
+  color: #6c757d !important;
+}
+

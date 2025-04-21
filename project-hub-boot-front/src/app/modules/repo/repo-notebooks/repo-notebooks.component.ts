@@ -1,5 +1,5 @@
-import { Component, inject, OnInit, AfterViewInit, TemplateRef, ViewChild } from '@angular/core';
-import { NotebookRepo } from '../../../core/interfaces/repo/repo-notebook.interface';
+import { Component, inject, OnInit, AfterViewInit, TemplateRef, ViewChild, effect } from '@angular/core';
+import { NotebookRepo, NotebookRepoCreate } from '../../../core/interfaces/repo/repo-notebook.interface';
 import { RepoNotebookService } from '../../../core/services/repo/repo-notebook.service';
 import { LucideAngularModule, Plus, Upload, Search, Pencil, Trash2, X, Check, AlertTriangle, FileText, Save } from 'lucide-angular';
 import { CommonModule } from '@angular/common';
@@ -35,7 +35,28 @@ export class RepoNotebooksComponent implements OnInit, AfterViewInit {
   FileText = FileText;
   Save = Save;
 
-  notebooks: NotebookRepo[] = [];
+  // Force the service to load notebooks initially
+  constructor() {
+    // This will trigger loading notebooks from the API
+    this.repoNotebookService.getAllNotebooksResource.reload();
+    
+    // Create an effect to automatically update the _notebooks array when allNotebooks() changes
+    effect(() => {
+      this._notebooks = this.repoNotebookService.allNotebooks();
+      console.log('Effect triggered: notebooks updated', this._notebooks);
+    });
+  }
+
+  get notebooks(): NotebookRepo[] {
+    return this._notebooks;
+  }
+
+  set notebooks(value: NotebookRepo[]) {
+    this._notebooks = value;
+  }
+
+  private _notebooks: NotebookRepo[] = [];
+  
   notebook: NotebookRepo = {
     id: 0,
     name: '',
@@ -53,54 +74,45 @@ export class RepoNotebooksComponent implements OnInit, AfterViewInit {
   // Quill editor configuration
   quillModules = {
     toolbar: [
-      ['bold', 'italic', 'underline', 'strike'],
+      ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
       ['blockquote', 'code-block'],
-      [{ 'header': 1 }, { 'header': 2 }],
-      [{ 'list': 'ordered' }, { 'list': 'bullet' }],
-      [{ 'script': 'sub' }, { 'script': 'super' }],
-      [{ 'indent': '-1' }, { 'indent': '+1' }],
-      [{ 'direction': 'rtl' }],
-      [{ 'size': ['small', false, 'large', 'huge'] }],
+
+      [{ 'header': 1 }, { 'header': 2 }],               // custom button values
+      [{ 'list': 'ordered'}, { 'list': 'bullet' }],     // lists
+      [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
+      [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
+      [{ 'direction': 'rtl' }],                         // text direction
+
+      [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
       [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-      [{ 'color': [] }, { 'background': [] }],
+
+      [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults
       [{ 'font': [] }],
       [{ 'align': [] }],
-      ['clean'],
-      ['link', 'image', 'video']
-    ],
-    mention: {
-      allowedChars: /^[A-Za-z\sÅÄÖåäö]*$/,
-      mentionDenotationChars: ["@", "#"],
-      source: function (searchTerm: any, renderList: any, mentionChar: any) {
-        let values;
-        if (mentionChar === "@") {
-          values = [
-            { id: 1, value: "Fredrik Sundqvist" },
-            { id: 2, value: "Patrik Sjölin" }
-          ];
-        } else {
-          values = [
-            { id: 1, value: "Task1" },
-            { id: 2, value: "Task2" }
-          ]
-        }
 
-        if (searchTerm.length === 0) {
-          renderList(values, searchTerm);
-        } else {
-          const matches = [];
-          for (let i = 0; i < values.length; i++)
-            if (
-              ~values[i].value
-                .toLowerCase()
-                .indexOf(searchTerm.toLowerCase())
-            )
-              matches.push(values[i]);
-          renderList(matches, searchTerm);
-        }
-      }
+      ['clean'],                                         // remove formatting button
+      ['link', 'image']                                  // link and image
+    ],
+    clipboard: {
+      matchVisual: false
     }
   };
+
+  // Quill editor formats (what's allowed)
+  quillFormats = [
+    'bold', 'italic', 'underline', 'strike',
+    'blockquote', 'code-block',
+    'header',
+    'list',
+    'script',
+    'indent',
+    'direction',
+    'size',
+    'color', 'background',
+    'font',
+    'align',
+    'link', 'image', 'video'
+  ];
 
   // Quill editor options
   editorOptions = {
@@ -114,8 +126,16 @@ export class RepoNotebooksComponent implements OnInit, AfterViewInit {
   }
   
   ngOnInit(): void {
-    this.notebooks = this.repoNotebookService.allNotebooks();
-    this.temp = [...this.notebooks];
+    // Force reload data
+    this.repoNotebookService.getAllNotebooksResource.reload();
+  
+  }
+
+  // Load notebooks from service
+  loadNotebooks(): void {
+    // This triggers a reload of the notebooks
+    this.repoNotebookService.getAllNotebooksResource.reload();
+    console.log('Loading notebooks, current value:', this.repoNotebookService.allNotebooks());
   }
 
   ngAfterViewInit(): void {
@@ -142,18 +162,18 @@ export class RepoNotebooksComponent implements OnInit, AfterViewInit {
   updateFilter(event: any): void {
     const val = event.target.value.toLowerCase();
     
-    // Filter the data
-    const temp = this.temp.filter(function(d) {
-      return (
-        d.name.toLowerCase().indexOf(val) !== -1 ||
-        d.description.toLowerCase().indexOf(val) !== -1 ||
-        d.id.toString().indexOf(val) !== -1 ||
-        !val
-      );
-    });
+    // Always start with fresh data from the service
+    if (!val) {
+      this.loadNotebooks();
+      return;
+    }
     
-    // Update the data
-    this.notebooks = temp;
+    // Filter the data from the full dataset
+    this._notebooks = this.repoNotebookService.allNotebooks().filter(notebook => 
+      notebook.name.toLowerCase().includes(val) ||
+      notebook.description.toLowerCase().includes(val) ||
+      notebook.id.toString().includes(val)
+    );
   }
   
   // Selection handling
@@ -163,6 +183,25 @@ export class RepoNotebooksComponent implements OnInit, AfterViewInit {
   }
   
   openNew(): void {
+    this.loadNotebooks();  // Reset data
+    this.initNotebook();  // Initialize with empty values
+    this.notebookModal.show();
+  }
+
+  findNotebookIndexById(id: number): number {
+    let index = -1;
+    for (let i = 0; i < this.repoNotebookService.allNotebooks().length; i++) {
+        if (this.repoNotebookService.allNotebooks()[i].id === id) {
+            index = i;
+            break;
+        }
+    }
+
+    return index;
+  }
+  
+  // Initialize notebook with empty values
+  initNotebook(): void {
     this.notebook = {
       id: 0,
       name: '',
@@ -173,8 +212,25 @@ export class RepoNotebooksComponent implements OnInit, AfterViewInit {
   }
   
   editNotebook(notebook: NotebookRepo): void {
+    console.log('Editing notebook:', notebook);
+    
     this.notebook = { ...notebook };
-    this.notebookModal.show();
+		this.repoNotebookService.selectedNotebook.set(notebook);
+    
+    // Check if the modal is initialized
+    if (!this.notebookModal) {
+      console.error('Modal not initialized!');
+      // Initialize again if needed
+      setTimeout(() => {
+        const notebookModalElement = document.getElementById('notebookModal');
+        if (notebookModalElement) {
+          this.notebookModal = new bootstrap.Modal(notebookModalElement);
+          this.notebookModal.show();
+        }
+      }, 100);
+    } else {
+      this.notebookModal.show();
+    }
   }
   
   hideDialog(): void {
@@ -194,22 +250,33 @@ export class RepoNotebooksComponent implements OnInit, AfterViewInit {
   confirmDelete(): void {
     if (this.deleteId) {
       this.repoNotebookService.deleteNotebook(this.deleteId);
-      this.notebooks = this.repoNotebookService.allNotebooks();
-      this.temp = [...this.notebooks];
+      this.loadNotebooks();  // Reload after delete
     }
     this.dismissConfirm();
   }
   
   saveNotebook(): void {
+    this.repoNotebookService.selectedNotebook.set(this.notebook);
+    console.log("saving notebook", this.notebook);
     if (this.notebook.id) {
-      this.repoNotebookService.editNotebook(this.notebook.id, this.notebook);
+      this.repoNotebookService.editNotebook(this.notebook.id, this.repoNotebookService.selectedNotebook());
     } else {
       this.repoNotebookService.createNotebook(this.notebook);
     }
     
-    this.notebooks = this.repoNotebookService.allNotebooks();
-    this.temp = [...this.notebooks];
+        this.notebook = {
+          id: 0,
+          name: '',
+          description: '',
+          content: ''
+        };
+    this.loadNotebooks();  // Reload after save
     this.hideDialog();
+  }
+  
+  // Reset filter and show all data
+  resetFilter(): void {
+    this.loadNotebooks();
   }
   
   exportCSV(): void {

@@ -1,1 +1,224 @@
-<p>dash-tasks works!</p>
+<div class="task-dashboard">
+  <!-- Header with task count and filters -->
+  <div class="card mb-4">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <div>
+          <h5 class="mb-0">{{ taskCounts().all }} tasks</h5>
+          <!-- Task completion progress bar -->
+          <div class="progress mt-2" style="height: 6px; width: 150px;">
+            <div class="progress-bar bg-success" role="progressbar" 
+                 [style.width.%]="(taskCounts().completed / taskCounts().all) * 100" 
+                 [attr.aria-valuenow]="taskCounts().completed" 
+                 aria-valuemin="0" 
+                 [attr.aria-valuemax]="taskCounts().all"
+                 title="{{ taskCounts().completed }} of {{ taskCounts().all }} tasks completed"></div>
+          </div>
+          <small class="text-muted">{{ taskCounts().completed }} completed</small>
+        </div>
+        <div class="d-flex">
+          <div class="input-group me-2" style="max-width: 300px;">
+            <span class="input-group-text bg-transparent border-end-0">
+              <i class="bi bi-search"></i>
+            </span>
+            <input 
+              type="text" 
+              class="form-control border-start-0" 
+              placeholder="Search tasks..." 
+              (input)="updateSearch($event)"
+              [value]="searchQuery()"
+            >
+          </div>
+          <!-- Categories Dropdown -->
+          <div class="me-2">
+            <button 
+              class="btn btn-outline-secondary"
+              type="button" 
+              (click)="toggleCategoryDrawer()"
+              [class.btn-info]="selectedCategoryId() !== null"
+              [class.btn-outline-secondary]="selectedCategoryId() === null"
+            >
+              Categories
+              <span *ngIf="selectedCategoryId() !== null" class="badge bg-primary ms-1">1</span>
+            </button>
+            <button 
+              *ngIf="selectedCategoryId() !== null" 
+              class="btn btn-outline-danger ms-1" 
+              title="Categories X"
+              (click)="clearCategoryFilter()"
+            >
+            </button>
+          </div>
+          <!-- Show/Hide Completed Tasks Toggle -->
+          <div class="me-2">
+            <button 
+              class="btn" 
+              [class.btn-success]="showCompleted()" 
+              [class.btn-outline-secondary]="!showCompleted()"
+              (click)="toggleShowCompleted()"
+              title="{{ showCompleted() ? 'Hide completed tasks' : 'Show completed tasks' }}"
+            >
+              <i class="bi" [class]="showCompleted() ? 'bi-eye-fill' : 'bi-eye-slash-fill'"></i>
+              {{ showCompleted() ? 'Completed' : 'Completed' }}
+            </button>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Filter tabs - Made sticky -->
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a class="nav-link" [class.active]="filterState() === 'all'" href="#" (click)="$event.preventDefault(); toggleFilter('all')">
+            All
+            <span class="badge bg-secondary ms-1">{{ taskCounts().all }}</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [class.active]="filterState() === TaskStatus.Active" href="#" (click)="$event.preventDefault(); toggleFilter(TaskStatus.Active)">
+            Active
+            <span class="badge bg-primary ms-1">{{ taskCounts().active }}</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [class.active]="filterState() === TaskStatus.Late" href="#" (click)="$event.preventDefault(); toggleFilter(TaskStatus.Late)">
+            Late
+            <span class="badge bg-danger ms-1">{{ taskCounts().late }}</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [class.active]="filterState() === TaskStatus.Completed" href="#" (click)="$event.preventDefault(); toggleFilter(TaskStatus.Completed)">
+            Completed
+            <span class="badge bg-success ms-1">{{ taskCounts().completed }}</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Task lists by project and phase -->
+  <div *ngIf="groupedTasks().length > 0; else noTasks">
+    <div class="card mb-3" *ngFor="let group of groupedTasks()">
+      <!-- Project/Phase header -->
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <h6 class="mb-0">
+          <button class="btn btn-link text-decoration-none p-0" (click)="toggleCollapse(group.id)">
+            <i class="bi" [ngClass]="group.collapsed ? 'bi-chevron-right' : 'bi-chevron-down'"></i>
+            {{ group.name }}
+          </button>
+        </h6>
+        <span class="badge bg-secondary">{{ group.tasks.length }}</span>
+      </div>
+      
+      <!-- Tasks in this group -->
+      <div class="card-body p-0" [ngClass]="{'d-none': group.collapsed}">
+        <div class="list-group list-group-flush">
+          <div class="list-group-item task-item" *ngFor="let task of group.tasks">
+            <div class="d-flex align-items-start gap-2">
+              <!-- Task status indicator with completion functionality -->
+              <div class="form-check mt-1 position-relative">
+                <input 
+                  class="form-check-input" 
+                  type="checkbox" 
+                  [checked]="task.status === TaskStatus.Completed"
+                  [disabled]="loading()[task.id]"
+                  (change)="completeTask(task)"
+                >
+                <div class="position-absolute" style="top: -2px; left: 20px;" *ngIf="loading()[task.id]">
+                  <span class="spinner-border spinner-border-sm text-primary"></span>
+                </div>
+              </div>
+              
+              <!-- Task info -->
+              <div class="flex-grow-1">
+                <div class="d-flex justify-content-between align-items-start mb-1">
+                  <div>
+                    <h6 class="mb-0">{{ task.name }}</h6>
+                    <p class="text-muted small mb-1">{{ task.description }}</p>
+                  </div>
+                  <div class="d-flex align-items-center gap-2">
+                    <span class="badge bg-info" *ngIf="task.categoryName && task.categoryName !== 'Uncategorized'">
+                      {{ task.categoryName }}
+                    </span>
+                    <span class="badge" [ngClass]="getStatusClass(task.status)">
+                      {{ getStatusText(task.status) }}
+                    </span>
+                  </div>
+                </div>
+                
+                <!-- Task metadata -->
+                <div class="d-flex align-items-center gap-3">
+                  <div class="small text-secondary">
+                    <i class="bi bi-calendar-event me-1"></i>
+                    <span [ngClass]="{'text-danger': task.status === TaskStatus.Late}">Due {{ formatDate(task.endDate) }}</span>
+                  </div>
+                  
+                  <div class="small text-secondary" *ngIf="task.projectTaskComments?.length">
+                    <i class="bi bi-chat-dots me-1"></i>
+                    <span>{{ task.projectTaskComments?.length }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Empty state -->
+  <ng-template #noTasks>
+    <div class="card">
+      <div class="card-body text-center p-5">
+        <div class="mb-3">
+          <i class="bi bi-check2-circle fs-1 text-muted"></i>
+        </div>
+        <h5>No tasks found</h5>
+        <p class="text-muted">
+          {{ filterState() !== 'all' || selectedCategoryId() !== null ? 'Try changing your filter criteria.' : 'You don\'t have any tasks assigned to you.' }}
+        </p>
+      </div>
+    </div>
+  </ng-template>
+
+  <!-- Add category drawer at the end of the template -->
+  <div class="offcanvas offcanvas-end" [class.show]="categoryDrawer()" tabindex="-1" id="categoryDrawer">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title">Filter by Category</h5>
+      <button type="button" class="btn-close" (click)="closeCategoryDrawer()"></button>
+    </div>
+    <div class="offcanvas-body">
+      <div class="list-group">
+        <!-- All Categories Option - First item in array -->
+        <button 
+          *ngIf="taskCategories().length > 0"
+          class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+          [class.active]="selectedCategoryId() === null"
+          (click)="clearCategoryFilter(); closeCategoryDrawer();"
+        >
+          {{ taskCategories()[0].name }}
+          <span class="badge bg-secondary rounded-pill">{{ taskCategories()[0].count }}</span>
+        </button>
+        
+        <!-- Category list - Skip first "All Categories" item -->
+        <ng-container *ngIf="taskCategories().length > 1; else noCategories">
+          <button 
+            *ngFor="let category of taskCategories(); let i = index"
+            class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+            [class.active]="selectedCategoryId() === category.id"
+            (click)="setTaskCategory(category.id); closeCategoryDrawer();"
+            [style.display]="i === 0 ? 'none' : 'flex'"
+          >
+            {{ category.name }}
+            <span class="badge bg-secondary rounded-pill">{{ category.count }}</span>
+          </button>
+        </ng-container>
+        
+        <ng-template #noCategories>
+          <div class="alert alert-info mt-3">
+            No categories found in your tasks.
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div>

@@ -42,6 +42,10 @@ namespace project_hub_api.Repositories.Repos
             {
                 throw new ArgumentException("NotebookRepo not found");
             }
+
+            exist.Name = notebookRepo.Name;
+            exist.Description = notebookRepo.Description;
+            exist.Content = notebookRepo.Content;
             _context.NotebookRepo.Update(exist);
             await _context.SaveChangesAsync();
             return exist;

@@ -1,3 +1,14 @@
+/* Sticky phases container */
+.sticky-phases-container {
+  position: sticky;
+  top: 0;
+  z-index: 1030;
+  background-color: white;
+  padding: 1rem 0;
+  margin-bottom: 1rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
 /* Phase column styling with colored glows */
 .phase-column {
     transition: all 300ms ease-in-out;

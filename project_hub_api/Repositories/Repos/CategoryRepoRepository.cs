@@ -46,9 +46,13 @@ namespace project_hub_api.Repositories.Repos
             {
                 throw new Exception("CategoryRepo not found");
             }
-            _context.CategoryRepo.Update(categoryRepo);
+
+            category.Name = categoryRepo.Name;
+            category.Description = categoryRepo.Description;
+
+            _context.CategoryRepo.Update(category);
             await _context.SaveChangesAsync();
-            return categoryRepo;
+            return category;
         }
 
         public async Task<CategoryRepo> DeleteCategoryRepoAsync(int id)

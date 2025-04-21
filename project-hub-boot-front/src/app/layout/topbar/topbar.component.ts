@@ -97,7 +97,15 @@ export class TopbarComponent implements AfterViewInit, OnDestroy {
   }
 
   selectProject(project: Project) {
-    this.router.navigate(['/project', project.id]);
+    this.projectService.selectedProjectId.set(project.id);
+    this.projectService.selectedProject.set(project);
+    this.router.navigate(['/projects', project.id, 'details']);
     this.toggleSearch();
+  }
+
+  selectProjectFromTopbar(project: Project) {
+    this.projectService.selectedProjectId.set(project.id);
+    this.projectService.selectedProject.set(project);
+    this.router.navigate(['/projects', project.id, 'details']);
   }
 }

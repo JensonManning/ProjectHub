@@ -1,0 +1,46 @@
+<div class="card">
+    <div class="card-body">
+        <!-- Tabs -->
+        <ul class="nav nav-tabs mb-3">
+            <li class="nav-item">
+                <a class="nav-link" [class.active]="activeTab === 'overview'" 
+                   (click)="setActiveTab('overview')">Overview</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" [class.active]="activeTab === 'tasks'" 
+                   (click)="setActiveTab('tasks')">Tasks</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" [class.active]="activeTab === 'notebooks'" 
+                   (click)="setActiveTab('notebooks')">Notebooks</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" [class.active]="activeTab === 'resources'" 
+                   (click)="setActiveTab('resources')">Resources</a>
+            </li>
+        </ul>
+
+        <!-- Tab Content -->
+        <div class="tab-content">
+            <!-- Overview Tab -->
+            <div [class.d-none]="activeTab !== 'overview'">
+                <app-details-project-overview></app-details-project-overview>
+            </div>
+            
+            <!-- Tasks Tab -->
+            <div [class.d-none]="activeTab !== 'tasks'">
+                <app-details-project-tasks></app-details-project-tasks>
+            </div>
+            
+            <!-- Notebooks Tab -->
+            <div [class.d-none]="activeTab !== 'notebooks'">
+                <app-details-project-notebooks></app-details-project-notebooks>
+            </div>
+            
+            <!-- Resources Tab -->
+            <div [class.d-none]="activeTab !== 'resources'">
+                <app-details-project-resources></app-details-project-resources>
+            </div>
+        </div>
+    </div>
+</div>

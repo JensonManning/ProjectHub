@@ -58,9 +58,14 @@ namespace project_hub_api.Repositories.Repos
             {
                 throw new Exception("PhaseRepo not found");
             }
-            _context.PhaseRepo.Update(phaseRepo);
+
+            phase.Name = phaseRepo.Name;
+            phase.Description = phaseRepo.Description;
+            phase.Order = phaseRepo.Order;
+
+            _context.PhaseRepo.Update(phase);
             await _context.SaveChangesAsync();
-            return phaseRepo;
+            return phase;
         }
     }
 }

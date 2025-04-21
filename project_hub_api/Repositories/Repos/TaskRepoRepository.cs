@@ -172,8 +172,6 @@ namespace project_hub_api.Repositories.Repos
             existingTask.HasSubTaskRepo = updatedTask.HasSubTaskRepo;
             existingTask.CategoryRepoId = updatedTask.CategoryRepoId;
             existingTask.TaskTypeRepoId = updatedTask.TaskTypeRepoId;
-
-
             
             // Update resources if they exist in the updated task
             if (updatedTask.TaskRepoResources != null)

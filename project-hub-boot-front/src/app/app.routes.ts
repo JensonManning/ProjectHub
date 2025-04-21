@@ -18,8 +18,11 @@ export const routes: Routes = [
             },
             {
                 path: 'repo',
-                loadChildren: () => import('./modules/repo/repo.routes')
-                
+                loadChildren: () => import('./modules/repo/repo.routes')               
+            },
+            {
+                path: 'projects',
+                loadChildren: () => import('./modules/projects/projects.routes')
             }
         ]
     }

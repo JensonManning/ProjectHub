@@ -7,7 +7,7 @@
         <span>New Notebook</span>
       </button>
     </div>
-    <div>
+    <div class="d-flex gap-2">
       <button class="btn btn-outline-secondary d-flex align-items-center gap-2" (click)="exportCSV()">
         <lucide-angular [name]="Upload" size="18"></lucide-angular>
         <span>Export</span>
@@ -29,7 +29,7 @@
           type="text" 
           class="form-control border-start-0 ps-0" 
           placeholder="Search notebooks..." 
-          (keyup)="updateFilter($event)"
+          (input)="updateFilter($event)"
         />
       </div>
     </div>
@@ -52,8 +52,8 @@
           </tr>
         </thead>
         <tbody>
-          @if (repoNotebookService.allNotebooks().length > 0) {
-              @for (notebook of repoNotebookService.allNotebooks(); track notebook.id) {
+          @if (notebooks.length > 0) {
+              @for (notebook of notebooks; track notebook.id) {
                 <tr>
                   <td>
                     <div class="form-check">
@@ -65,10 +65,10 @@
                   <td>{{ notebook.description }}</td>
                   <td>
                     <div class="d-flex justify-content-center gap-2">
-                      <button class="btn btn-sm btn-outline-primary rounded-circle" (click)="editNotebook(notebook)">
+                      <button class="btn btn-sm btn-ghost-primary" (click)="editNotebook(notebook)">
                         <lucide-angular [name]="Pencil" size="16"></lucide-angular>
                       </button>
-                      <button class="btn btn-sm btn-outline-danger rounded-circle" (click)="deleteSelectedNotebooks(notebook.id)">
+                      <button class="btn btn-sm btn-ghost-danger" (click)="deleteSelectedNotebooks(notebook.id)">
                         <lucide-angular [name]="Trash2" size="16"></lucide-angular>
                       </button>
                     </div>
@@ -117,27 +117,43 @@
         </h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body">       
         <div class="row g-3">
           <div class="col-12">
             <label for="name" class="form-label fw-semibold">Name</label>
-            <input type="text" class="form-control" id="name" [(ngModel)]="notebook.name" required
-                   placeholder="Enter notebook name">
+            <input 
+              type="text" 
+              class="form-control" 
+              id="name" 
+              [(ngModel)]="notebook.name" 
+              #name="ngModel"
+              required
+              placeholder="Enter notebook name">
+            <div *ngIf="name.invalid && (name.dirty || name.touched)" class="text-danger mt-1 small">
+              Name is required
+            </div>
           </div>
           <div class="col-12">
             <label for="description" class="form-label fw-semibold">Description</label>
-            <textarea class="form-control" id="description" rows="3" [(ngModel)]="notebook.description" required
-                      placeholder="Enter notebook description"></textarea>
+            <textarea 
+              class="form-control" 
+              id="description" 
+              rows="3" 
+              [(ngModel)]="notebook.description" 
+              #description="ngModel"
+              required
+              placeholder="Enter notebook description"></textarea>
+            <div *ngIf="description.invalid && (description.dirty || description.touched)" class="text-danger mt-1 small">
+              Description is required
+            </div>
           </div>
           <div class="col-12">
             <label for="content" class="form-label fw-semibold">Content</label>
             <quill-editor 
               [(ngModel)]="notebook.content" 
               [modules]="quillModules"
-              [placeholder]="editorOptions.placeholder"
-              [style]="{height: '300px', 'border-radius': '0.375rem'}"
-              [theme]="editorOptions.theme"
-              (onEditorCreated)="editorCreated($event)">
+              [formats]="quillFormats"
+              [style]="{height: '300px', 'border-radius': '0.375rem'}">
             </quill-editor>
           </div>
         </div>

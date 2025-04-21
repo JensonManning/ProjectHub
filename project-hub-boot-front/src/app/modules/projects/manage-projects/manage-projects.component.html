@@ -1,0 +1,297 @@
+<p>manage-projects works!</p>
+
+<!-- Top Action Panel -->
+<div class="card mb-4 shadow-sm">
+  <div class="card-body d-flex justify-content-between align-items-center py-3">
+    <div>
+      <button class="btn btn-primary d-flex align-items-center gap-2" (click)="openNew()">
+        <lucide-angular [name]="Plus" size="18"></lucide-angular>
+        <span>New Project</span>
+      </button>
+    </div>
+    <div class="d-flex gap-2">
+      <button class="btn btn-outline-secondary d-flex align-items-center gap-2" (click)="exportCSV()">
+        <lucide-angular [name]="Upload" size="18"></lucide-angular>
+        <span>Export</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Search and Table Card -->
+<div class="card shadow-sm">
+  <div class="card-header bg-white py-3">
+    <div class="d-flex justify-content-between align-items-center">
+      <h5 class="mb-0 fw-bold">Manage Projects</h5>
+      <div class="input-group" style="width: 280px">
+        <span class="input-group-text bg-light border-end-0">
+          <lucide-angular [name]="Search" size="18"></lucide-angular>
+        </span>
+        <input 
+          type="text" 
+          class="form-control border-start-0 ps-0" 
+          placeholder="Search projects..." 
+          (input)="updateFilter($event)"
+        />
+      </div>
+    </div>
+  </div>
+  
+  <div class="card-body p-0">
+    <div class="table-responsive">
+      <table class="table table-hover align-middle mb-0">
+        <thead class="table-light">
+          <tr>
+            <th width="40">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="selectAll">
+              </div>
+            </th>
+            <th width="60">ID</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Shortcode</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Status</th>
+            <th>Type</th>
+            <th width="120" class="text-center">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+              @if (projects.length > 0) {
+              @for (project of projects; track project.id) {
+                <tr>
+                  <td>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" [value]="project">
+                    </div>
+                  </td>
+                  <td>{{ project.id }}</td>
+                  <td>{{ project.name }}</td>
+                  <td>{{ project.description }}</td>
+                  <td>{{ project.shortcode }}</td>
+                  <td>{{ project.startDate | date:'shortDate' }}</td>
+                  <td>{{ project.endDate | date:'shortDate' }}</td>
+                  <td>
+                    <span class="badge" [ngClass]="{
+                      'bg-secondary': project.status === 0,
+                      'bg-primary': project.status === 1,
+                      'bg-warning': project.status === 2,
+                      'bg-success': project.status === 3,
+                      'bg-info': project.status === 4,
+                      'bg-danger': project.status === 5
+                    }">{{ getStatusText(project.status) }}</span>
+                  </td>
+                  <td>{{ getProjectTypeText(project.type) }}</td>
+                  <td>
+                    <div class="d-flex justify-content-center gap-2">
+                      <button class="btn btn-sm btn-ghost-primary" (click)="editProject(project)">
+                        <lucide-angular [name]="Pencil" size="16"></lucide-angular>
+                      </button>
+                      <button class="btn btn-sm btn-ghost-danger" (click)="deleteSelectedProject(project.id)">
+                        <lucide-angular [name]="Trash2" size="16"></lucide-angular>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              }
+          } 
+          @else {
+            <tr>
+              <td colspan="10" class="text-center py-4 text-muted">
+                <div class="d-flex flex-column align-items-center">
+                  <lucide-angular [name]="FileText" size="32" class="mb-2 text-secondary"></lucide-angular>
+                  <p>No projects found</p>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+  <div class="card-footer bg-white py-3 d-flex justify-content-between align-items-center">
+    <div class="text-muted small">
+      {{ selected.length }} selected / {{ projects.length }} total
+    </div>
+    <nav aria-label="Page navigation" *ngIf="projects.length > 0">
+      <ul class="pagination pagination-sm mb-0">
+        <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+      </ul>
+    </nav>
+  </div>
+</div>
+
+<!-- Modal for edit/create -->
+<div class="modal fade" id="projectModal" tabindex="-1" aria-labelledby="projectModalLabel" aria-hidden="true" data-bs-backdrop="static">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="projectModalLabel">
+          {{ project.id ? 'Edit Project: ' + project.name : 'Create New Project' }}
+        </h5>
+        <button type="button" class="btn-close" aria-label="Close" (click)="hideDialog()"></button>
+      </div>
+      <div class="modal-body">       
+        <div class="row g-3">
+          <div class="col-12">
+            <label for="name" class="form-label fw-semibold">Name</label>
+            <input 
+              type="text" 
+              class="form-control" 
+              id="name" 
+              [(ngModel)]="project.name" 
+              #name="ngModel"
+              required
+              placeholder="Enter project name">
+              @if(name.invalid && (name.dirty || name.touched)) {
+                  <div class="text-danger mt-1 small">
+                      Name is required
+                  </div>
+              }
+          </div>
+          <div class="col-12">
+            <label for="description" class="form-label fw-semibold">Description</label>
+            <textarea 
+              class="form-control" 
+              id="description" 
+              rows="3" 
+              [(ngModel)]="project.description" 
+              #description="ngModel"
+              required
+              placeholder="Enter project description"></textarea>
+              @if (description.invalid && (description.dirty || description.touched)) {
+                  <div class="text-danger mt-1 small">
+                      Description is required
+                  </div>
+              }
+          </div>
+          <div class="col-12">
+            <label for="shortcode" class="form-label fw-semibold">Shortcode</label>
+            <input 
+              type="text" 
+              class="form-control" 
+              id="shortcode" 
+              [(ngModel)]="project.shortcode" 
+              #shortcode="ngModel"
+              required
+              placeholder="Enter project shortcode">
+              @if (shortcode.invalid && (shortcode.dirty || shortcode.touched)) {
+                  <div class="text-danger mt-1 small">
+                      Shortcode is required
+                  </div>
+              }
+          </div>
+          <div class="col-md-6">
+            <label for="startDate" class="form-label fw-semibold">Start Date</label>
+            <input 
+              type="date" 
+              class="form-control" 
+              id="startDate" 
+              [ngModel]="formatDateForInput(project.startDate)"
+              (ngModelChange)="project.startDate = $event"
+              #startDate="ngModel"
+              required>
+              @if (startDate.invalid && (startDate.dirty || startDate.touched)) {
+                  <div class="text-danger mt-1 small">
+                      Start date is required
+                  </div>
+              }
+          </div>
+          <div class="col-md-6">
+            <label for="endDate" class="form-label fw-semibold">End Date</label>
+            <input 
+              type="date" 
+              class="form-control" 
+              id="endDate" 
+              [ngModel]="formatDateForInput(project.endDate)"
+              (ngModelChange)="project.endDate = $event"
+              #endDate="ngModel"
+              required>
+              @if (endDate.invalid && (endDate.dirty || endDate.touched)) {
+                  <div class="text-danger mt-1 small">
+                      End date is required
+                  </div>
+              }
+          </div>
+          <div class="col-md-6">
+              <label for="status" class="form-label fw-semibold">Status</label>
+              <select 
+                  class="form-select" 
+                  id="status" 
+                  [(ngModel)]="project.status"
+                  #status="ngModel"
+                  required>
+                  <option [ngValue]="0">Not Started</option>
+                  <option [ngValue]="1">In Progress</option>
+                  <option [ngValue]="2">On Hold</option>
+                  <option [ngValue]="3">Active</option>
+                  <option [ngValue]="4">Completed</option>
+                  <option [ngValue]="5">Cancelled</option>
+              </select>
+              @if(status.invalid && (status.dirty || status.touched)) {
+                  <div class="text-danger mt-1 small">
+                      Status is required
+                  </div>
+              }
+          </div>
+          <div class="col-md-6">
+              <label for="type" class="form-label fw-semibold">Project Type</label>
+              <select 
+                  class="form-select" 
+                  id="type" 
+                  [(ngModel)]="project.type"
+                  #type="ngModel"
+                  required>
+                  <option [ngValue]="0">Standard</option>
+                  <option [ngValue]="1">Research</option>
+                  <option [ngValue]="2">Development</option>
+                  <option [ngValue]="3">Maintenance</option>
+              </select>
+              @if(type.invalid && (type.dirty || type.touched)) {
+                  <div class="text-danger mt-1 small">
+                      Project type is required
+                  </div>
+              }
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="hideDialog()">Cancel</button>
+        <button type="button" class="btn btn-primary d-flex align-items-center gap-2" (click)="saveProject()">
+          <lucide-angular [name]="Save" size="18"></lucide-angular>
+          Save
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Confirmation Modal -->
+<div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true" data-bs-backdrop="static">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="confirmModalLabel">Confirm Delete</h5>
+        <button type="button" class="btn-close" aria-label="Close" (click)="dismissConfirm()"></button>
+      </div>
+      <div class="modal-body">
+        <div class="d-flex align-items-center mb-3">
+          <lucide-angular [name]="AlertTriangle" size="24" class="text-warning me-3"></lucide-angular>
+          <div>Are you sure you want to delete this project?</div>
+        </div>
+        <p class="text-muted mb-0 small">This action cannot be undone.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="dismissConfirm()">Cancel</button>
+        <button type="button" class="btn btn-danger" (click)="confirmDelete()">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>

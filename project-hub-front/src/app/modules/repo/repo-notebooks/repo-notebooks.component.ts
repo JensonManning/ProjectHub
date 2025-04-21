@@ -141,19 +141,6 @@ export class RepoNotebooksComponent {
 		this.repoNotebookService.createNotebook(notebook);
 	}
 
-    getSeverity(status: string) {
-        switch (status) {
-            case 'INSTOCK':
-                return 'success';
-            case 'LOWSTOCK':
-                return 'warn';
-            case 'OUTOFSTOCK':
-                return 'danger';
-            default:
-                return 'info';
-        }
-    }
-
 	saveNotebook() {
 		this.notebookSubmitted = true;
 		let _notebooks = this.repoNotebookService.allNotebooks();

@@ -1,0 +1,128 @@
+.task-dashboard {
+  .nav-tabs {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: white;
+    border-bottom: 1px solid #dee2e6;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    margin-bottom: 1rem;
+    .nav-link {
+      color: var(--bs-body-color);
+      border-bottom-width: 2px;
+      
+      &.active {
+        border-bottom-color: var(--bs-primary);
+        color: var(--bs-primary);
+        font-weight: 500;
+      }
+    }
+  }
+  
+  .task-item {
+    transition: background-color 0.15s ease-in-out;
+    
+    &:hover {
+      background-color: rgba(var(--bs-primary-rgb), 0.03);
+    }
+  }
+  
+  .card-header {
+    position: sticky;
+    top: 48px; // Height of the tabs
+    z-index: 990;
+    background-color: white;
+    border-bottom: 1px solid #dee2e6;
+    background-color: rgba(var(--bs-light-rgb), 0.5);
+    
+    .btn-link {
+      color: var(--bs-body-color);
+      font-weight: 500;
+    }
+  }
+  
+  .badge {
+    font-weight: 500;
+    
+    &.status-upcoming {
+      background-color: var(--bs-secondary);
+    }
+    
+    &.status-active {
+      background-color: var(--bs-primary);
+    }
+    
+    &.status-completed {
+      background-color: var(--bs-success);
+    }
+    
+    &.status-cancelled {
+      background-color: var(--bs-danger);
+    }
+    
+    &.status-delayed, &.status-postponed {
+      background-color: var(--bs-warning);
+      color: var(--bs-dark);
+    }
+    
+    &.status-late {
+      background-color: var(--bs-danger);
+    }
+  }
+  
+  .form-check-input:checked {
+    background-color: var(--bs-success);
+    border-color: var(--bs-success);
+  }
+  
+  .text-danger {
+    font-weight: 500;
+  }
+  
+  // Task status styling
+  .status-primary {
+    background-color: var(--bs-primary);
+    color: white;
+  }
+  
+  .status-success {
+    background-color: var(--bs-success);
+    color: white;
+  }
+  
+  .status-warning {
+    background-color: var(--bs-warning);
+    color: white;
+  }
+  
+  .status-danger {
+    background-color: var(--bs-danger);
+    color: white;
+  }
+  
+  .status-info {
+    background-color: var(--bs-info);
+    color: white;
+  }
+  
+  .status-secondary {
+    background-color: var(--bs-secondary);
+    color: white;
+  }
+}
+
+// Animation for collapsible sections
+.card-body:not(.d-none) {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

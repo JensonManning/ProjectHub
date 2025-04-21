@@ -1,0 +1,57 @@
+/* Animation for card transitions */
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 0.4s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Ensure multiple select has enough height */
+.form-select[multiple] {
+  min-height: 150px;
+}
+
+/* Style for disabled buttons */
+.btn:disabled {
+  cursor: not-allowed;
+}
+
+/* Style for the card components */
+.card {
+  border-radius: 8px;
+  transition: box-shadow 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Enhance form controls */
+.form-control:focus, 
+.form-select:focus {
+  border-color: var(--bs-primary);
+  box-shadow: 0 0 0 0.25rem rgba(var(--bs-primary-rgb), 0.25);
+}
+
+/* Custom style for list group items showing selected items */
+.list-group-item {
+  transition: background-color 0.2s ease;
+}
+
+.list-group-item:hover {
+  background-color: rgba(var(--bs-primary-rgb), 0.05);
+}
+
+/* Nice border for task list items */
+.border-start.border-primary {
+  border-left-width: 3px !important;
+}

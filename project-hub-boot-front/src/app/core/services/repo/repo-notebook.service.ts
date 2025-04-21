@@ -31,9 +31,10 @@ export class RepoNotebookService {
   })
 
   editNotebook(id: number, notebook: NotebookRepo) {
-    this.http.put<NotebookRepo>(this.apiUrl + 'NotebookRepo/' + id, notebook).subscribe(() => {
+    console.log("sending this information to the api", notebook);
+    this.http.put<NotebookRepo>(this.apiUrl + 'NotebookRepo/' + id, notebook).subscribe((res) => {
       this.getAllNotebooksResource.reload();
-      console.log(notebook, "updated")
+      console.log(res, "updated")
     })
   }
 
@@ -53,7 +54,7 @@ export class RepoNotebookService {
   
   constructor() { }
   eff = effect(() => {
-    console.log(this.allNotebooks());
-    console.log(this.selectedNotebook());
+    console.log("Service allNotebooks", this.allNotebooks());
+    console.log("Service selectedNotebook", this.selectedNotebook());
   })
 }

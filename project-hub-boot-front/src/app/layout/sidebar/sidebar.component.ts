@@ -27,7 +27,7 @@ export class SidebarComponent {
 
   // Menu structure
   dashboardMenu = [
-    { name: 'Dashboard', icon: Home, path: '/dashboard' }
+    { name: 'Dashboard', icon: Home, path: '' }
   ];
 
   manageMenu = [
@@ -36,12 +36,12 @@ export class SidebarComponent {
       path: '#',
       expanded: false,
       submenu: [
-        { name: 'Projects', icon: Zap, path: '/manage/projects' },
+        { name: 'Projects', icon: Zap, path: '/projects/manage' },
         { name: 'Users', icon: User, path: '/manage/users' },
         { name: 'Tasks', icon: CheckCircle2, path: '/manage/tasks' }
       ]
     },
-    { name: 'Create Project', icon: Plus, path: '/project/create' }
+    { name: 'Create Project', icon: Plus, path: '/projects/create' }
   ];
 
   repoMenu = [

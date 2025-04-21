@@ -4,10 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 using project_hub_api.Data;
 using project_hub_api.Models.Repo;
-
+using project_hub_api.IRepositories.Repos;
+using project_hub_api.Dtos.Repo;
+using project_hub_api.Mappers.Repo;
 namespace project_hub_api.Controllers.Repos
 {
     [ApiController]
@@ -15,11 +16,13 @@ namespace project_hub_api.Controllers.Repos
     public class PhaseRepoController : ControllerBase
     {
         private readonly AppDbContext _context;
+        private readonly IPhaseRepoRepository _phaseRepoRepository;
         private readonly ILogger<PhaseRepoController> _logger;
 
-        public PhaseRepoController(AppDbContext context, ILogger<PhaseRepoController> logger)
+        public PhaseRepoController(AppDbContext context, IPhaseRepoRepository phaseRepoRepository, ILogger<PhaseRepoController> logger)
         {
             _context = context;
+            _phaseRepoRepository = phaseRepoRepository;
             _logger = logger;
         }
 
@@ -81,17 +84,24 @@ namespace project_hub_api.Controllers.Repos
         // API PUT: api/PhaseRepo/{id}
         [HttpPut]
         [Route ("{id}")]
-        public async Task<ActionResult<PhaseRepo>> PutPhaseRepo(int id, PhaseRepo phaseRepo)
+        public async Task<ActionResult<PhaseRepo>> PutPhaseRepo(int id, PhaseRepoUpdateDto phaseRepoUpdateDto)
         {
             try
             {
-                if (id != phaseRepo.Id)
+                var updatePhase = phaseRepoUpdateDto.ToPhaseRepoUpdateDto();
+                var phase = await _phaseRepoRepository.GetPhaseRepoAsync(id);
+                if (phase == null)
                 {
-                    return BadRequest();
+                    return NotFound("PhaseRepo not found");
                 }
-                _context.PhaseRepo.Update(phaseRepo);
-                await _context.SaveChangesAsync();
-                return NoContent();
+                if (id != phase.Id)
+                {
+                    return BadRequest("PhaseRepo id does not match");
+                }
+
+                await _phaseRepoRepository.UpdatePhaseRepoAsync(id, updatePhase);
+                var updatedPhase = await _phaseRepoRepository.GetPhaseRepoAsync(id);
+                return Ok(updatedPhase);
             }
             catch (Exception ex)
             {

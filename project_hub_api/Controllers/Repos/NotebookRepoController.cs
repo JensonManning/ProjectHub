@@ -91,12 +91,19 @@ namespace project_hub_api.Controllers.Repos
             try
             {
                 var updateNotebook = notebookRepoUpdateDto.ToNotebookRepoUpdateDto();
-                if (id != updateNotebook.Id)
+                var notebook = await _notebookRepository.GetNotebookByIdAsync(id);
+                if (notebook == null)
+                {
+                    return NotFound("Notebook not found");
+                }
+                if (id != notebook.Id)
                 {
                     return BadRequest("Notebook id does not match");
                 }
+                
                 await _notebookRepository.UpdateNotebookAsync(id, updateNotebook);
-                return NoContent();
+                var updatedNotebook = await _notebookRepository.GetNotebookByIdAsync(id);
+                return Ok(updatedNotebook);
             }
             catch (Exception ex)
             {

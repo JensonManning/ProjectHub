@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject, signal } from '@angular/core';
-import { environment } from 'src/environments/environment.development';
+import { environment } from '../../../../environments/environment';
 import * as signalR from '@microsoft/signalr';
 import { UserService } from '../user/user.service';
-import { Notification } from '@/core/interfaces/Hubs/notification.interface';
+import { Notification } from '../../../core/interfaces/Hubs/notification.interface';
 
 @Injectable({
   providedIn: 'root'
